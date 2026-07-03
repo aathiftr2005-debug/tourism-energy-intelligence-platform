@@ -33,13 +33,13 @@ export default function DigitalTwinMap() {
   };
 
   return (
-    <div className="flex gap-6">
-      <div className="w-[200px] flex-shrink-0">
+    <div className="flex flex-col lg:flex-row gap-6">
+      <div className="w-full lg:w-[200px] flex-shrink-0">
         <LayerToggle activeLayer={activeLayer} onLayerChange={setActiveLayer} />
       </div>
 
       <div className="flex-1 min-w-0">
-        <div className="w-full h-[600px] relative overflow-hidden rounded-2xl" style={{ background: 'rgba(0,0,0,0.3)' }}>
+        <div className="w-full h-[400px] md:h-[600px] relative overflow-hidden rounded-2xl" style={{ background: 'rgba(0,0,0,0.3)' }}>
           <motion.svg
             viewBox="0 0 100 70"
             className="w-full h-full"

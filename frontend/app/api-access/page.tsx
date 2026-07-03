@@ -72,35 +72,37 @@ export default function ApiAccessPage() {
           </div>
         </div>
 
-        <table className="data-table">
-          <thead>
-            <tr className="text-left text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
-              <th className="pb-2 font-semibold">Method</th>
-              <th className="pb-2 font-semibold">Endpoint</th>
-              <th className="pb-2 font-semibold">Description</th>
-              <th className="pb-2 font-semibold">Auth</th>
-            </tr>
-          </thead>
-          <tbody>
-            {endpoints.map((ep) => (
-              <tr key={ep.path} className="border-b border-[rgba(255,255,255,0.03)]">
-                <td className="py-2.5">
-                  <span className={`rounded px-2 py-0.5 text-xs font-mono ${ep.method === 'GET' ? 'text-[#00d4ff]' : 'text-[#f59e0b]'}`}
-                    style={{ background: ep.method === 'GET' ? 'rgba(0,212,255,0.1)' : 'rgba(245,158,11,0.1)' }}>
-                    {ep.method}
-                  </span>
-                </td>
-                <td className="py-2.5 font-mono text-xs" style={{ color: '#f0f0ff' }}>{ep.path}</td>
-                <td className="py-2.5 text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{ep.desc}</td>
-                <td className="py-2.5 text-xs">
-                  {ep.auth
-                    ? <span className="badge-elevated text-[10px]">Required</span>
-                    : <span className="badge-normal text-[10px]">No</span>}
-                </td>
+        <div className="overflow-x-auto">
+          <table className="data-table">
+            <thead>
+              <tr className="text-left text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                <th className="pb-2 font-semibold">Method</th>
+                <th className="pb-2 font-semibold">Endpoint</th>
+                <th className="pb-2 font-semibold">Description</th>
+                <th className="pb-2 font-semibold">Auth</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {endpoints.map((ep) => (
+                <tr key={ep.path} className="border-b border-[rgba(255,255,255,0.03)]">
+                  <td className="py-2.5">
+                    <span className={`rounded px-2 py-0.5 text-xs font-mono ${ep.method === 'GET' ? 'text-[#00d4ff]' : 'text-[#f59e0b]'}`}
+                      style={{ background: ep.method === 'GET' ? 'rgba(0,212,255,0.1)' : 'rgba(245,158,11,0.1)' }}>
+                      {ep.method}
+                    </span>
+                  </td>
+                  <td className="py-2.5 font-mono text-xs" style={{ color: '#f0f0ff' }}>{ep.path}</td>
+                  <td className="py-2.5 text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{ep.desc}</td>
+                  <td className="py-2.5 text-xs">
+                    {ep.auth
+                      ? <span className="badge-elevated text-[10px]">Required</span>
+                      : <span className="badge-normal text-[10px]">No</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <div className="mt-6 text-center">
           <a href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/docs`} target="_blank"

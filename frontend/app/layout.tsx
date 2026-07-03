@@ -16,10 +16,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
-        <div className="map-wallpaper">
-          <img src="/eu-map-bg.jpg" alt="" aria-hidden="true" loading="lazy" />
-          <div className="map-wallpaper-overlay" />
-        </div>
+        <div className="map-wallpaper" />
+        <div className="map-wallpaper-overlay" />
         <div className="grid-overlay" />
         <div className="scan-lines" />
         <CustomCursor />

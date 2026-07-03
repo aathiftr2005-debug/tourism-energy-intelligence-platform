@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 interface HealthItem {
@@ -29,11 +30,14 @@ import type { SystemHealthItem } from '@/lib/types';
 
 export default function SystemHealth() {
   const items = data.healthItems as SystemHealthItem[];
+  const [lastUpdated, setLastUpdated] = useState('');
 
-  const now = new Date();
-  const lastUpdated = now.toLocaleString('en-US', {
-    month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-  });
+  useEffect(() => {
+    const now = new Date();
+    setLastUpdated(now.toLocaleString('en-US', {
+      month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+    }));
+  }, []);
 
   return (
     <div className="space-y-4">
@@ -57,7 +61,7 @@ export default function SystemHealth() {
                 <span className="text-xs font-semibold" style={{ color: 'rgba(255,255,255,0.5)' }}>{item.label}</span>
                 <HealthDot status={item.status} />
               </div>
-              <p className="text-lg font-bold" style={{ color: cfg.color }}>{cfg.label}</p>
+              <p className="text-sm font-bold" style={{ color: cfg.color }}>{cfg.label}</p>
               <p className="text-[10px] mt-1" style={{ color: 'rgba(255,255,255,0.3)' }}>{item.value}</p>
             </motion.div>
           );

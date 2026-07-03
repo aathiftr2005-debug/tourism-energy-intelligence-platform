@@ -39,7 +39,9 @@ function getHeatGlow(score: number): string {
 
 function getTimelineAdjustedScore(baseScore: number, timelineIndex: number): number {
   const multipliers = [1.0, 1.08, 1.15, 1.22];
-  const adjusted = baseScore * multipliers[timelineIndex] || baseScore;
+  const b = baseScore ?? 0;
+  const m = multipliers[timelineIndex] ?? 1.0;
+  const adjusted = b * m;
   return Math.min(Math.round(adjusted), 100);
 }
 

@@ -120,7 +120,7 @@ export default function MapPage() {
   };
 
   return (
-    <div className="min-h-screen p-6 relative">
+    <div className="min-h-screen relative">
       <div className="fixed inset-0 z-[-1] pointer-events-none">
         <img src="/images/map-bg.jpg" alt="" aria-hidden="true" loading="lazy" className="w-full h-full object-cover opacity-[0.05]" />
         <div className="absolute inset-0 bg-[#0a0e1a]/70" />
@@ -160,7 +160,7 @@ export default function MapPage() {
         </div>
       </div>
 
-      <div className="flex gap-6">
+      <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1 min-w-0">
           <div className="glass-card p-4" style={{ height: '600px' }}>
             {viewMode === 'stress' ? (
@@ -190,7 +190,7 @@ export default function MapPage() {
                   background: 'rgba(10,14,26,0.9)',
                   backdropFilter: 'blur(24px)',
                   border: '1px solid rgba(0,212,255,0.1)',
-                  width: 360,
+                  width: '100%', maxWidth: 360,
                 }}
               >
                 <div className="flex items-center justify-between mb-5">

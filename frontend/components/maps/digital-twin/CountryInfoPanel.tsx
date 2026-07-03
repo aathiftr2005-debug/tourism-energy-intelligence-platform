@@ -29,7 +29,7 @@ export default function CountryInfoPanel({ data, onClose }: Props) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 80 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="w-[360px] flex-shrink-0 overflow-hidden"
+      className="w-full lg:w-[360px] flex-shrink-0 overflow-hidden"
     >
       <div
         className="rounded-2xl p-5 h-full overflow-y-auto"
