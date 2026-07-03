@@ -1,0 +1,9 @@
+{
+  "cards": [
+    { "label": "Europe Avg Stress", "value": 42.8, "suffix": "", "color": "#f59e0b", "icon": "⚡", "precision": 1 },
+    { "label": "Critical Countries", "value": 3, "suffix": "", "color": "#ef4444", "icon": "🔴", "precision": 0 },
+    { "label": "Forecast Confidence", "value": 94.2, "suffix": "%", "color": "#00d4ff", "icon": "🎯", "precision": 1 },
+    { "label": "Countries Monitored", "value": 30, "suffix": "", "color": "#10b981", "icon": "🌍", "precision": 0 },
+    { "label": "Last ETL Run", "value": 2, "suffix": "h ago", "color": "#7c3aed", "icon": "🔄", "precision": 0 }
+  ]
+}

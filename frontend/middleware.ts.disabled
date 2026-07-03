@@ -1,0 +1,51 @@
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+const PUBLIC_PATHS = ['/login', '/api/auth/login', '/api/auth/logout', '/api/auth/session'];
+const STATIC_PATHS = ['/_next', '/favicon', '/images', '/eu-map-bg.jpg', '/europe-map-bg.jpg'];
+
+function isPublic(path: string): boolean {
+  return PUBLIC_PATHS.some((p) => path.startsWith(p));
+}
+
+function isStatic(path: string): boolean {
+  return STATIC_PATHS.some((p) => path.startsWith(p));
+}
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (isPublic(pathname) || isStatic(pathname)) {
+    return NextResponse.next();
+  }
+
+  const token = request.cookies.get('tei_session');
+
+  if (!token?.value) {
+    const loginUrl = new URL('/login', request.url);
+    loginUrl.searchParams.set('redirect', pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  try {
+    const payload = JSON.parse(Buffer.from(token.value, 'base64').toString());
+
+    if (Date.now() - payload.ts > 24 * 60 * 60 * 1000) {
+      const loginUrl = new URL('/login', request.url);
+      loginUrl.searchParams.set('redirect', pathname);
+      const response = NextResponse.redirect(loginUrl);
+      response.cookies.set('tei_session', '', { maxAge: 0, path: '/' });
+      return response;
+    }
+  } catch {
+    const loginUrl = new URL('/login', request.url);
+    loginUrl.searchParams.set('redirect', pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+};

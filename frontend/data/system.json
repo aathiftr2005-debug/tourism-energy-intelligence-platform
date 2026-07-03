@@ -1,0 +1,8 @@
+{
+  "healthItems": [
+    { "label": "API", "status": "operational", "value": "99.9% uptime" },
+    { "label": "Database", "status": "operational", "value": "Connected" },
+    { "label": "Model", "status": "operational", "value": "Trained" },
+    { "label": "ETL Pipeline", "status": "operational", "value": "Idle" }
+  ]
+}

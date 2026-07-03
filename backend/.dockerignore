@@ -1,0 +1,11 @@
+node_modules/
+__pycache__/
+.env
+.git/
+ml/data/raw/
+ml/data/processed/
+app/ml/saved_models/
+.pytest_cache/
+*.pyc
+.venv/
+venv/

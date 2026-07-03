@@ -1,0 +1,32 @@
+{
+  "alerts": [
+    { "id": "a1", "priority": "high", "title": "Spain — Grid Overload Risk", "description": "Energy demand exceeds 85% of grid capacity in Barcelona and Valencia regions. Peak tourist season contributing to 12% increase over baseline.", "timestamp": "2 min ago" },
+    { "id": "a2", "priority": "high", "title": "France — Cooling Capacity Critical", "description": "Elevated temperatures in Provence-Alpes-Côte d'Azur region driving cooling demand to record levels for this period.", "timestamp": "8 min ago" },
+    { "id": "a3", "priority": "medium", "title": "Italy — Tourism Surge Detected", "description": "Week-over-week tourist arrivals up 18% in Rome and Florence. Energy consumption trending above seasonal norms.", "timestamp": "22 min ago" },
+    { "id": "a4", "priority": "medium", "title": "Greece — Renewable Dip Expected", "description": "Cloud cover forecast suggests 30% reduction in solar generation across Greek islands over next 48 hours.", "timestamp": "35 min ago" },
+    { "id": "a5", "priority": "low", "title": "Germany — Wind Generation Surplus", "description": "Offshore wind farms producing 15% above forecast. Grid operators managing excess capacity.", "timestamp": "1h ago" },
+    { "id": "a6", "priority": "low", "title": "Netherlands — Normal Operations", "description": "All monitored metrics within expected ranges. No intervention required.", "timestamp": "1h ago" }
+  ],
+  "risks": [
+    { "id": "rg", "title": "Grid Overload", "probability": 72, "level": "high", "trend": "up" },
+    { "id": "ts", "title": "Tourism Surge", "probability": 85, "level": "critical", "trend": "up" },
+    { "id": "rs", "title": "Renewable Shortage", "probability": 38, "level": "medium", "trend": "down" },
+    { "id": "wi", "title": "Weather Impact", "probability": 55, "level": "medium", "trend": "stable" }
+  ],
+  "recommendations": [
+    { "id": "r1", "title": "Activate Reserve Capacity", "description": "Deploy 15% reserve energy capacity across Spanish and Italian grids to accommodate peak tourist demand over the next 72 hours.", "impact": "Prevents grid overload in 3 critical regions", "priority": "critical" },
+    { "id": "r2", "title": "Optimize Cooling Schedules", "description": "Shift public building cooling to off-peak hours (22:00–06:00) in southern France and Greece to flatten demand curves.", "impact": "Reduces peak load by approximately 8%", "priority": "high" },
+    { "id": "r3", "title": "Increase Renewable Monitoring", "description": "Deploy additional solar generation monitoring in Greek islands ahead of forecast cloud cover to manage supply expectations.", "impact": "Improves grid stability during renewable dip", "priority": "medium" },
+    { "id": "r4", "title": "Maintain Current Operations", "description": "Northern and Central European regions require no changes. Continue standard monitoring with weekly reporting cadence.", "impact": "Optimizes operational efficiency", "priority": "low" }
+  ],
+  "markers": [
+    { "id": "m1", "country": "Spain", "country_code": "ES", "type": "incident", "label": "Grid overload warning", "x": 45, "y": 55 },
+    { "id": "m2", "country": "France", "country_code": "FR", "type": "warning", "label": "Cooling capacity critical", "x": 48, "y": 35 },
+    { "id": "m3", "country": "Greece", "country_code": "GR", "type": "incident", "label": "Island grid stress", "x": 65, "y": 55 },
+    { "id": "m4", "country": "Italy", "country_code": "IT", "type": "warning", "label": "Tourism surge detected", "x": 55, "y": 45 },
+    { "id": "m5", "country": "Germany", "country_code": "DE", "type": "info", "label": "Wind surplus", "x": 55, "y": 25 },
+    { "id": "m6", "country": "Netherlands", "country_code": "NL", "type": "info", "label": "Normal operations", "x": 50, "y": 18 },
+    { "id": "m7", "country": "Hungary", "country_code": "HU", "type": "warning", "label": "Demand rising", "x": 65, "y": 32 },
+    { "id": "m8", "country": "Poland", "country_code": "PL", "type": "warning", "label": "Coal reserve low", "x": 65, "y": 20 }
+  ]
+}

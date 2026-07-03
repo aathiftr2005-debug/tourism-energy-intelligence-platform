@@ -1,0 +1,117 @@
+{
+  "monthlyEnergy": [
+    { "month": "Jan", "actual": 380, "xgb": 385, "prophet": 370, "ensemble": 379 },
+    { "month": "Feb", "actual": 360, "xgb": 358, "prophet": 350, "ensemble": 355 },
+    { "month": "Mar", "actual": 390, "xgb": 392, "prophet": 385, "ensemble": 389 },
+    { "month": "Apr", "actual": 410, "xgb": 405, "prophet": 400, "ensemble": 403 },
+    { "month": "May", "actual": 430, "xgb": 428, "prophet": 420, "ensemble": 425 },
+    { "month": "Jun", "actual": 470, "xgb": 465, "prophet": 455, "ensemble": 461 },
+    { "month": "Jul", "actual": 490, "xgb": 488, "prophet": 480, "ensemble": 485 },
+    { "month": "Aug", "actual": 500, "xgb": 495, "prophet": 490, "ensemble": 493 },
+    { "month": "Sep", "actual": 460, "xgb": 458, "prophet": 450, "ensemble": 455 },
+    { "month": "Oct", "actual": 420, "xgb": 418, "prophet": 415, "ensemble": 417 },
+    { "month": "Nov", "actual": 390, "xgb": 388, "prophet": 380, "ensemble": 385 },
+    { "month": "Dec", "actual": 370, "xgb": 365, "prophet": 360, "ensemble": 363 }
+  ],
+  "monthlyForecast": [
+    { "month": "Jan", "ensemble": 375, "xgb": 370, "prophet": 365, "lower": 350, "upper": 400 },
+    { "month": "Feb", "ensemble": 365, "xgb": 360, "prophet": 355, "lower": 340, "upper": 390 },
+    { "month": "Mar", "ensemble": 395, "xgb": 390, "prophet": 385, "lower": 370, "upper": 420 },
+    { "month": "Apr", "ensemble": 415, "xgb": 410, "prophet": 405, "lower": 390, "upper": 440 },
+    { "month": "May", "ensemble": 435, "xgb": 430, "prophet": 425, "lower": 410, "upper": 460 },
+    { "month": "Jun", "ensemble": 475, "xgb": 470, "prophet": 465, "lower": 445, "upper": 500 },
+    { "month": "Jul", "ensemble": 495, "xgb": 490, "prophet": 485, "lower": 465, "upper": 520 },
+    { "month": "Aug", "ensemble": 505, "xgb": 500, "prophet": 495, "lower": 475, "upper": 530 },
+    { "month": "Sep", "ensemble": 465, "xgb": 460, "prophet": 455, "lower": 435, "upper": 490 },
+    { "month": "Oct", "ensemble": 425, "xgb": 420, "prophet": 415, "lower": 395, "upper": 450 },
+    { "month": "Nov", "ensemble": 395, "xgb": 390, "prophet": 385, "lower": 370, "upper": 420 },
+    { "month": "Dec", "ensemble": 375, "xgb": 370, "prophet": 365, "lower": 350, "upper": 400 }
+  ],
+  "modelMetrics": [
+    { "model": "XGBoost", "mae": 8.2, "rmse": 11.5, "mape": 2.1, "r2": 0.92 },
+    { "model": "Prophet", "mae": 12.7, "rmse": 16.3, "mape": 3.2, "r2": 0.84 },
+    { "model": "Ensemble (6:4)", "mae": 6.8, "rmse": 9.8, "mape": 1.7, "r2": 0.94 }
+  ],
+  "seasonalStress": [
+    { "season": "Winter", "stress": 34.2 },
+    { "season": "Spring", "stress": 42.8 },
+    { "season": "Summer", "stress": 68.5 },
+    { "season": "Autumn", "stress": 45.1 }
+  ],
+  "historicalStressTrends": {
+    "DE": [
+      { "label": "2022", "year": 2022, "stress": 38.2 },
+      { "label": "2023", "year": 2023, "stress": 40.5 },
+      { "label": "2024", "year": 2024, "stress": 42.3 },
+      { "label": "2025", "year": 2025, "stress": 44.1 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 46.8, "lower": 43.2, "upper": 50.4 }
+    ],
+    "FR": [
+      { "label": "2022", "year": 2022, "stress": 52.1 },
+      { "label": "2023", "year": 2023, "stress": 55.3 },
+      { "label": "2024", "year": 2024, "stress": 58.7 },
+      { "label": "2025", "year": 2025, "stress": 61.2 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 64.5, "lower": 59.8, "upper": 69.1 }
+    ],
+    "ES": [
+      { "label": "2022", "year": 2022, "stress": 72.4 },
+      { "label": "2023", "year": 2023, "stress": 76.1 },
+      { "label": "2024", "year": 2024, "stress": 81.2 },
+      { "label": "2025", "year": 2025, "stress": 79.5 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 83.1, "lower": 77.6, "upper": 88.5 }
+    ],
+    "IT": [
+      { "label": "2022", "year": 2022, "stress": 68.9 },
+      { "label": "2023", "year": 2023, "stress": 72.3 },
+      { "label": "2024", "year": 2024, "stress": 76.5 },
+      { "label": "2025", "year": 2025, "stress": 74.8 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 78.2, "lower": 72.9, "upper": 83.6 }
+    ],
+    "AT": [
+      { "label": "2022", "year": 2022, "stress": 30.5 },
+      { "label": "2023", "year": 2023, "stress": 32.1 },
+      { "label": "2024", "year": 2024, "stress": 34.1 },
+      { "label": "2025", "year": 2025, "stress": 33.5 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 36.2, "lower": 32.8, "upper": 39.6 }
+    ],
+    "GR": [
+      { "label": "2022", "year": 2022, "stress": 71.8 },
+      { "label": "2023", "year": 2023, "stress": 75.4 },
+      { "label": "2024", "year": 2024, "stress": 79.8 },
+      { "label": "2025", "year": 2025, "stress": 77.2 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 82.5, "lower": 77.1, "upper": 87.9 }
+    ],
+    "PT": [
+      { "label": "2022", "year": 2022, "stress": 55.2 },
+      { "label": "2023", "year": 2023, "stress": 58.6 },
+      { "label": "2024", "year": 2024, "stress": 62.4 },
+      { "label": "2025", "year": 2025, "stress": 60.8 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 65.3, "lower": 60.2, "upper": 70.4 }
+    ],
+    "NL": [
+      { "label": "2022", "year": 2022, "stress": 24.3 },
+      { "label": "2023", "year": 2023, "stress": 26.7 },
+      { "label": "2024", "year": 2024, "stress": 28.9 },
+      { "label": "2025", "year": 2025, "stress": 27.4 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 31.1, "lower": 27.8, "upper": 34.5 }
+    ],
+    "BE": [
+      { "label": "2022", "year": 2022, "stress": 48.9 },
+      { "label": "2023", "year": 2023, "stress": 51.3 },
+      { "label": "2024", "year": 2024, "stress": 55.3 },
+      { "label": "2025", "year": 2025, "stress": 53.8 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 57.6, "lower": 53.1, "upper": 62.2 }
+    ],
+    "CZ": [
+      { "label": "2022", "year": 2022, "stress": 27.1 },
+      { "label": "2023", "year": 2023, "stress": 29.5 },
+      { "label": "2024", "year": 2024, "stress": 31.7 },
+      { "label": "2025", "year": 2025, "stress": 30.2 },
+      { "label": "2026 Forecast", "year": 2026, "forecast": 33.9, "lower": 30.4, "upper": 37.5 }
+    ]
+  },
+  "simulatorBaseline": [420, 380, 450, 410, 520, 580, 640, 610, 530, 480, 430, 510],
+  "simulatorSimulated": [450, 410, 480, 440, 560, 630, 690, 660, 570, 510, 460, 540],
+  "simulatorBaselineScore": 65.2,
+  "simulatorSimulatedScore": 81.7
+}

@@ -1,0 +1,31 @@
+{
+  "summary": {
+    "health": 87.4,
+    "energyStatus": "Moderate — Stable",
+    "tourismActivity": "Peaking in Mediterranean regions (ES, IT, GR)",
+    "summary": "Overall European tourism energy stress remains moderate this period. Southern regions show elevated demand driven by seasonal travel and warmer temperatures. Northern and Central Europe remain within normal operating ranges. Grid stability is adequate across most monitored regions with localized pressure points in peak tourist destinations.",
+    "currentStatus": "moderate"
+  },
+  "forecast24h": [
+    { "label": "Peak Demand", "value": "48.2 GWh", "change": "+5.3%", "direction": "up" },
+    { "label": "Renewable Gen", "value": "18.7 GWh", "change": "-2.1%", "direction": "down" },
+    { "label": "Tourist Inflow", "value": "342K", "change": "+8.7%", "direction": "up" },
+    { "label": "Avg Temperature", "value": "28.4°C", "change": "+1.2°C", "direction": "up" }
+  ],
+  "forecast7d": [
+    { "label": "Peak Demand", "value": "52.6 GWh", "change": "+9.8%", "direction": "up" },
+    { "label": "Renewable Gen", "value": "21.3 GWh", "change": "+14.2%", "direction": "up" },
+    { "label": "Tourist Inflow", "value": "2.1M", "change": "+12.4%", "direction": "up" },
+    { "label": "Avg Temperature", "value": "27.1°C", "change": "-0.9°C", "direction": "down" }
+  ],
+  "confidence": 94.2,
+  "governmentReadiness": {
+    "overall": 74.8,
+    "scores": [
+      { "label": "Sustainability", "score": 78, "icon": "🌱" },
+      { "label": "Infrastructure", "score": 72, "icon": "🏗️" },
+      { "label": "Emergency Prep", "score": 85, "icon": "🛑" },
+      { "label": "Tourism Capacity", "score": 64, "icon": "🗺️" }
+    ]
+  }
+}

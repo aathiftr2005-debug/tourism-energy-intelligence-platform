@@ -1,0 +1,26 @@
+{
+  "conditions": {
+    "DE": { "condition": "Partly Cloudy", "temperature": 22, "humidity": 58 },
+    "FR": { "condition": "Sunny", "temperature": 28, "humidity": 45 },
+    "ES": { "condition": "Hot", "temperature": 35, "humidity": 30 },
+    "IT": { "condition": "Sunny", "temperature": 31, "humidity": 42 },
+    "GB": { "condition": "Cloudy", "temperature": 18, "humidity": 65 },
+    "PT": { "condition": "Sunny", "temperature": 30, "humidity": 35 },
+    "GR": { "condition": "Hot", "temperature": 34, "humidity": 28 },
+    "NL": { "condition": "Windy", "temperature": 20, "humidity": 60 },
+    "BE": { "condition": "Cloudy", "temperature": 21, "humidity": 62 },
+    "AT": { "condition": "Partly Cloudy", "temperature": 24, "humidity": 50 },
+    "CH": { "condition": "Clear", "temperature": 23, "humidity": 45 },
+    "SE": { "condition": "Clear", "temperature": 19, "humidity": 40 },
+    "NO": { "condition": "Partly Cloudy", "temperature": 16, "humidity": 48 },
+    "DK": { "condition": "Windy", "temperature": 18, "humidity": 58 },
+    "FI": { "condition": "Clear", "temperature": 15, "humidity": 42 },
+    "IE": { "condition": "Windy", "temperature": 17, "humidity": 68 },
+    "PL": { "condition": "Cloudy", "temperature": 20, "humidity": 55 },
+    "CZ": { "condition": "Partly Cloudy", "temperature": 22, "humidity": 52 },
+    "HU": { "condition": "Sunny", "temperature": 29, "humidity": 38 },
+    "RO": { "condition": "Sunny", "temperature": 28, "humidity": 40 },
+    "BG": { "condition": "Sunny", "temperature": 30, "humidity": 35 },
+    "HR": { "condition": "Sunny", "temperature": 29, "humidity": 42 }
+  }
+}

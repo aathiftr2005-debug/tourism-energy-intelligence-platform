@@ -1,0 +1,234 @@
+{
+  "dataset_name": "European Country Boundaries",
+  "version": "1.0.0",
+  "source_dataset": "Natural Earth Admin-0 Countries (1:50m Cultural Vector)",
+  "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson",
+  "source_organization": "Natural Earth (supported by NACIS), via nvkelso/natural-earth-vector GitHub mirror",
+  "coordinate_reference_system": "WGS84 (EPSG:4326)",
+  "geometry_processing": {
+    "validation": "shapely.is_valid checked for every polygon; invalid geometries repaired with make_valid()",
+    "simplification": "Douglas-Peucker simplify, tolerance=0.01 degrees, preserve_topology=True",
+    "all_geometries_valid_after_processing": true
+  },
+  "record_count": 42,
+  "feature_property_schema": {
+    "country_name": "string - official English country name",
+    "iso2": "string - ISO 3166-1 alpha-2 code",
+    "iso3": "string - ISO 3166-1 alpha-3 code"
+  },
+  "countries": [
+    {
+      "iso2": "AL",
+      "iso3": "ALB",
+      "country_name": "Albania"
+    },
+    {
+      "iso2": "AD",
+      "iso3": "AND",
+      "country_name": "Andorra"
+    },
+    {
+      "iso2": "AT",
+      "iso3": "AUT",
+      "country_name": "Austria"
+    },
+    {
+      "iso2": "BE",
+      "iso3": "BEL",
+      "country_name": "Belgium"
+    },
+    {
+      "iso2": "BA",
+      "iso3": "BIH",
+      "country_name": "Bosnia and Herzegovina"
+    },
+    {
+      "iso2": "BG",
+      "iso3": "BGR",
+      "country_name": "Bulgaria"
+    },
+    {
+      "iso2": "HR",
+      "iso3": "HRV",
+      "country_name": "Croatia"
+    },
+    {
+      "iso2": "CY",
+      "iso3": "CYP",
+      "country_name": "Cyprus"
+    },
+    {
+      "iso2": "CZ",
+      "iso3": "CZE",
+      "country_name": "Czechia"
+    },
+    {
+      "iso2": "DK",
+      "iso3": "DNK",
+      "country_name": "Denmark"
+    },
+    {
+      "iso2": "EE",
+      "iso3": "EST",
+      "country_name": "Estonia"
+    },
+    {
+      "iso2": "FI",
+      "iso3": "FIN",
+      "country_name": "Finland"
+    },
+    {
+      "iso2": "FR",
+      "iso3": "FRA",
+      "country_name": "France"
+    },
+    {
+      "iso2": "DE",
+      "iso3": "DEU",
+      "country_name": "Germany"
+    },
+    {
+      "iso2": "GR",
+      "iso3": "GRC",
+      "country_name": "Greece"
+    },
+    {
+      "iso2": "HU",
+      "iso3": "HUN",
+      "country_name": "Hungary"
+    },
+    {
+      "iso2": "IS",
+      "iso3": "ISL",
+      "country_name": "Iceland"
+    },
+    {
+      "iso2": "IE",
+      "iso3": "IRL",
+      "country_name": "Ireland"
+    },
+    {
+      "iso2": "IT",
+      "iso3": "ITA",
+      "country_name": "Italy"
+    },
+    {
+      "iso2": "LV",
+      "iso3": "LVA",
+      "country_name": "Latvia"
+    },
+    {
+      "iso2": "LI",
+      "iso3": "LIE",
+      "country_name": "Liechtenstein"
+    },
+    {
+      "iso2": "LT",
+      "iso3": "LTU",
+      "country_name": "Lithuania"
+    },
+    {
+      "iso2": "LU",
+      "iso3": "LUX",
+      "country_name": "Luxembourg"
+    },
+    {
+      "iso2": "MT",
+      "iso3": "MLT",
+      "country_name": "Malta"
+    },
+    {
+      "iso2": "MD",
+      "iso3": "MDA",
+      "country_name": "Moldova"
+    },
+    {
+      "iso2": "MC",
+      "iso3": "MCO",
+      "country_name": "Monaco"
+    },
+    {
+      "iso2": "ME",
+      "iso3": "MNE",
+      "country_name": "Montenegro"
+    },
+    {
+      "iso2": "NL",
+      "iso3": "NLD",
+      "country_name": "Netherlands"
+    },
+    {
+      "iso2": "MK",
+      "iso3": "MKD",
+      "country_name": "North Macedonia"
+    },
+    {
+      "iso2": "NO",
+      "iso3": "NOR",
+      "country_name": "Norway"
+    },
+    {
+      "iso2": "PL",
+      "iso3": "POL",
+      "country_name": "Poland"
+    },
+    {
+      "iso2": "PT",
+      "iso3": "PRT",
+      "country_name": "Portugal"
+    },
+    {
+      "iso2": "RO",
+      "iso3": "ROU",
+      "country_name": "Romania"
+    },
+    {
+      "iso2": "SM",
+      "iso3": "SMR",
+      "country_name": "San Marino"
+    },
+    {
+      "iso2": "RS",
+      "iso3": "SRB",
+      "country_name": "Serbia"
+    },
+    {
+      "iso2": "SK",
+      "iso3": "SVK",
+      "country_name": "Slovakia"
+    },
+    {
+      "iso2": "SI",
+      "iso3": "SVN",
+      "country_name": "Slovenia"
+    },
+    {
+      "iso2": "ES",
+      "iso3": "ESP",
+      "country_name": "Spain"
+    },
+    {
+      "iso2": "SE",
+      "iso3": "SWE",
+      "country_name": "Sweden"
+    },
+    {
+      "iso2": "CH",
+      "iso3": "CHE",
+      "country_name": "Switzerland"
+    },
+    {
+      "iso2": "UA",
+      "iso3": "UKR",
+      "country_name": "Ukraine"
+    },
+    {
+      "iso2": "GB",
+      "iso3": "GBR",
+      "country_name": "United Kingdom"
+    }
+  ],
+  "last_updated": "2026-07-03",
+  "license": "Public Domain / CC0 1.0 (Natural Earth)",
+  "notes": "Micro-states (Andorra, Liechtenstein, Monaco, San Marino) included as small-scale polygons consistent with the 1:50m resolution."
+}

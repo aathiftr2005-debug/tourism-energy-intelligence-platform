@@ -1,0 +1,37 @@
+{
+  "consumption": {
+    "DE": 482.3, "FR": 358.7, "ES": 295.6, "IT": 312.4, "GB": 335.2,
+    "PT": 68.5, "GR": 98.7, "NL": 128.5, "BE": 92.3, "AT": 65.8,
+    "CH": 58.2, "SE": 85.4, "NO": 72.1, "DK": 45.2, "FI": 48.5,
+    "IE": 38.2, "PL": 185.6, "CZ": 72.5, "HU": 48.5, "RO": 62.3,
+    "BG": 38.5, "HR": 28.5, "SK": 35.2, "SI": 22.8, "LT": 18.5,
+    "LV": 14.2, "EE": 10.8, "CY": 12.5, "LU": 8.2, "MT": 6.5
+  },
+  "gridHealth": {
+    "DE": 88, "FR": 82, "ES": 65, "IT": 68, "GB": 78,
+    "PT": 72, "GR": 58, "NL": 85, "BE": 80, "AT": 90,
+    "CH": 92, "SE": 88, "NO": 90, "DK": 85, "FI": 87,
+    "IE": 76, "PL": 62, "CZ": 70, "HU": 65, "RO": 55,
+    "BG": 52, "HR": 68, "SK": 60, "SI": 72, "LT": 58,
+    "LV": 55, "EE": 60, "CY": 50, "LU": 82, "MT": 48
+  },
+  "carbonEmissions": {
+    "DE": 218.5, "FR": 145.2, "ES": 98.3, "IT": 132.8, "GB": 165.4,
+    "PT": 28.2, "GR": 42.5, "NL": 58.3, "BE": 42.1, "AT": 22.4,
+    "CH": 18.5, "SE": 12.8, "NO": 8.2, "DK": 15.8, "FI": 18.5,
+    "IE": 18.5, "PL": 95.3, "CZ": 38.2, "HU": 22.8, "RO": 32.5,
+    "BG": 18.5, "HR": 12.2
+  },
+  "stressScores": {
+    "DE": { "score": 42.3, "level": "NORMAL" },
+    "FR": { "score": 58.7, "level": "ELEVATED" },
+    "ES": { "score": 81.2, "level": "CRITICAL" },
+    "IT": { "score": 76.5, "level": "CRITICAL" },
+    "AT": { "score": 34.1, "level": "NORMAL" },
+    "GR": { "score": 79.8, "level": "CRITICAL" },
+    "PT": { "score": 62.4, "level": "ELEVATED" },
+    "NL": { "score": 28.9, "level": "NORMAL" },
+    "BE": { "score": 55.3, "level": "ELEVATED" },
+    "CZ": { "score": 31.7, "level": "NORMAL" }
+  }
+}

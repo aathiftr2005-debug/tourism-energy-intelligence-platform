@@ -1,0 +1,114 @@
+'use client';
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { registerApiKey } from '@/lib/api';
+
+const endpoints = [
+  { method: 'GET', path: '/api/public/forecast/{country}', desc: '12-month ensemble forecast', auth: true },
+  { method: 'GET', path: '/api/public/stress-score/{country}', desc: 'Latest stress score + traffic light', auth: true },
+  { method: 'GET', path: '/api/public/stress-score/all', desc: 'Stress scores for all countries', auth: true },
+  { method: 'GET', path: '/api/public/regions', desc: 'Supported countries with metadata', auth: true },
+  { method: 'POST', path: '/api/public/keys/register', desc: 'Request an API key', auth: false },
+  { method: 'GET', path: '/api/public/docs-info', desc: 'API documentation (no auth)', auth: false },
+];
+
+export default function ApiAccessPage() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function handleRegister() {
+    setLoading(true);
+    const res = await registerApiKey(name, email);
+    setMessage(res?.message || 'Failed to register. Check the API connection.');
+    setLoading(false);
+  }
+
+  return (
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
+      <div className="page-header">
+        <h1 className="page-title">API Access</h1>
+        <p className="page-subtitle">Integrate TEI data into your applications</p>
+      </div>
+
+      <div className="glass-card">
+        <h2 className="section-title">Get Your API Key</h2>
+        <div className="flex flex-wrap gap-3">
+          <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name"
+            className="glass-input flex-1 min-w-[200px]" />
+          <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com"
+            className="glass-input flex-1 min-w-[200px]" />
+          <button onClick={handleRegister} disabled={loading || !name || !email}
+            className="btn-primary text-sm disabled:opacity-50">
+            {loading ? 'Sending...' : 'Generate API Key'}
+          </button>
+        </div>
+        {message && (
+          <p className="mt-3 text-sm" style={{ color: '#00d4ff' }}>{message}</p>
+        )}
+        <p className="mt-3 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Rate limit: 100 requests/hour per key &middot; Keys sent via email</p>
+      </div>
+
+      <div className="glass-card">
+        <h2 className="section-title">API Documentation</h2>
+
+        <div className="mb-6 space-y-3">
+          <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
+            <p className="mb-2 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Get forecast for Germany</p>
+            <pre className="text-sm font-mono" style={{ color: '#00d4ff' }}>GET /api/public/forecast/DE</pre>
+            <pre className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+          </div>
+          <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
+            <p className="mb-2 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Get stress score for Spain</p>
+            <pre className="text-sm font-mono" style={{ color: '#00d4ff' }}>GET /api/public/stress-score/ES</pre>
+            <pre className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+          </div>
+          <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
+            <p className="mb-2 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Get all stress scores</p>
+            <pre className="text-sm font-mono" style={{ color: '#00d4ff' }}>GET /api/public/stress-score/all</pre>
+            <pre className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+          </div>
+        </div>
+
+        <table className="data-table">
+          <thead>
+            <tr className="text-left text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
+              <th className="pb-2 font-semibold">Method</th>
+              <th className="pb-2 font-semibold">Endpoint</th>
+              <th className="pb-2 font-semibold">Description</th>
+              <th className="pb-2 font-semibold">Auth</th>
+            </tr>
+          </thead>
+          <tbody>
+            {endpoints.map((ep) => (
+              <tr key={ep.path} className="border-b border-[rgba(255,255,255,0.03)]">
+                <td className="py-2.5">
+                  <span className={`rounded px-2 py-0.5 text-xs font-mono ${ep.method === 'GET' ? 'text-[#00d4ff]' : 'text-[#f59e0b]'}`}
+                    style={{ background: ep.method === 'GET' ? 'rgba(0,212,255,0.1)' : 'rgba(245,158,11,0.1)' }}>
+                    {ep.method}
+                  </span>
+                </td>
+                <td className="py-2.5 font-mono text-xs" style={{ color: '#f0f0ff' }}>{ep.path}</td>
+                <td className="py-2.5 text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{ep.desc}</td>
+                <td className="py-2.5 text-xs">
+                  {ep.auth
+                    ? <span className="badge-elevated text-[10px]">Required</span>
+                    : <span className="badge-normal text-[10px]">No</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className="mt-6 text-center">
+          <a href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/docs`} target="_blank"
+            className="btn-secondary inline-flex items-center gap-2 text-sm">
+            View Full Swagger Docs &rarr;
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
