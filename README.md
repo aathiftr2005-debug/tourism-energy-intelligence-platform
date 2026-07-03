@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Tourism Energy Intelligence 🌍⚡
 
 > AI-powered seasonal energy demand forecasting platform for European tourism regions
@@ -273,3 +274,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">Built with ⚡ for European energy resilience</p>
+=======
+# tourism-energy-intelligence-platform
+AI-powered Tourism &amp; Energy Intelligence Platform for Europe featuring Digital Twin Mapping, Predictive Analytics, Executive Dashboard, Renewable Energy Insights, and Smart Decision Support.
+>>>>>>> e376c40e1dcbdb34fcee95344954244725966e69
