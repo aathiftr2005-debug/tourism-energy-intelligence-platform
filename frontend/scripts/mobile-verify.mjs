@@ -247,6 +247,10 @@ async function run() {
       }
     }
 
+    // Collect errors across viewport loops for summary
+    allConsoleErrors.push(...consoleErrors);
+    allHydrationErrors.push(...hydrationErrors);
+
     await context.close();
   }
 
@@ -261,13 +265,13 @@ async function run() {
     if (r.status === 'PASS') pass++; else fail++;
   }
   console.log(`\nPassed: ${pass}, Failed: ${fail}, Total: ${allResults.length}`);
-  if (consoleErrors.length > 0) {
+  if (allConsoleErrors.length > 0) {
     console.log(`\nConsole errors seen (first 10):`);
-    consoleErrors.slice(0, 10).forEach(e => console.log(`  ${e.type}: ${e.message.slice(0, 120)}`));
+    allConsoleErrors.slice(0, 10).forEach(e => console.log(`  ${e.type}: ${e.message.slice(0, 120)}`));
   }
-  if (hydrationErrors.length > 0) {
-    console.log(`\nHydration warnings detected: ${hydrationErrors.length}`);
-    hydrationErrors.forEach(e => console.log(`  ${e}`));
+  if (allHydrationErrors.length > 0) {
+    console.log(`\nHydration warnings detected: ${allHydrationErrors.length}`);
+    allHydrationErrors.forEach(e => console.log(`  ${e}`));
   }
 
   // Write full report
@@ -275,8 +279,8 @@ async function run() {
     timestamp: new Date().toISOString(),
     summary: { passed: pass, failed: fail, total: allResults.length },
     results: allResults,
-    consoleErrors: consoleErrors.slice(0, 50),
-    hydrationErrors,
+    consoleErrors: allConsoleErrors.slice(0, 50),
+    hydrationErrors: allHydrationErrors,
   };
   writeFileSync(`${outDir}/report.json`, JSON.stringify(report, null, 2));
   console.log(`\nFull report: ${outDir}/report.json`);

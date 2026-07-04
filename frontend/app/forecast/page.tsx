@@ -63,7 +63,7 @@ export default function ForecastPage() {
             <button
               key={m}
               onClick={() => setMonths(m)}
-              className="px-3 py-1.5 rounded-full text-xs font-medium transition-all"
+              className="px-3 py-1.5 min-w-[44px] min-h-[44px] rounded-full text-xs font-medium transition-all flex items-center justify-center"
               style={{
                 background: months === m ? 'linear-gradient(135deg, #00d4ff22, #7c3aed22)' : 'rgba(255,255,255,0.04)',
                 border: `1px solid ${months === m ? 'rgba(0,212,255,0.3)' : 'rgba(255,255,255,0.08)'}`,

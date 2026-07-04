@@ -245,8 +245,8 @@ img[loading="lazy"] {
   top: 12px;
   left: 12px;
   z-index: 200;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   background: rgba(10,14,26,0.9);
   backdrop-filter: blur(16px);

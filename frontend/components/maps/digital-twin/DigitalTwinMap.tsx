@@ -83,7 +83,7 @@ export default function DigitalTwinMap() {
                     fill={layerValue > 0 ? color : 'rgba(255,255,255,0.04)'}
                     stroke={isHovered || isSelected ? 'rgba(0,212,255,0.9)' : layerValue > 0 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.05)'}
                     strokeWidth={isHovered || isSelected ? 2 : 0.5}
-                    animate={{ r: size, scale: isHovered ? 1.3 : 1 }}
+                    animate={{ scale: isHovered ? 1.3 : 1 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
                     style={{ filter: layerValue > 0 ? `drop-shadow(${glow})` : 'none', transformOrigin: `${pos.x}px ${pos.y}px` }}
                   />
