@@ -115,7 +115,7 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
                   strokeWidth={isHovered || isZoomed ? 2 : 0.5}
                   animate={{ r: size, scale: isHovered ? 1.3 : 1 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
-                  style={{ filter: hasData ? `drop-shadow(${getHeatGlow(score)})` : 'none' }}
+                  style={{ filter: hasData ? `drop-shadow(${getHeatGlow(score)})` : 'none', transformOrigin: `${pos.x}px ${pos.y}px` }}
                 />
 
                 <AnimatePresence>

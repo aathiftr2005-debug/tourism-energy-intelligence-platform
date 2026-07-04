@@ -819,6 +819,108 @@ input[type='range']::-webkit-slider-thumb {
   box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
 }
 
+/* ===== MOBILE OPTIMIZATIONS ===== */
+@media (max-width: 767px) {
+  /* Use full screen width on mobile */
+  .tei-main {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 80px));
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .kpi-value {
+    font-size: 24px;
+  }
+
+  .glass-card,
+  .glass-card-accent {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .page-header {
+    margin-bottom: 16px;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-card {
+    padding: 14px;
+  }
+
+  .kpi-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ===== TOUCH DEVICE: DISABLE DESKTOP HOVER EFFECTS ===== */
+@media (hover: none) and (pointer: coarse) {
+  .glass-card:hover,
+  .glass-card-accent:hover,
+  .kpi-card:hover,
+  .nav-item:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-critical:hover,
+  .btn-ghost:hover,
+  .glass-button:hover,
+  .glass-select:hover,
+  .glass-card:hover::before,
+  .glass-card-accent:hover::before,
+  .data-table tr:hover td,
+  .critical-card:hover,
+  .sidebar-toggle:hover {
+    transform: none !important;
+    background: inherit !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    color: inherit !important;
+  }
+
+  .glass-card,
+  .glass-card-accent {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+  }
+
+  .glass-select {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+  }
+
+  .scan-lines,
+  .grid-overlay {
+    opacity: 0.15 !important;
+  }
+
+  .map-wallpaper {
+    background-attachment: scroll !important;
+  }
+
+  .kpi-card {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
 /* ===== PRINT STYLES FOR PDF EXPORT ===== */
 @media print {
   body { background: white !important; overflow: visible !important; }

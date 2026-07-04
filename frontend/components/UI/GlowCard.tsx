@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -10,9 +10,15 @@ interface Props {
 }
 
 export default function GlowCard({ children, className = '', onClick }: Props) {
+  const [isTouch, setIsTouch] = useState(true);
+
+  useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
+      whileHover={isTouch ? undefined : { scale: 1.02 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       onClick={onClick}
       className={`rounded-xl border border-[rgba(255,255,255,0.08)] p-5 cursor-pointer transition-colors ${className}`}

@@ -72,28 +72,28 @@ export default function ApiAccessPage() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="data-table">
+        <div className="overflow-x-auto -mx-4 md:-mx-0 px-4 md:px-0">
+          <table className="data-table" style={{ minWidth: '420px' }}>
             <thead>
               <tr className="text-left text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                <th className="pb-2 font-semibold">Method</th>
-                <th className="pb-2 font-semibold">Endpoint</th>
-                <th className="pb-2 font-semibold">Description</th>
-                <th className="pb-2 font-semibold">Auth</th>
+                <th className="pb-2 font-semibold whitespace-nowrap pr-2">Method</th>
+                <th className="pb-2 font-semibold whitespace-nowrap pr-2">Endpoint</th>
+                <th className="pb-2 font-semibold whitespace-nowrap pr-2">Description</th>
+                <th className="pb-2 font-semibold whitespace-nowrap">Auth</th>
               </tr>
             </thead>
             <tbody>
               {endpoints.map((ep) => (
                 <tr key={ep.path} className="border-b border-[rgba(255,255,255,0.03)]">
-                  <td className="py-2.5">
+                  <td className="py-2.5 pr-2 whitespace-nowrap">
                     <span className={`rounded px-2 py-0.5 text-xs font-mono ${ep.method === 'GET' ? 'text-[#00d4ff]' : 'text-[#f59e0b]'}`}
                       style={{ background: ep.method === 'GET' ? 'rgba(0,212,255,0.1)' : 'rgba(245,158,11,0.1)' }}>
                       {ep.method}
                     </span>
                   </td>
-                  <td className="py-2.5 font-mono text-xs" style={{ color: '#f0f0ff' }}>{ep.path}</td>
-                  <td className="py-2.5 text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{ep.desc}</td>
-                  <td className="py-2.5 text-xs">
+                  <td className="py-2.5 pr-2 font-mono text-xs max-w-[120px] md:max-w-none" style={{ color: '#f0f0ff', wordBreak: 'break-word' }}>{ep.path}</td>
+                  <td className="py-2.5 pr-2 text-xs min-w-0" style={{ color: 'rgba(255,255,255,0.5)' }}>{ep.desc}</td>
+                  <td className="py-2.5 text-xs whitespace-nowrap">
                     {ep.auth
                       ? <span className="badge-elevated text-[10px]">Required</span>
                       : <span className="badge-normal text-[10px]">No</span>}

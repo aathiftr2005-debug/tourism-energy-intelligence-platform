@@ -1,11 +1,16 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const [isTouch, setIsTouch] = useState(true);
 
   useEffect(() => {
+    const touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setIsTouch(touch);
+    if (touch) return;
+
     let ringX = 0, ringY = 0;
     let mouseX = 0, mouseY = 0;
     let rafId: number;
@@ -62,6 +67,8 @@ export default function CustomCursor() {
       });
     };
   }, []);
+
+  if (isTouch) return null;
 
   return (
     <>

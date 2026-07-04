@@ -39,11 +39,12 @@ export default function DigitalTwinMap() {
       </div>
 
       <div className="flex-1 min-w-0">
-        <div className="w-full h-[400px] md:h-[600px] relative overflow-hidden rounded-2xl" style={{ background: 'rgba(0,0,0,0.3)' }}>
+        <div className="w-full h-[400px] md:h-[600px] min-h-[300px] relative overflow-hidden rounded-2xl" style={{ background: 'rgba(0,0,0,0.3)' }}>
           <motion.svg
             viewBox="0 0 100 70"
             className="w-full h-full"
             style={{ background: 'transparent' }}
+            preserveAspectRatio="xMidYMid meet"
           >
             {Object.entries(COUNTRY_POSITIONS).map(([country, pos]) => {
               const twinData = DIGITAL_TWIN_DATA[country] || Object.values(DIGITAL_TWIN_DATA).find(d => d.country === country);
@@ -84,7 +85,7 @@ export default function DigitalTwinMap() {
                     strokeWidth={isHovered || isSelected ? 2 : 0.5}
                     animate={{ r: size, scale: isHovered ? 1.3 : 1 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
-                    style={{ filter: layerValue > 0 ? `drop-shadow(${glow})` : 'none' }}
+                    style={{ filter: layerValue > 0 ? `drop-shadow(${glow})` : 'none', transformOrigin: `${pos.x}px ${pos.y}px` }}
                   />
 
                   <AnimatePresence>

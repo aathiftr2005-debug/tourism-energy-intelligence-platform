@@ -162,7 +162,7 @@ export default function MapPage() {
 
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1 min-w-0">
-          <div className="glass-card p-4" style={{ height: '600px' }}>
+          <div className="glass-card p-4 h-[400px] md:h-[600px]">
             {viewMode === 'stress' ? (
               <EuropeMap
                 data={data}

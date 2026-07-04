@@ -69,9 +69,11 @@ export default function Dashboard() {
         <div className="absolute inset-0 bg-[#0a0e1a]/70" />
       </div>
 
-      <div className="glass-card p-4 md:p-8 mb-4 md:mb-6">
-        <h1 className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent break-words min-w-0">
-          Tourism Energy Intelligence
+      <div className="glass-card p-4 md:p-8 mb-4 md:mb-6 w-full max-w-full">
+        <h1 className="text-2xl md:text-5xl font-bold break-words min-w-0">
+          <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            Tourism Energy Intelligence
+          </span>
         </h1>
         <p className="text-gray-300 text-sm md:text-base mt-1 md:mt-2 min-w-0">
           Real-time stress monitoring for {data.length} European countries
