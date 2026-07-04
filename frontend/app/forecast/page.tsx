@@ -83,7 +83,7 @@ export default function ForecastPage() {
             max={36}
             value={months}
             onChange={(e) => setMonths(Number(e.target.value))}
-            className="w-32"
+            className="w-full sm:w-32"
           />
         </div>
 

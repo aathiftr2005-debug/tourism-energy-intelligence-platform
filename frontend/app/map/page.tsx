@@ -127,18 +127,18 @@ export default function MapPage() {
       </div>
 
       <div className="glass-card p-6 mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
+          <div className="min-w-0">
+            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
               {viewMode === 'stress' ? 'Europe Stress Map' : 'Digital Twin Monitor'}
             </h1>
-            <p className="text-gray-300 mt-1">
+            <p className="text-gray-300 mt-1 text-sm md:text-base">
               {viewMode === 'stress'
                 ? 'Interactive map showing real-time stress scores across Europe'
                 : 'Layer-based digital twin visualization with AI-powered insights'}
             </p>
           </div>
-          <div className="flex items-center gap-2 p-1 rounded-2xl" style={{
+          <div className="flex items-center gap-2 p-1 rounded-2xl flex-shrink-0" style={{
             background: 'rgba(255,255,255,0.04)',
             border: '1px solid rgba(255,255,255,0.06)',
           }}>
@@ -323,8 +323,8 @@ export default function MapPage() {
 
       {viewMode === 'stress' && (
         <>
-          <div className="flex items-center justify-between mt-4">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               {[0, 1, 2, 3].map((idx) => (
                 <button
                   key={idx}

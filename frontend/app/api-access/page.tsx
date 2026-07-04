@@ -37,9 +37,9 @@ export default function ApiAccessPage() {
         <h2 className="section-title">Get Your API Key</h2>
         <div className="flex flex-wrap gap-3">
           <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name"
-            className="glass-input flex-1 min-w-[200px]" />
+            className="glass-input w-full sm:flex-1 sm:min-w-[200px]" />
           <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com"
-            className="glass-input flex-1 min-w-[200px]" />
+            className="glass-input w-full sm:flex-1 sm:min-w-[200px]" />
           <button onClick={handleRegister} disabled={loading || !name || !email}
             className="btn-primary text-sm disabled:opacity-50">
             {loading ? 'Sending...' : 'Generate API Key'}

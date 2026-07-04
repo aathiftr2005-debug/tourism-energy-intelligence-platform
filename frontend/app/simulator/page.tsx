@@ -73,7 +73,7 @@ export default function SimulatorPage() {
 
           {simulated ? (
             <>
-              <div className="flex items-center justify-center gap-8 py-4">
+              <div className="flex items-center justify-center gap-4 md:gap-8 py-4">
                 <div className="text-center">
                   <p className="text-xs mb-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Baseline</p>
                   <p className="text-3xl font-bold" style={{ color: 'rgba(255,255,255,0.4)' }}>65.2</p>

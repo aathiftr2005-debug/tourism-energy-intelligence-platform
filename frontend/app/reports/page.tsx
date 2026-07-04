@@ -110,7 +110,7 @@ export default function ReportsPage() {
         <select
           value={country}
           onChange={(e) => setCountry(e.target.value)}
-          className="glass-select min-w-[200px]"
+          className="glass-select w-full sm:min-w-[200px]"
         >
           {countries.map(([k, v]) => (
             <option key={k} value={k}>{COUNTRY_FLAGS[k]} {v}</option>

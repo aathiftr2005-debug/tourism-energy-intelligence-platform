@@ -180,7 +180,7 @@ export default function StressPage() {
             <select
               value={compareA}
               onChange={(e) => setCompareA(e.target.value)}
-              className="glass-select min-w-[160px]"
+              className="glass-select w-full sm:min-w-[160px]"
             >
               {countries.map((c) => (
                 <option key={c.code} value={c.code}>{c.name}</option>
@@ -192,7 +192,7 @@ export default function StressPage() {
             <select
               value={compareB}
               onChange={(e) => setCompareB(e.target.value)}
-              className="glass-select min-w-[160px]"
+              className="glass-select w-full sm:min-w-[160px]"
             >
               {countries.map((c) => (
                 <option key={c.code} value={c.code}>{c.name}</option>
