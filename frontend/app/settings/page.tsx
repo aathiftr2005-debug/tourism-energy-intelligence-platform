@@ -15,7 +15,7 @@ export default function SettingsPage() {
         <div className="space-y-4 text-sm">
           <div className="flex items-center justify-between py-2 border-b border-[rgba(255,255,255,0.04)]">
             <span style={{ color: 'rgba(255,255,255,0.5)' }}>API Endpoint</span>
-            <span className="font-mono text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}</span>
+            <span className="font-mono text-xs truncate max-w-[55%] text-right" style={{ color: 'rgba(255,255,255,0.5)' }}>{process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}</span>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-[rgba(255,255,255,0.04)]">
             <span style={{ color: 'rgba(255,255,255,0.5)' }}>Application Version</span>

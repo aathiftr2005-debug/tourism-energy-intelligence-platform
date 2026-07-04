@@ -58,7 +58,7 @@ export default function ForecastPage() {
           ))}
         </select>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           {[3, 6, 12, 24, 36].map((m) => (
             <button
               key={m}

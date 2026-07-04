@@ -41,7 +41,7 @@ export default function ApiAccessPage() {
           <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com"
             className="glass-input w-full sm:flex-1 sm:min-w-[200px]" />
           <button onClick={handleRegister} disabled={loading || !name || !email}
-            className="btn-primary text-sm disabled:opacity-50">
+            className="btn-primary text-sm disabled:opacity-50 w-full sm:w-auto">
             {loading ? 'Sending...' : 'Generate API Key'}
           </button>
         </div>
@@ -106,7 +106,7 @@ export default function ApiAccessPage() {
 
         <div className="mt-6 text-center">
           <a href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/docs`} target="_blank"
-            className="btn-secondary inline-flex items-center gap-2 text-sm">
+            className="btn-secondary inline-flex items-center gap-2 text-sm w-full sm:w-auto">
             View Full Swagger Docs &rarr;
           </a>
         </div>

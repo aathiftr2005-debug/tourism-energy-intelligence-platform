@@ -1,280 +1,117 @@
-<<<<<<< HEAD
-# Tourism Energy Intelligence 🌍⚡
+# Tourism Energy Intelligence Platform (TEI)
 
-> AI-powered seasonal energy demand forecasting platform for European tourism regions
+**AI-powered platform that quantifies tourism-driven energy stress across 10 European countries — from real-time ETL to ensemble ML forecasting to interactive dashboard.**
 
-[![CI/CD Pipeline](https://github.com/aathiftr2005-debug/tourism-energy-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/aathiftr2005-debug/tourism-energy-intelligence/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/aathiftr2005-debug/tourism-energy-intelligence-platform)](https://github.com/aathiftr2005-debug/tourism-energy-intelligence-platform/commits/main)
+[![Stack: Next.js + FastAPI](https://img.shields.io/badge/Stack-Next.js_14_|_FastAPI-black?logo=next.js)](https://github.com/aathiftr2005-debug/tourism-energy-intelligence-platform)
+[![Live Demo](https://img.shields.io/badge/Live-Vercel-000?logo=vercel)](https://tourism-energy-intelligence-platfor.vercel.app)
 
-## Problem & Solution
-
-European tourism regions face extreme seasonal energy demand spikes driven by tourist influx, weather patterns, and large-scale events. Grid operators struggle to balance supply and demand, often resorting to expensive last-minute capacity purchases or risking brownouts.
-
-Tourism Energy Intelligence solves this by combining multi-source ETL pipelines (Eurostat, OpenMeteo, OpenSky Network) with ensemble ML models (XGBoost + Prophet) to produce accurate 12-month energy demand forecasts. A novel Tourism Energy Stress Score (0-100) with traffic-light classification provides an at-a-glance risk assessment, while SHAP explainability and a Gemini-powered AI assistant make the insights actionable.
-
-## Architecture
-
-```
-┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-│   Eurostat API   │    │  OpenMeteo API   │    │ OpenSky Network  │
-│ (tourism/energy) │    │ (weather archive)│    │ (flight arrivals)│
-└────────┬─────────┘    └────────┬─────────┘    └────────┬─────────┘
-         │                       │                       │
-         ▼                       ▼                       ▼
-    ┌─────────────────────────────────────────────────────────┐
-    │                   ETL Pipeline (async)                   │
-    │          Caching · Retry · Validation · Logging          │
-    └──────────────────────────┬──────────────────────────────┘
-                               │
-                               ▼
-                    ┌──────────────────┐
-                    │    Supabase DB   │
-                    │ (PostgreSQL)     │
-                    └────────┬─────────┘
-                             │
-                    ┌────────▼────────┐
-                    │ Feature Engine  │
-                    │ (lags, rolling, │
-                    │  calendar, int.)│
-                    └────────┬────────┘
-                             │
-               ┌─────────────┼─────────────┐
-               ▼             ▼             ▼
-        ┌──────────┐  ┌──────────┐  ┌──────────┐
-        │ XGBoost  │  │ Prophet  │  │  SHAP    │
-        │ (TSS CV) │  │(season.) │  │Explain.  │
-        └────┬─────┘  └────┬─────┘  └────┬─────┘
-             │             │             │
-             ▼             ▼             ▼
-        ┌─────────────────────────────────────┐
-        │        Ensemble Forecast (6:4)       │
-        └──────────────────┬──────────────────┘
-                           │
-                           ▼
-        ┌─────────────────────────────────────┐
-        │      Stress Score Engine (0-100)     │
-        │   🟢 Normal · 🟡 Elevated · 🔴 Critical │
-        └──────────────────┬──────────────────┘
-                           │
-              ┌────────────┼────────────┐
-              ▼            ▼            ▼
-      ┌──────────┐  ┌──────────┐  ┌──────────┐
-      │ Next.js  │  │  Public  │  │ SendGrid │
-      │Dashboard │  │ REST API │  │  Alerts  │
-      └──────────┘  └──────────┘  └──────────┘
-```
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Next.js 14 (App Router), Tailwind CSS, Framer Motion, Recharts, react-simple-maps |
-| Backend | FastAPI, Python 3.11, Pydantic |
-| ML | XGBoost, Prophet, SHAP, scikit-learn, TimeSeriesSplit CV |
-| Database | Supabase (PostgreSQL) |
-| AI | Google Gemini API (RAG-based assistant) |
-| Maps | react-simple-maps (SVG choropleth) |
-| Alerts | SendGrid (HTML email with dark theme) |
-| DevOps | Docker, docker-compose, GitHub Actions CI/CD |
-| Deploy | Vercel (frontend) + Render (backend) |
-
-## Features
-
-- ⚡ **Multi-source ETL** — Automated pipelines ingesting Eurostat tourism/energy data, OpenMeteo weather, and OpenSky flight arrivals with caching + retry
-- 🤖 **Ensemble ML Forecasting** — XGBoost (TimeSeriesSplit cross-validation) + Prophet (custom tourism seasonality) weighted 60:40
-- 🧠 **Explainable AI** — SHAP TreeExplainer with global importance, per-prediction breakdown, and Gemini-generated plain-English explanations
-- 🚦 **Tourism Energy Stress Score** — 0-100 score with 🔴 CRITICAL / 🟡 ELEVATED / 🟢 NORMAL classification from 4 weighted factors
-- 🗺️ **Interactive Europe Map** — Country-level stress visualisation with clickable detail panel
-- 📧 **Automated Email Alerts** — Dark-themed HTML alerts sent via SendGrid when stress is elevated or critical
-- 🔄 **Scenario Simulator** — Adjust tourist arrivals, temperature, flights, and events to see projected stress impact
-- 🤖 **AI Assistant** — Chat interface powered by Gemini for natural-language questions about forecasts and stress scores
-- 🔑 **Public REST API** — Key-authenticated API with rate limiting (100 req/h) for forecast and stress score data
-- 🐳 **Docker + CI/CD** — Production-ready containers with GitHub Actions automated testing and Docker build
-
-## Quick Start
-
-### Prerequisites
-
-- Python 3.11+
-- Node.js 20+
-- Docker & docker-compose (optional)
-- Supabase account
-- SendGrid account (for email alerts)
-- Google Gemini API key (for AI assistant)
-
-### Local Setup
-
-```bash
-# Clone
-git clone https://github.com/aathiftr2005-debug/tourism-energy-intelligence
-cd tourism-energy-intelligence
-
-# Backend
-cd backend
-cp .env.example .env
-# Edit .env with your API keys
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-
-# Frontend (new terminal)
-cd frontend
-cp .env.example .env
-npm install
-npm run dev
-```
-
-Open http://localhost:3000 for the dashboard and http://localhost:8000/docs for the API.
-
-### Docker Setup
-
-```bash
-docker-compose up --build
-```
-
-## Environment Variables
-
-### Backend (`backend/.env`)
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `SUPABASE_URL` | Supabase project URL | Yes |
-| `SUPABASE_SERVICE_KEY` | Supabase service role key | Yes |
-| `SENDGRID_API_KEY` | SendGrid API key for alerts | For alerts |
-| `ALERT_RECIPIENT_EMAIL` | Default alert destination | For alerts |
-| `GEMINI_API_KEY` | Google Gemini API key | For AI features |
-| `WEATHER_API_KEY` | OpenWeatherMap API key | Weather fallback |
-| `ENVIRONMENT` | `development` or `production` | No |
-
-### Frontend (`frontend/.env`)
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_API_URL` | Backend API base URL | `http://localhost:8000` |
-
-## API Usage
-
-### Get an API Key
-
-```bash
-curl -X POST https://your-api.com/api/v1/public/keys/register \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Your Name", "email": "you@email.com"}'
-```
-
-### Query the API
-
-```bash
-# 12-month ensemble forecast for Germany
-curl https://your-api.com/api/v1/public/forecast/DE \
-  -H "X-API-Key: TEI-your-key-here"
-
-# Latest stress score for Spain
-curl https://your-api.com/api/v1/public/stress-score/ES \
-  -H "X-API-Key: TEI-your-key-here"
-
-# All stress scores
-curl https://your-api.com/api/v1/public/stress-score/all \
-  -H "X-API-Key: TEI-your-key-here"
-
-# Supported regions
-curl https://your-api.com/api/v1/public/regions \
-  -H "X-API-Key: TEI-your-key-here"
-```
-
-### Internal Endpoints (no auth)
-
-```bash
-# Health check
-curl https://your-api.com/health
-
-# API documentation (no auth)
-curl https://your-api.com/api/v1/public/docs-info
-
-# Trigger ETL pipeline (all 10 countries)
-curl -X POST https://your-api.com/api/v1/etl/run
-
-# Trigger ML model training (background job)
-curl -X POST https://your-api.com/api/v1/ml/train
-```
-
-## Data Sources
-
-| Source | Dataset | Variables | Update Frequency |
-|--------|---------|-----------|-----------------|
-| **Eurostat** | `tour_occ_nim` | Tourist nights by country/month | Monthly |
-| **Eurostat** | `nrg_cb_em` | Energy consumption (GWh) | Monthly |
-| **OpenMeteo** | Archive API | Temperature, precipitation, sunshine | Daily |
-| **OpenSky** | Flight arrivals | International arrival counts | Real-time |
-
-**Target countries:** Germany (DE), France (FR), Spain (ES), Italy (IT), Austria (AT), Greece (GR), Portugal (PT), Netherlands (NL), Belgium (BE), Czech Republic (CZ)
-
-## Deployment
-
-### Backend (Render)
-
-1. Create a new Web Service on Render
-2. Set root directory to `backend`
-3. Build command: `pip install -r requirements.txt`
-4. Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-5. Add all environment variables from `backend/.env.example`
-
-### Frontend (Vercel)
-
-1. Import repository on Vercel
-2. Set root directory to `frontend`
-3. Framework preset: Next.js
-4. Add environment variable: `NEXT_PUBLIC_API_URL` = your Render backend URL
-5. Deploy
-
-## Project Structure
-
-```
-tourism-energy-intelligence/
-├── backend/                  # FastAPI application
-│   ├── app/
-│   │   ├── api/routes/       # API endpoints (7 route files)
-│   │   ├── core/             # Config, database, auth
-│   │   ├── etl/              # Eurostat, Weather, Flights, Pipeline
-│   │   ├── ml/               # Features, Train, Forecast, SHAP, Stress Score
-│   │   ├── services/         # Alerts, Scheduler
-│   │   └── main.py           # FastAPI entry point
-│   ├── tests/                # Pytest test suite
-│   ├── supabase/migrations/  # SQL migrations
-│   └── requirements.txt
-│
-├── frontend/                 # Next.js 14 application
-│   ├── app/                  # 8 route pages
-│   ├── components/           # UI + Chart components
-│   ├── lib/                  # API client + TypeScript types
-│   └── package.json
-│
-├── ml/                       # ML notebooks & data
-├── .github/workflows/        # CI/CD pipeline
-├── docker-compose.yml
-└── README.md
-```
-
-## Roadmap
-
-- [ ] **Real-time WebSocket** stress score updates
-- [ ] **Mobile app** (React Native)
-- [ ] **Additional countries** (Nordics, Baltics, Balkans)
-- [ ] **Carbon footprint** correlation layer
-- [ ] **Multi-language** support (DE, FR, ES)
-- [ ] **Historical backtesting** dashboard
-- [ ] **Slack/Discord** alert integrations
-
-## License
-
-MIT License — see [LICENSE](LICENSE) for details.
-
-## Author
-
-**Aathif TR** — [GitHub](https://github.com/aathiftr2005-debug) — [LinkedIn](https://www.linkedin.com/in/aathif-tr-)
+**Live Demo** · [API Docs](./API.md) · [Architecture](./ARCHITECTURE.md) · [Deployment](./DEPLOYMENT.md)
 
 ---
 
-<p align="center">Built with ⚡ for European energy resilience</p>
-=======
-# tourism-energy-intelligence-platform
-AI-powered Tourism &amp; Energy Intelligence Platform for Europe featuring Digital Twin Mapping, Predictive Analytics, Executive Dashboard, Renewable Energy Insights, and Smart Decision Support.
->>>>>>> e376c40e1dcbdb34fcee95344954244725966e69
+### The Problem
+
+European tourism regions experience extreme seasonal energy demand spikes driven by tourist influx, weather patterns, and large-scale events. Grid operators lack the predictive tools needed to balance supply and demand, often resorting to expensive last-minute capacity purchases or risking brownouts.
+
+### What It Does
+
+| Capability | Description |
+|---|---|
+| **Multi-source ETL** | Automated pipelines ingest Eurostat tourism/energy data, Open-Meteo weather, and OpenSky flight arrivals with caching + retry |
+| **Ensemble ML Forecasting** | XGBoost (TimeSeriesSplit CV) + Prophet (custom seasonality) weighted 60:40 produce 12‑month energy demand forecasts |
+| **Stress Score (0‑100)** | Novel composite index from 4 weighted factors with traffic‑light classification: Normal / Elevated / Critical |
+| **Explainable AI** | SHAP TreeExplainer with per‑prediction breakdown + Gemini‑generated plain‑English explanations |
+| **Digital Twin Map** | Country‑level stress visualization with clickable detail panel, timeline projection, and risk factor breakdown |
+| **Public REST API** | Key‑authenticated API (100 req/h) serving forecast, stress score, and region data — fully documented in [API.md](./API.md) |
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 14 (App Router), Tailwind CSS, Framer Motion, Recharts |
+| Backend | FastAPI, Python 3.11, Pydantic |
+| Machine Learning | XGBoost, Prophet, SHAP, scikit-learn, TimeSeriesSplit |
+| Database | Supabase / PostgreSQL |
+| AI | Google Gemini API (RAG‑based assistant & insight generation) |
+| Data Sources | Eurostat, Open‑Meteo, OpenSky Network |
+| DevOps | Docker, docker-compose, GitHub Actions CI/CD |
+| Deployment | Vercel (frontend) + Render (backend) |
+
+### Architecture
+
+```mermaid
+flowchart LR
+    A[Eurostat API<br/>Tourism & Energy] --> D[ETL Pipeline]
+    B[Open-Meteo<br/>Weather Archive] --> D
+    C[OpenSky Network<br/>Flight Arrivals] --> D
+    D --> E[Supabase / PostgreSQL]
+    E --> F[Feature Engine<br/>Lags · Rolling · Calendar]
+    F --> G[XGBoost<br/>TSS CV]
+    F --> H[Prophet<br/>Seasonality]
+    G --> I[Ensemble Forecast<br/>60:40 Weighted]
+    H --> I
+    I --> J[Stress Score<br/>0-100 Classifier]
+    J --> K[Next.js Dashboard<br/>7 Pages]
+    J --> L[REST API<br/>Key-Auth]
+```
+
+### Screenshots
+
+![Dashboard home — KPI cards, Europe stress map, top-10 leaderboard, alert center, system health](screenshots/dashboard.png)
+*Dashboard home — KPI cards, Europe stress map, top-10 leaderboard, alert center, system health*
+
+![Interactive Europe map with country heatmap, detail panel, timeline projection, and risk factor breakdown](screenshots/map-view.png)
+*Interactive Europe stress map with country detail panel and timeline projection*
+
+![Forecast page with ensemble chart, model metrics table, historical trends, and seasonal analysis](screenshots/forecast.png)
+*Forecast page — ensemble chart, model metrics, historical trends, seasonal analysis*
+
+### Quick Start
+
+```bash
+# 1. Clone
+git clone https://github.com/aathiftr2005-debug/tourism-energy-intelligence-platform
+cd tourism-energy-intelligence-platform
+
+# 2. Backend
+cd backend && cp .env.example .env   # add your API keys
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+
+# 3. Frontend (new terminal)
+cd frontend && cp .env.example .env
+npm install && npm run dev
+```
+
+Open `http://localhost:3000` for the dashboard and `http://localhost:8000/docs` for the Swagger API.
+
+### Live Highlights
+
+The model currently flags **Spain (78)**, **Greece (71)**, and **Italy (65)** as **CRITICAL** — driven by elevated tourism demand, high summer temperatures, and increased flight traffic. These scores trigger automated email alerts and surface priority recommendations on the dashboard. The system monitors all 10 countries continuously and updates scores with each ETL run.
+
+### Project Structure
+
+```
+backend/            FastAPI app — routes, ETL pipelines, ML training, services
+frontend/           Next.js 14 app — 8 route pages, UI components, API client
+ml/                 Jupyter notebooks for model development and evaluation
+database/           Supabase migrations and schema definitions
+```
+
+### Documentation
+
+- [**API.md**](./API.md) — Full REST API reference with request/response examples
+- [**ARCHITECTURE.md**](./ARCHITECTURE.md) — System design, data flow, component decisions
+- [**DATABASE.md**](./DATABASE.md) — Schema, indexes, and migration strategy
+- [**DEPLOYMENT.md**](./DEPLOYMENT.md) — Production setup for Vercel + Render + Docker
+
+### Author
+
+**Aathif T.R** — 3rd-year CSE student  
+[GitHub](https://github.com/aathiftr2005-debug) · [LinkedIn](https://www.linkedin.com/in/aathif-tr-)
+
+### License
+
+MIT — see [LICENSE](LICENSE).

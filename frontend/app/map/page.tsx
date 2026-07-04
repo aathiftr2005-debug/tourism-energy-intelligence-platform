@@ -128,11 +128,11 @@ export default function MapPage() {
 
       <div className="glass-card p-6 mb-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
-          <div className="min-w-0">
-            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+          <div className="min-w-0 break-words">
+            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent break-words">
               {viewMode === 'stress' ? 'Europe Stress Map' : 'Digital Twin Monitor'}
             </h1>
-            <p className="text-gray-300 mt-1 text-sm md:text-base">
+            <p className="text-gray-300 mt-1 text-sm md:text-base break-words">
               {viewMode === 'stress'
                 ? 'Interactive map showing real-time stress scores across Europe'
                 : 'Layer-based digital twin visualization with AI-powered insights'}
@@ -146,7 +146,7 @@ export default function MapPage() {
               <button
                 key={mode}
                 onClick={() => setViewMode(mode)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold transition-all tracking-wider uppercase"
+                className="px-3 md:px-4 py-2 rounded-xl text-[10px] md:text-xs font-semibold transition-all tracking-wider uppercase"
                 style={{
                   background: viewMode === mode ? 'linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15))' : 'transparent',
                   border: `1px solid ${viewMode === mode ? 'rgba(0,212,255,0.25)' : 'transparent'}`,

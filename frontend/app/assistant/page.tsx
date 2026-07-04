@@ -115,7 +115,7 @@ export default function AssistantPage() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           placeholder="Ask about energy forecasts, stress scores..."
-          className="glass-input flex-1"
+          className="glass-input flex-1 min-w-0"
         />
         <button onClick={() => handleSend()} disabled={loading} className="btn-primary flex-shrink-0">
           Send

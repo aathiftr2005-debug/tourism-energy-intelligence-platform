@@ -183,11 +183,11 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
           )}
         </AnimatePresence>
 
-        <div className="absolute bottom-4 left-4 p-2.5 rounded-xl" style={{
+        <div className="absolute bottom-4 left-4 p-2 rounded-xl" style={{
           background: 'rgba(17,24,39,0.85)', backdropFilter: 'blur(12px)',
           border: '1px solid rgba(255,255,255,0.06)',
         }}>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             {[
               { label: 'Low', color: '#10b981' },
               { label: 'Moderate', color: '#eab308' },
@@ -195,8 +195,8 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
               { label: 'Critical', color: '#ef4444' },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-1">
-                <div className="w-2.5 h-2.5 rounded-full" style={{ background: item.color, boxShadow: `0 0 6px ${item.color}60` }} />
-                <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>{item.label}</span>
+                <div className="w-2 h-2.5 rounded-full" style={{ background: item.color, boxShadow: `0 0 6px ${item.color}60` }} />
+                <span className="text-[8px] md:text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>{item.label}</span>
               </div>
             ))}
           </div>

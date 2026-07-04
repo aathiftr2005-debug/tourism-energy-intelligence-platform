@@ -61,7 +61,7 @@ export default function SystemHealth() {
                 <span className="text-xs font-semibold" style={{ color: 'rgba(255,255,255,0.5)' }}>{item.label}</span>
                 <HealthDot status={item.status} />
               </div>
-              <p className="text-sm font-bold" style={{ color: cfg.color }}>{cfg.label}</p>
+              <p className="text-xs md:text-sm font-bold" style={{ color: cfg.color }}>{cfg.label}</p>
               <p className="text-[10px] mt-1" style={{ color: 'rgba(255,255,255,0.3)' }}>{item.value}</p>
             </motion.div>
           );

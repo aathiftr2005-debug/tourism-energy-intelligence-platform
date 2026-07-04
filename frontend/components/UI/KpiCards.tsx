@@ -50,7 +50,7 @@ export default function KpiCards() {
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-lg">{card.icon}</span>
-            <span className="text-[10px] uppercase tracking-wider font-medium" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <span className="text-[10px] uppercase tracking-wider font-medium truncate max-w-[50%]" style={{ color: 'rgba(255,255,255,0.3)' }}>
               {card.label.split(' ').pop()}
             </span>
           </div>
