@@ -111,7 +111,7 @@ database/           Supabase migrations and schema definitions
 
 ### Author
 
-**Aathif T.R** — final-year CSE student  
+**Aathif T.R** — Final-year CSE student  
 [GitHub](https://github.com/aathiftr2005-debug) · [LinkedIn](https://www.linkedin.com/in/aathif-tr-)
 
 ### License
