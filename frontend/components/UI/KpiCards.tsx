@@ -33,14 +33,14 @@ export default function KpiCards() {
   const cards = data.cards as KpiCard[];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
       {cards.map((card, i) => (
         <motion.div
           key={card.label}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 * i }}
-          className="rounded-2xl p-4 relative overflow-hidden"
+          className="rounded-2xl p-4 relative overflow-hidden w-full"
           style={{
             background: 'rgba(255,255,255,0.03)',
             backdropFilter: 'blur(16px)',

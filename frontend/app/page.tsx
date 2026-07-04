@@ -56,7 +56,7 @@ export default function Dashboard() {
   const [data, setData] = useState(MOCK_DATA);
 
   return (
-    <div className="min-h-screen p-3 md:p-6 relative">
+    <div className="min-h-screen p-3 md:p-6 relative overflow-x-hidden">
 
       <div className="fixed inset-0 z-[-1] pointer-events-none">
         <img
@@ -70,14 +70,14 @@ export default function Dashboard() {
       </div>
 
       <div className="glass-card p-4 md:p-8 mb-4 md:mb-6">
-        <h1 className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+        <h1 className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent break-words min-w-0">
           Tourism Energy Intelligence
         </h1>
-        <p className="text-gray-300 text-sm md:text-base mt-1 md:mt-2">
+        <p className="text-gray-300 text-sm md:text-base mt-1 md:mt-2 min-w-0">
           Real-time stress monitoring for {data.length} European countries
         </p>
 
-        <div className="mt-4 md:mt-6">
+        <div className="mt-4 md:mt-6 min-w-0">
           <KpiCards />
         </div>
       </div>
@@ -186,7 +186,7 @@ export default function Dashboard() {
       <div className="mt-4 md:mt-6">
         <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4">EU All European Countries</h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
           {ALL_COUNTRIES.map((item) => {
             const stressData = data.find(d => d.country === item.name);
             const score = stressData?.stress_score || 0;

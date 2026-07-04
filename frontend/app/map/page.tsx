@@ -178,11 +178,11 @@ export default function MapPage() {
         <AnimatePresence>
           {selectedCountry && (
             <motion.div
-              initial={{ opacity: 0, x: 80, width: 0 }}
-              animate={{ opacity: 1, x: 0, width: 360 }}
-              exit={{ opacity: 0, x: 80, width: 0 }}
+              initial={{ opacity: 0, x: 80 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 80 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="overflow-hidden flex-shrink-0"
+              className="overflow-hidden flex-shrink-0 w-full md:w-[360px]"
             >
               <div
                 className="rounded-2xl p-5 h-full overflow-y-auto"

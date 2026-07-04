@@ -51,7 +51,7 @@ export default function ForecastPage() {
         <select
           value={country}
           onChange={(e) => setCountry(e.target.value)}
-          className="glass-select min-w-[200px]"
+          className="glass-select w-full sm:min-w-[200px]"
         >
           {countries.map((c) => (
             <option key={c} value={c}>{COUNTRY_FLAGS[c]} {COUNTRY_NAMES[c]}</option>

@@ -83,7 +83,7 @@ img[loading="lazy"] {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  background-image: url('/eu-map-bg.jpg');
+  background-image: url('/images/ChatGPT%20Image%20Jul%204%2C%202026%2C%2001_55_14%20PM.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -290,7 +290,8 @@ img[loading="lazy"] {
   flex: 1;
   height: 100vh;
   overflow-y: auto;
-  padding: 16px;
+  overflow-x: hidden;
+  padding: 12px;
   position: relative;
   z-index: 10;
 }
@@ -308,10 +309,16 @@ img[loading="lazy"] {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: 24px;
+  padding: 16px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .glass-card {
+    padding: 24px;
+  }
 }
 
 .glass-card::before {
@@ -343,9 +350,15 @@ img[loading="lazy"] {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 20px;
-  padding: 24px;
+  padding: 16px;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+  .glass-card-accent {
+    padding: 24px;
+  }
 }
 
 .glass-card-accent::before {
