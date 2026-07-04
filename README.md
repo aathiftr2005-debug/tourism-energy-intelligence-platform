@@ -7,7 +7,7 @@
 [![Stack: Next.js + FastAPI](https://img.shields.io/badge/Stack-Next.js_14_|_FastAPI-black?logo=next.js)](https://github.com/aathiftr2005-debug/tourism-energy-intelligence-platform)
 [![Live Demo](https://img.shields.io/badge/Live-Vercel-000?logo=vercel)](https://tourism-energy-intelligence-platfor.vercel.app)
 
-**Live Demo** · [API Docs](./API.md) · [Architecture](./ARCHITECTURE.md) · [Deployment](./DEPLOYMENT.md)
+[**Live Demo**](https://tourism-energy-intelligence-platfor.vercel.app) · [API Docs](./API.md) · [Architecture](./ARCHITECTURE.md) · [Deployment](./DEPLOYMENT.md)
 
 ---
 
@@ -59,14 +59,16 @@ flowchart LR
 
 ### Screenshots
 
-![Dashboard home — KPI cards, Europe stress map, top-10 leaderboard, alert center, system health](screenshots/dashboard.png)
-*Dashboard home — KPI cards, Europe stress map, top-10 leaderboard, alert center, system health*
-
-![Interactive Europe map with country heatmap, detail panel, timeline projection, and risk factor breakdown](screenshots/map-view.png)
-*Interactive Europe stress map with country detail panel and timeline projection*
-
-![Forecast page with ensemble chart, model metrics table, historical trends, and seasonal analysis](screenshots/forecast.png)
-*Forecast page — ensemble chart, model metrics, historical trends, seasonal analysis*
+<table>
+  <tr>
+    <td width="50%"><img src="assets/screenshots/dashboard-home.png" alt="TEI Dashboard - KPI cards, Europe stress map, top-10 leaderboard" width="100%"></td>
+    <td width="50%"><img src="assets/screenshots/stress-map.png" alt="TEI Stress Map - country heatmap with detail panel and timeline projection" width="100%"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="assets/screenshots/forecast-chart.png" alt="TEI Forecast - ensemble ML predictions with model metrics and seasonal analysis" width="100%"></td>
+    <td width="50%"><img src="assets/screenshots/overview.png" alt="TEI Executive Overview - strategic summary and decision support" width="100%"></td>
+  </tr>
+</table>
 
 ### Quick Start
 
