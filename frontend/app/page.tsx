@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import EuropeMap from '@/components/maps/EuropeMap';
 import AlertFeed from '@/components/alerts/AlertFeed';
 import KpiCards from '@/components/UI/KpiCards';
@@ -59,12 +60,12 @@ export default function Dashboard() {
     <div className="min-h-screen p-3 md:p-6 relative overflow-x-hidden">
 
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <img
+        <Image
           src="/images/map-bg.jpg"
           alt=""
           aria-hidden="true"
-          loading="lazy"
-          className="w-full h-full object-cover opacity-[0.05]"
+          fill
+          className="object-cover opacity-[0.05]"
         />
         <div className="absolute inset-0 bg-[#0a0e1a]/70" />
       </div>
@@ -75,7 +76,7 @@ export default function Dashboard() {
             Tourism Energy Intelligence
           </span>
         </h1>
-        <p className="text-gray-300 text-sm md:text-base mt-1 md:mt-2 min-w-0">
+        <p className="text-muted text-sm md:text-base mt-1 md:mt-2 min-w-0">
           Real-time stress monitoring for {data.length} European countries
         </p>
 
@@ -102,10 +103,12 @@ export default function Dashboard() {
                   className="flex items-center justify-between p-2 glass-card hover:scale-[1.02] transition-all text-sm md:text-base"
                 >
                   <div className="flex items-center gap-2 min-w-0">
-                    <span className="text-gray-500 text-xs md:text-sm w-5 flex-shrink-0">#{index + 1}</span>
-                    <img
+                    <span className="text-caption text-xs md:text-sm w-5 flex-shrink-0">#{index + 1}</span>
+                    <Image
                       src={getFlagImage(item.country)}
                       alt={item.country}
+                      width={640}
+                      height={427}
                       className="w-5 h-auto object-contain rounded flex-shrink-0"
                     />
                     <span className="font-medium truncate text-xs md:text-sm">{item.country}</span>
@@ -131,8 +134,8 @@ export default function Dashboard() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="glass-card p-4"
         >
-          <h2 className="text-lg md:text-xl font-bold mb-3" style={{ color: '#f0f0ff' }}>Alert Center</h2>
-          <p className="text-xs mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>Countries requiring attention</p>
+          <h2 className="text-heading text-lg md:text-xl font-bold mb-3">Alert Center</h2>
+          <p className="text-caption text-xs mb-3">Countries requiring attention</p>
           <AlertFeed data={data.map(d => ({ country: d.country, stress_score: d.stress_score }))} />
         </motion.div>
 
@@ -142,8 +145,8 @@ export default function Dashboard() {
           transition={{ duration: 0.4, delay: 0.15 }}
           className="glass-card p-4"
         >
-          <h2 className="text-lg md:text-xl font-bold mb-3" style={{ color: '#f0f0ff' }}>System Health</h2>
-          <p className="text-xs mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>Infrastructure and model status</p>
+          <h2 className="text-heading text-lg md:text-xl font-bold mb-3">System Health</h2>
+          <p className="text-caption text-xs mb-3">Infrastructure and model status</p>
           <SystemHealth />
         </motion.div>
       </div>
@@ -157,8 +160,8 @@ export default function Dashboard() {
             </svg>
           </div>
           <div>
-            <h2 className="text-xl font-bold" style={{ color: '#f0f0ff' }}>AI Executive Command Center</h2>
-            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
+            <h2 className="text-heading text-xl font-bold">AI Executive Command Center</h2>
+            <p className="text-caption text-xs">
               Real-time operational intelligence and decision support
             </p>
           </div>
@@ -199,27 +202,27 @@ export default function Dashboard() {
                 className="group relative rounded-2xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-500 hover:scale-[1.04] hover:shadow-[0_0_40px_rgba(0,212,255,0.15)] cursor-pointer"
               >
                   <div className="absolute inset-0 w-full h-full">
-                    <img
+                    <Image
                       src={getFlagImage(item.name)}
                       alt=""
-                      loading="lazy"
-                      className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-700 opacity-25 group-hover:opacity-35 blur-sm"
+                      fill
+                      className="object-cover scale-110 group-hover:scale-125 transition-transform duration-700 opacity-25 group-hover:opacity-35 blur-sm"
                     />
                   </div>
 
                 <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,14,26,0.4)] via-[rgba(10,14,26,0.6)] to-[rgba(10,14,26,0.85)]" />
 
                 <div className="relative z-10 p-3 md:p-4 flex flex-col items-center text-center min-h-[140px] md:min-h-[160px]">
-                  <div className="w-10 h-7 md:w-12 md:h-8 rounded-lg overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm mb-2 flex items-center justify-center shadow-lg">
-                    <img
+                  <div className="w-10 h-7 md:w-12 md:h-8 rounded-lg overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm mb-2 flex items-center justify-center shadow-lg relative">
+                    <Image
                       src={getFlagImage(item.name)}
                       alt={item.name}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
 
-                  <h3 className="font-semibold text-white text-xs md:text-sm truncate w-full">
+                  <h3 className="font-semibold text-heading text-xs md:text-sm truncate w-full">
                     {item.name}
                   </h3>
 
@@ -237,7 +240,7 @@ export default function Dashboard() {
                         </span>
                       </>
                     ) : (
-                      <div className="text-gray-500 text-xs py-3">No data</div>
+                      <div className="text-caption text-xs py-3">No data</div>
                     )}
                   </div>
                 </div>

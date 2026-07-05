@@ -50,7 +50,7 @@ export default function KpiCards() {
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-lg">{card.icon}</span>
-            <span className="text-[10px] uppercase tracking-wider font-medium truncate max-w-[50%]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <span className="text-caption text-[10px] uppercase tracking-wider font-medium truncate max-w-[50%]">
               {card.label.split(' ').pop()}
             </span>
           </div>
@@ -62,10 +62,10 @@ export default function KpiCards() {
               <AnimatedCounter value={card.value} precision={card.precision} />
             </span>
             {card.suffix && (
-              <span className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.4)' }}>{card.suffix}</span>
+              <span className="text-muted text-xs font-medium">{card.suffix}</span>
             )}
           </div>
-          <p className="text-[11px] mt-1 font-medium" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          <p className="text-caption text-[11px] mt-1 font-medium">
             {card.label}
           </p>
           <div className="absolute bottom-0 left-0 right-0 h-px" style={{

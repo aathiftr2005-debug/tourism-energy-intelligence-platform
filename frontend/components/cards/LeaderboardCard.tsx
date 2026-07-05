@@ -1,7 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { CountryService } from '@/lib/services';
+import { useTheme } from '@/lib/theme/ThemeContext';
+import { getChartColors } from '@/lib/theme/chartColors';
 
 interface LeaderboardEntry {
   rank: number;
@@ -39,13 +42,21 @@ function getChangeIcon(change: number | undefined): string {
 }
 
 function getChangeColor(change: number | undefined): string {
-  if (change === undefined) return 'rgba(255,255,255,0.3)';
+  if (change === undefined) return 'var(--color-text-muted)';
   if (change > 0) return '#ef4444';
   if (change < 0) return '#10b981';
   return '#f59e0b';
 }
 
 export default function LeaderboardCard({ title, subtitle, entries, valueLabel, accentColor }: LeaderboardCardProps) {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const colors = getChartColors(isDark);
+  const cardBg = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
+  const entryBg = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)';
+  const entryBorder = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)';
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -53,15 +64,15 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
       transition={{ duration: 0.4 }}
       className="relative overflow-hidden rounded-2xl p-5"
       style={{
-        background: 'rgba(255,255,255,0.03)',
+        background: cardBg,
         backdropFilter: 'blur(16px)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        border: `1px solid ${cardBorder}`,
       }}
     >
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-sm font-semibold" style={{ color: 'rgba(255,255,255,0.8)' }}>{title}</h3>
-          <p className="text-[10px] mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>{subtitle}</p>
+          <h3 className="text-body text-sm font-semibold">{title}</h3>
+          <p className="text-caption text-[10px] mt-0.5">{subtitle}</p>
         </div>
         <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: `${accentColor}15`, border: `1px solid ${accentColor}30` }}>
           <span className="text-xs font-bold" style={{ color: accentColor }}>{entries.length}</span>
@@ -78,25 +89,25 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: i * 0.08 }}
               className="flex items-center gap-3 rounded-xl p-2.5 transition-all hover:scale-[1.02]"
-              style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}
+              style={{ background: entryBg, border: `1px solid ${entryBorder}` }}
             >
               <div className="flex items-center justify-center w-6 h-6 rounded-lg text-[10px] font-bold flex-shrink-0"
                 style={{
-                  background: entry.rank <= 3 ? `${accentColor}20` : 'rgba(255,255,255,0.04)',
-                  color: entry.rank <= 3 ? accentColor : 'rgba(255,255,255,0.3)',
-                  border: `1px solid ${entry.rank <= 3 ? `${accentColor}40` : 'rgba(255,255,255,0.06)'}`,
+                  background: entry.rank <= 3 ? `${accentColor}20` : (isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'),
+                  color: entry.rank <= 3 ? accentColor : 'var(--color-text-caption)',
+                  border: `1px solid ${entry.rank <= 3 ? `${accentColor}40` : (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)')}`,
                 }}>
                 {entry.rank}
               </div>
 
-              <div className="w-7 h-5 rounded overflow-hidden flex-shrink-0 border border-white/10 bg-white/5">
+              <div className="w-7 h-5 rounded overflow-hidden flex-shrink-0 border border-white/10 bg-white/5 relative">
                 {flagImages[entry.countryCode] && (
-                  <img src={flagImages[entry.countryCode]} alt={entry.country} className="w-full h-full object-cover" />
+                  <Image src={flagImages[entry.countryCode]} alt={entry.country} fill className="object-cover" />
                 )}
               </div>
 
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-white truncate">{entry.country}</p>
+                <p className="text-heading text-xs font-medium truncate">{entry.country}</p>
               </div>
 
               {entry.change !== undefined && (
@@ -113,8 +124,8 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
         })}
       </div>
 
-      <div className="mt-3 pt-3 border-t" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
-        <span className="text-[10px] uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.25)' }}>
+      <div className="mt-3 pt-3 border-t" style={{ borderColor: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.08)' }}>
+        <span className="text-disabled text-[10px] uppercase tracking-wider">
           {valueLabel}
         </span>
       </div>

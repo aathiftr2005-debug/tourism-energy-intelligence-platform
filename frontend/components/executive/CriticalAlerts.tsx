@@ -67,8 +67,8 @@ export default function CriticalAlerts() {
             </svg>
           </div>
           <div>
-            <h2 className="text-sm font-bold" style={{ color: '#f0f0ff' }}>Critical Alerts</h2>
-            <p className="text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>Priority-based operational notifications</p>
+            <h2 className="text-sm font-bold text-heading">Critical Alerts</h2>
+            <p className="text-[10px] text-caption">Priority-based operational notifications</p>
           </div>
         </div>
 
@@ -76,7 +76,7 @@ export default function CriticalAlerts() {
           {(['high', 'medium', 'low'] as const).map((p) => (
             <div key={p} className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full" style={{ background: priorityConfig[p].color }} />
-              <span className="text-[10px] font-medium" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              <span className="text-[10px] font-medium text-muted">
                 {counts[p]}
               </span>
             </div>
@@ -124,14 +124,15 @@ export default function CriticalAlerts() {
                         {cfg.label}
                       </span>
                       <svg
-                        width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                        width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                        className="text-muted"
                         style={{ transform: `rotate(${isExpanded ? 180 : 0}deg)`, transition: 'transform 0.2s ease' }}
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
                     </div>
                   </div>
-                  <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.25)' }}>{alert.timestamp}</span>
+                  <span className="text-[10px] text-caption">{alert.timestamp}</span>
                 </div>
               </div>
 
@@ -146,7 +147,7 @@ export default function CriticalAlerts() {
                   >
                     <div className="px-3 pb-3 pt-0">
                       <div className="h-px w-full mb-2" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)' }} />
-                      <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                      <p className="text-xs leading-relaxed text-body">
                         {alert.description}
                       </p>
                     </div>

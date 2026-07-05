@@ -23,8 +23,8 @@ export default function ErrorState({
           <line x1="12" y1="16" x2="12.01" y2="16" />
         </svg>
       </div>
-      <h3 className="text-sm font-semibold mb-1" style={{ color: '#ef4444' }}>{title}</h3>
-      <p className="text-xs max-w-xs leading-relaxed mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>{message}</p>
+      <h3 className="text-critical text-sm font-semibold mb-1">{title}</h3>
+      <p className="text-caption text-xs max-w-xs leading-relaxed mb-4">{message}</p>
       {onRetry && (
         <button onClick={onRetry} className="btn-primary text-xs">
           Try Again

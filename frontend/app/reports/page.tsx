@@ -6,6 +6,7 @@ import { COUNTRY_FLAGS, COUNTRY_NAMES } from '@/lib/types';
 import ReportContent from '@/components/reports/ReportContent';
 import { exportCSV, exportExcel, exportPDF, type ReportData } from '@/components/reports/exportUtils';
 import { CountryService, EnergyService } from '@/lib/services';
+import { useTheme } from '@/lib/theme/ThemeContext';
 
 const countries = Object.entries(COUNTRY_NAMES);
 
@@ -81,6 +82,8 @@ function buildReportData(country: string, reportType: 'executive' | 'government'
 }
 
 export default function ReportsPage() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const [country, setCountry] = useState('DE');
   const [reportType, setReportType] = useState<'executive' | 'government'>('executive');
   const reportRef = useRef<HTMLDivElement>(null);
@@ -122,11 +125,10 @@ export default function ReportsPage() {
             <button
               key={type}
               onClick={() => setReportType(type)}
-              className="px-4 py-2 rounded-full text-xs font-medium transition-all"
+              className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${reportType === type ? 'text-accent' : 'text-muted'}`}
               style={{
-                background: reportType === type ? 'linear-gradient(135deg, #00d4ff22, #7c3aed22)' : 'rgba(255,255,255,0.04)',
-                border: `1px solid ${reportType === type ? 'rgba(0,212,255,0.3)' : 'rgba(255,255,255,0.08)'}`,
-                color: reportType === type ? '#00d4ff' : 'rgba(255,255,255,0.4)',
+                background: reportType === type ? 'linear-gradient(135deg, #00d4ff22, #7c3aed22)' : (isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'),
+                border: `1px solid ${reportType === type ? 'rgba(0,212,255,0.3)' : (isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)')}`,
                 textTransform: 'capitalize',
               }}
             >
@@ -157,7 +159,7 @@ export default function ReportsPage() {
         </div>
       </div>
 
-      <div className="glass-card overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
+      <div className="glass-card overflow-hidden" style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)' }}>
         <div id="report-content" ref={reportRef} style={{ overflow: 'auto', maxHeight: '70vh' }}>
           <ReportContent
             country_code={data.country_code}

@@ -8,17 +8,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'tei-bg': '#0a0e1a',
-        'tei-card': 'rgba(255,255,255,0.05)',
-        'tei-secondary': '#111827',
-        'tei-border': 'rgba(255,255,255,0.08)',
-        'tei-text': '#f0f0ff',
-        'tei-muted': 'rgba(255,255,255,0.5)',
-        cyan: { 400: '#00d4ff', 500: '#00b8e6' },
-        purple: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
-        critical: '#ef4444',
-        elevated: '#f59e0b',
-        normal: '#10b981',
+        'tei-bg': 'var(--color-bg)',
+        'tei-card': 'var(--color-card)',
+        'tei-secondary': 'var(--color-bg-secondary)',
+        'tei-border': 'var(--color-border)',
+        'tei-text': 'var(--color-text)',
+        'tei-muted': 'var(--color-muted)',
+        cyan: { 400: 'var(--color-accent)', 500: 'var(--color-accent)' },
+        purple: { 400: 'var(--color-accent-secondary)', 500: 'var(--color-accent-secondary)', 600: 'var(--color-accent-secondary)' },
+        critical: 'var(--color-critical)',
+        elevated: 'var(--color-elevated)',
+        normal: 'var(--color-normal)',
       },
       fontFamily: {
         heading: ['Inter', 'system-ui', 'sans-serif'],
@@ -52,7 +52,7 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #00d4ff, #7c3aed)',
+        'gradient-primary': 'var(--color-gradient-primary)',
         'gradient-stress': 'linear-gradient(90deg, #10b981, #f59e0b, #ef4444)',
       },
     },

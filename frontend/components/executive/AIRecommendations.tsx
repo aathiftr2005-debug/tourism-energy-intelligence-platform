@@ -28,8 +28,8 @@ export default function AIRecommendations() {
           </svg>
         </div>
         <div>
-          <h2 className="text-sm font-bold" style={{ color: '#f0f0ff' }}>AI Recommendations</h2>
-          <p className="text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>Intelligent actions based on current metrics</p>
+          <h2 className="text-sm font-bold text-heading">AI Recommendations</h2>
+          <p className="text-[10px] text-caption">Intelligent actions based on current metrics</p>
         </div>
       </div>
 
@@ -46,13 +46,13 @@ export default function AIRecommendations() {
               style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
             >
               <div className="flex items-start justify-between gap-3 mb-2">
-                <h3 className="text-xs font-semibold" style={{ color: '#f0f0ff' }}>{rec.title}</h3>
+                <h3 className="text-xs font-semibold text-heading">{rec.title}</h3>
                 <span className="text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full flex-shrink-0"
                   style={{ background: colors.bg, border: `1px solid ${colors.border}`, color: colors.color }}>
                   {rec.priority}
                 </span>
               </div>
-              <p className="text-xs leading-relaxed mb-2" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <p className="text-xs leading-relaxed mb-2 text-body">
                 {rec.description}
               </p>
               <div className="flex items-center gap-1.5">

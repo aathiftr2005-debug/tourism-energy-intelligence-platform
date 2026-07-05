@@ -38,7 +38,7 @@ export default function CustomCursor() {
       if (ringRef.current) {
         ringRef.current.style.width = "50px";
         ringRef.current.style.height = "50px";
-        ringRef.current.style.borderColor = "#7c3aed";
+        ringRef.current.style.borderColor = "var(--color-accent-secondary)";
       }
     };
 
@@ -46,7 +46,7 @@ export default function CustomCursor() {
       if (ringRef.current) {
         ringRef.current.style.width = "32px";
         ringRef.current.style.height = "32px";
-        ringRef.current.style.borderColor = "rgba(0,212,255,0.5)";
+        ringRef.current.style.borderColor = "var(--color-accent-20)";
       }
     };
 

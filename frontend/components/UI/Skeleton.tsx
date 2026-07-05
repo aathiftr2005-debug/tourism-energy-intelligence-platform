@@ -38,7 +38,7 @@ export function CardSkeleton() {
 export function TableSkeleton({ rows = 5 }: { rows?: number }) {
   return (
     <div className="space-y-3">
-      <div className="flex gap-4" style={{ color: 'rgba(255,255,255,0.2)' }}>
+      <div className="flex gap-4 text-disabled">
         {[40, 20, 20, 20].map((w, i) => (
           <Skeleton key={i} width={`${w}%`} height="12px" />
         ))}

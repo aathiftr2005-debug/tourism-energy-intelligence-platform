@@ -23,7 +23,7 @@ export default function AlertFeed({ data }: Props) {
   return (
     <div className="space-y-2 max-h-[280px] overflow-y-auto pr-1">
       {alerts.length === 0 && (
-        <div className="flex items-center justify-center h-48" style={{ color: 'rgba(255,255,255,0.3)' }}>
+        <div className="flex items-center justify-center h-48 text-caption">
           ✅ No active alerts
         </div>
       )}
@@ -53,7 +53,7 @@ export default function AlertFeed({ data }: Props) {
                   {Math.round(score)}
                 </span>
               </div>
-              <p className="text-xs mt-1 truncate" style={{ color: 'rgba(255,255,255,0.4)' }}>
+              <p className="text-caption text-xs mt-1 truncate">
                 {alert.recommendation || (isCritical ? 'Immediate attention required' : 'Monitor closely')}
               </p>
             </div>

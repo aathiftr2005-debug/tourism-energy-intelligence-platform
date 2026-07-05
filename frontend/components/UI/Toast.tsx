@@ -47,13 +47,12 @@ function ToastItemComponent({ toast, onRemove }: { toast: ToastItem; onRemove: (
       >
         {cfg.icon}
       </div>
-      <p className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.8)' }}>{toast.message}</p>
+      <p className="text-body text-xs flex-1">{toast.message}</p>
       <button
         onClick={() => onRemove(toast.id)}
-        className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-colors"
-        style={{ color: 'rgba(255,255,255,0.3)' }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.3)'; }}
+        className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-disabled hover:text-muted transition-colors"
+        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
         aria-label="Dismiss notification"
       >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>

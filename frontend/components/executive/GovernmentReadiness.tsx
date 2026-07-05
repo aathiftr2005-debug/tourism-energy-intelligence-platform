@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import data from '@/data/executive.json';
+import { useTheme } from '@/lib/theme/ThemeContext';
+import { getChartColors } from '@/lib/theme/chartColors';
 
 const { overall, scores } = data.governmentReadiness;
 
@@ -12,6 +14,10 @@ function getScoreColor(score: number): string {
 }
 
 export default function GovernmentReadiness() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const colors = getChartColors(isDark);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,8 +33,8 @@ export default function GovernmentReadiness() {
           </svg>
         </div>
         <div>
-          <h2 className="text-sm font-bold" style={{ color: '#f0f0ff' }}>Government Readiness</h2>
-          <p className="text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>Preparedness assessment by category</p>
+          <h2 className="text-sm font-bold text-heading">Government Readiness</h2>
+          <p className="text-[10px] text-caption">Preparedness assessment by category</p>
         </div>
       </div>
 
@@ -36,7 +42,7 @@ export default function GovernmentReadiness() {
         <div className="text-center">
           <div className="relative w-20 h-20 mx-auto mb-2">
             <svg width="80" height="80" viewBox="0 0 80 80" className="transform -rotate-90">
-              <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="4" />
+              <circle cx="40" cy="40" r="34" fill="none" stroke={colors.track} strokeWidth="4" />
               <circle cx="40" cy="40" r="34" fill="none" stroke={getScoreColor(overall)} strokeWidth="4"
                 strokeLinecap="round"
                 strokeDasharray={213.63}
@@ -48,7 +54,7 @@ export default function GovernmentReadiness() {
               <span className="text-xl font-bold" style={{ color: getScoreColor(overall) }}>{overall}</span>
             </div>
           </div>
-          <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
             Overall
           </span>
         </div>
@@ -67,11 +73,11 @@ export default function GovernmentReadiness() {
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2">
                   <span className="text-sm">{item.icon}</span>
-                  <span className="text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.6)' }}>{item.label}</span>
+                  <span className="text-[11px] font-medium text-muted">{item.label}</span>
                 </div>
                 <span className="text-[11px] font-semibold" style={{ color }}>{item.score}</span>
               </div>
-              <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
+              <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: colors.grid }}>
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${item.score}%` }}

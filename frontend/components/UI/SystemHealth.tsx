@@ -58,18 +58,18 @@ export default function SystemHealth() {
               }}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold" style={{ color: 'rgba(255,255,255,0.5)' }}>{item.label}</span>
+                <span className="text-muted text-xs font-semibold">{item.label}</span>
                 <HealthDot status={item.status} />
               </div>
               <p className="text-xs md:text-sm font-bold" style={{ color: cfg.color }}>{cfg.label}</p>
-              <p className="text-[10px] mt-1" style={{ color: 'rgba(255,255,255,0.3)' }}>{item.value}</p>
+              <p className="text-caption text-[10px] mt-1">{item.value}</p>
             </motion.div>
           );
         })}
       </div>
       <div className="flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#10b981', boxShadow: '0 0 6px rgba(16,185,129,0.4)', animation: 'breathing-glow 2s ease-in-out infinite' }} />
-        <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+        <span className="text-caption text-[11px]">
           All systems operational &mdash; Last updated {lastUpdated}
         </span>
       </div>

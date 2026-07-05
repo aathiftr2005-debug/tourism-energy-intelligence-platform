@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { EmergencyService } from '@/lib/services';
+import { useTheme } from '@/lib/theme/ThemeContext';
+import { getChartColors } from '@/lib/theme/chartColors';
 
 const risks = EmergencyService.getRisks();
 
@@ -24,6 +26,10 @@ function TrendArrow({ trend }: { trend: 'up' | 'down' | 'stable' }) {
 }
 
 export default function RiskPrediction() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const colors = getChartColors(isDark);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -39,14 +45,16 @@ export default function RiskPrediction() {
           </svg>
         </div>
         <div>
-          <h2 className="text-sm font-bold" style={{ color: '#f0f0ff' }}>Risk Prediction</h2>
-          <p className="text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>Probability and severity forecasts</p>
+          <h2 className="text-sm font-bold text-heading">Risk Prediction</h2>
+          <p className="text-[10px] text-caption">Probability and severity forecasts</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {risks.map((risk, i) => {
           const lvl = levelConfig[risk.level];
+          const cardBg = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)';
+          const cardBorder = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
           return (
             <motion.div
               key={risk.id}
@@ -54,10 +62,10 @@ export default function RiskPrediction() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.08 }}
               className="rounded-xl p-4"
-              style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+              style={{ background: cardBg, border: `1px solid ${cardBorder}` }}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-semibold" style={{ color: '#f0f0ff' }}>{risk.title}</span>
+                <span className="text-xs font-semibold text-heading">{risk.title}</span>
                 <div className="flex items-center gap-2">
                   <TrendArrow trend={risk.trend} />
                   <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full" style={{
@@ -71,7 +79,7 @@ export default function RiskPrediction() {
               </div>
 
               <div className="flex items-end justify-between mb-2">
-                <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>Probability</span>
+                <span className="text-[10px] text-caption">Probability</span>
                 <motion.span
                   key={risk.id + risk.probability}
                   initial={{ scale: 0.5, opacity: 0 }}
@@ -83,7 +91,7 @@ export default function RiskPrediction() {
                 </motion.span>
               </div>
 
-              <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
+              <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: colors.grid }}>
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${risk.probability}%` }}

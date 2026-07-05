@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import EuropeMap from '@/components/maps/EuropeMap';
 import { DigitalTwinMap } from '@/components/maps/digital-twin';
 import { CountryService } from '@/lib/services';
@@ -122,7 +123,7 @@ export default function MapPage() {
   return (
     <div className="min-h-screen relative">
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <img src="/images/map-bg.jpg" alt="" aria-hidden="true" loading="lazy" className="w-full h-full object-cover opacity-[0.05]" />
+        <Image src="/images/map-bg.jpg" alt="" aria-hidden="true" fill className="object-cover opacity-[0.05]" />
         <div className="absolute inset-0 bg-[#0a0e1a]/70" />
       </div>
 
@@ -132,7 +133,7 @@ export default function MapPage() {
             <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent break-words">
               {viewMode === 'stress' ? 'Europe Stress Map' : 'Digital Twin Monitor'}
             </h1>
-            <p className="text-gray-300 mt-1 text-sm md:text-base break-words">
+            <p className="text-muted mt-1 text-sm md:text-base break-words">
               {viewMode === 'stress'
                 ? 'Interactive map showing real-time stress scores across Europe'
                 : 'Layer-based digital twin visualization with AI-powered insights'}
@@ -146,11 +147,10 @@ export default function MapPage() {
               <button
                 key={mode}
                 onClick={() => setViewMode(mode)}
-                className="px-3 md:px-4 py-2 rounded-xl text-[10px] md:text-xs font-semibold transition-all tracking-wider uppercase"
+                className={`px-3 md:px-4 py-2 rounded-xl text-[10px] md:text-xs font-semibold transition-all tracking-wider uppercase ${viewMode === mode ? 'text-accent' : 'text-muted'}`}
                 style={{
                   background: viewMode === mode ? 'linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15))' : 'transparent',
                   border: `1px solid ${viewMode === mode ? 'rgba(0,212,255,0.25)' : 'transparent'}`,
-                  color: viewMode === mode ? '#00d4ff' : 'rgba(255,255,255,0.4)',
                 }}
               >
                 {mode === 'stress' ? 'Stress Map' : 'Digital Twin'}
@@ -197,16 +197,16 @@ export default function MapPage() {
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{FLAGS[selectedCountry.country_code || ''] || ''}</span>
                     <div>
-                      <h2 className="text-base font-bold" style={{ color: '#f0f0ff' }}>{selectedCountry.country}</h2>
-                      <span className="text-[10px] font-medium tracking-wider" style={{ color: 'rgba(255,255,255,0.3)' }}>{selectedCountry.country_code}</span>
+                      <h2 className="text-heading text-base font-bold">{selectedCountry.country}</h2>
+                      <span className="text-caption text-[10px] font-medium tracking-wider">{selectedCountry.country_code}</span>
                     </div>
                   </div>
                   <button
                     onClick={closePanel}
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
-                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' }}
+                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all text-muted"
+                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(239,68,68,0.2)'; e.currentTarget.style.borderColor = 'rgba(239,68,68,0.3)'; e.currentTarget.style.color = '#ef4444'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = ''; }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
                   </button>
@@ -216,7 +216,7 @@ export default function MapPage() {
                   background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)',
                 }}>
                   <div className="text-center">
-                    <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: 'rgba(255,255,255,0.35)' }}>Stress Score</p>
+                    <p className="text-caption text-[10px] uppercase tracking-wider mb-1">Stress Score</p>
                     <motion.p
                       key={timelineIndex}
                       initial={{ scale: 0.8, opacity: 0 }}
@@ -260,7 +260,7 @@ export default function MapPage() {
                     },
                   ].map((item) => (
                     <div key={item.label} className="rounded-xl p-3 text-center" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                      <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: 'rgba(255,255,255,0.35)' }}>{item.label}</p>
+                      <p className="text-caption text-[10px] uppercase tracking-wider mb-1">{item.label}</p>
                       <p className="text-lg font-bold" style={{ color: item.color }}>
                         {item.label === 'Trend' ? (
                           <span>{item.value === 'up' ? '\u2191 Rising' : item.value === 'down' ? '\u2193 Falling' : '\u2192 Stable'}</span>
@@ -273,7 +273,7 @@ export default function MapPage() {
                 </div>
 
                 <div className="mb-4">
-                  <p className="text-[10px] uppercase tracking-wider mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>Risk Factors</p>
+                  <p className="text-caption text-[10px] uppercase tracking-wider mb-3">Risk Factors</p>
                   {[
                     { label: 'Tourism', value: getRiskFactorTourism(selectedCountry.stress_score), key: 'tourism' },
                     { label: 'Weather', value: getRiskFactorWeather(selectedCountry.stress_score), key: 'weather' },
@@ -285,7 +285,7 @@ export default function MapPage() {
                     return (
                       <div key={factor.key} className="mb-2.5">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{factor.label}</span>
+                          <span className="text-xs text-muted">{factor.label}</span>
                           <span className="text-xs font-mono" style={{ color }}>{pct}%</span>
                         </div>
                         <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
@@ -303,15 +303,15 @@ export default function MapPage() {
                 </div>
 
                 <div className="mb-4 rounded-xl p-3" style={{ background: 'rgba(0,212,255,0.04)', border: '1px solid rgba(0,212,255,0.1)' }}>
-                  <p className="text-[10px] uppercase tracking-wider mb-1.5" style={{ color: 'rgba(0,212,255,0.5)' }}>AI Insight</p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                  <p className="text-caption text-[10px] uppercase tracking-wider mb-1.5">AI Insight</p>
+                  <p className="text-body text-xs leading-relaxed">
                     {generateInsight(selectedCountry.country_code || selectedCountry.country, selectedCountry.stress_score, getTrend(selectedCountry.stress_score, selectedCountry.country_code || ''))}
                   </p>
                 </div>
 
                 <div className="rounded-xl p-3" style={{ background: `${getScoreColor(selectedCountry.stress_score)}08`, border: `1px solid ${getScoreColor(selectedCountry.stress_score)}15` }}>
-                  <p className="text-[10px] uppercase tracking-wider mb-1.5" style={{ color: `${getScoreColor(selectedCountry.stress_score)}60` }}>AI Recommendation</p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                  <p className="text-caption text-[10px] uppercase tracking-wider mb-1.5">AI Recommendation</p>
+                  <p className="text-body text-xs leading-relaxed">
                     {generateRecommendation(selectedCountry.stress_score)}
                   </p>
                 </div>
@@ -329,11 +329,10 @@ export default function MapPage() {
                 <button
                   key={idx}
                   onClick={() => setTimelineIndex(idx)}
-                  className="px-4 py-2 rounded-full text-xs font-medium transition-all"
+                  className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${timelineIndex === idx ? 'text-accent' : 'text-muted'}`}
                   style={{
                     background: timelineIndex === idx ? 'linear-gradient(135deg, #00d4ff22, #7c3aed22)' : 'rgba(255,255,255,0.04)',
                     border: `1px solid ${timelineIndex === idx ? 'rgba(0,212,255,0.3)' : 'rgba(255,255,255,0.08)'}`,
-                    color: timelineIndex === idx ? '#00d4ff' : 'rgba(255,255,255,0.4)',
                   }}
                 >
                   {TIMELINE_LABELS[idx]}
@@ -341,7 +340,7 @@ export default function MapPage() {
               ))}
             </div>
 
-            <div className="text-[10px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <div className="text-caption text-[10px]">
               {TIMELINE_LABELS[timelineIndex]}
             </div>
           </div>
@@ -349,25 +348,25 @@ export default function MapPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
             <div className="glass-card p-4 text-center">
               <div className="text-2xl font-bold text-cyan-400">{data.length}</div>
-              <div className="text-gray-400 text-sm">Countries</div>
+              <div className="text-muted text-sm">Countries</div>
             </div>
             <div className="glass-card p-4 text-center">
               <div className="text-2xl font-bold text-red-500">
                 {data.filter(d => d.stress_score >= 70).length}
               </div>
-              <div className="text-gray-400 text-sm">Critical</div>
+              <div className="text-muted text-sm">Critical</div>
             </div>
             <div className="glass-card p-4 text-center">
               <div className="text-2xl font-bold text-yellow-500">
                 {data.filter(d => d.stress_score >= 50 && d.stress_score < 70).length}
               </div>
-              <div className="text-gray-400 text-sm">High</div>
+              <div className="text-muted text-sm">High</div>
             </div>
             <div className="glass-card p-4 text-center">
               <div className="text-2xl font-bold text-green-400">
                 {data.filter(d => d.stress_score < 30).length}
               </div>
-              <div className="text-gray-400 text-sm">Low</div>
+              <div className="text-muted text-sm">Low</div>
             </div>
           </div>
         </>

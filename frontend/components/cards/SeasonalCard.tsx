@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTheme } from '@/lib/theme/ThemeContext';
+import { getChartColors } from '@/lib/theme/chartColors';
 
 interface SeasonalCardProps {
   season: string;
@@ -32,7 +34,14 @@ function getSeasonIcon(season: string): string {
 }
 
 export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const colors = getChartColors(isDark);
   const color = getStressColor(stress);
+
+  const cardBg = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
+  const trackBg = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
 
   return (
     <motion.div
@@ -41,9 +50,9 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
       transition={{ duration: 0.4 }}
       className="relative overflow-hidden rounded-2xl p-5"
       style={{
-        background: 'rgba(255,255,255,0.03)',
+        background: cardBg,
         backdropFilter: 'blur(16px)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        border: `1px solid ${cardBorder}`,
       }}
     >
       <div className="flex items-center justify-between mb-3">
@@ -53,10 +62,10 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
         </div>
       </div>
 
-      <h3 className="text-sm font-semibold" style={{ color: 'rgba(255,255,255,0.8)' }}>{season}</h3>
-      <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Avg Stress Score</p>
+      <h3 className="text-body text-sm font-semibold">{season}</h3>
+      <p className="text-caption text-xs mt-1">Avg Stress Score</p>
 
-      <div className="mt-3 w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
+      <div className="mt-3 w-full h-1.5 rounded-full overflow-hidden" style={{ background: trackBg }}>
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${stress}%` }}
@@ -70,11 +79,11 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
       </div>
 
       <div className="mt-4 flex items-center gap-2">
-        <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)' }} />
-        <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: color }}>
+        <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, transparent, ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)'}, transparent)` }} />
+        <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color }}>
           {stress >= 70 ? 'High Risk' : stress >= 50 ? 'Elevated' : stress >= 30 ? 'Moderate' : 'Stable'}
         </span>
-        <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)' }} />
+        <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, transparent, ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)'}, transparent)` }} />
       </div>
     </motion.div>
   );

@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { COUNTRY_FLAGS, COUNTRY_NAMES } from '@/lib/types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { CountryService, ForecastService } from '@/lib/services';
+import { useTheme } from '@/lib/theme/ThemeContext';
+import { getChartColors } from '@/lib/theme/chartColors';
 
 const COUNTRIES = Object.entries(COUNTRY_NAMES);
 const sampleMonths = ForecastService.getMonthlyEnergy().map((m: { month: string }) => m.month);
@@ -12,6 +14,9 @@ const sampleBaseline = ForecastService.getSimulatorBaseline();
 const sampleSimulated = ForecastService.getSimulatorSimulated();
 
 export default function SimulatorPage() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const colors = getChartColors(isDark);
   const [country, setCountry] = useState('ES');
   const [touristChange, setTouristChange] = useState(0);
   const [tempDeviation, setTempDeviation] = useState(0);
@@ -50,8 +55,8 @@ export default function SimulatorPage() {
           ].map((s) => (
             <div key={s.label}>
               <div className="flex items-center justify-between mb-1">
-                <label className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{s.label}</label>
-                <span className="text-xs font-mono" style={{ color: '#00d4ff' }}>{s.val}{s.unit}</span>
+                <label className="text-xs text-muted">{s.label}</label>
+                <span className="text-xs font-mono text-accent">{s.val}{s.unit}</span>
               </div>
               <input type="range" min={s.min} max={s.max} step={s.step ?? 1} value={s.val}
                 onChange={(e) => s.set(Number(e.target.value))}
@@ -75,12 +80,12 @@ export default function SimulatorPage() {
             <>
               <div className="flex items-center justify-center gap-4 md:gap-8 py-4">
                 <div className="text-center">
-                  <p className="text-xs mb-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Baseline</p>
-                  <p className="text-3xl font-bold" style={{ color: 'rgba(255,255,255,0.4)' }}>65.2</p>
+                  <p className="text-xs mb-1 text-muted">Baseline</p>
+                  <p className="text-3xl font-bold text-muted">65.2</p>
                 </div>
-                <div className="text-2xl" style={{ color: 'rgba(255,255,255,0.3)' }}>&rarr;</div>
+                <div className="text-2xl text-muted">&rarr;</div>
                 <div className="text-center">
-                  <p className="text-xs mb-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Simulated</p>
+                  <p className="text-xs mb-1 text-muted">Simulated</p>
                   <p className="text-3xl font-bold" style={{ color: '#ef4444', textShadow: '0 0 20px rgba(239,68,68,0.3)' }}>81.7</p>
                   <span className="badge-critical text-xs">CRITICAL</span>
                 </div>
@@ -88,18 +93,18 @@ export default function SimulatorPage() {
 
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                  <XAxis dataKey="month" stroke="rgba(255,255,255,0.3)" fontSize={11} />
-                  <YAxis stroke="rgba(255,255,255,0.3)" fontSize={11} />
-                  <Tooltip contentStyle={{ background: '#111827', border: '1px solid rgba(0,212,255,0.15)', borderRadius: 12, color: '#f0f0ff' }} />
-                  <Bar dataKey="baseline" fill="rgba(255,255,255,0.2)" radius={[4, 4, 0, 0]} />
+                  <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
+                  <XAxis dataKey="month" stroke={colors.axis.tick} fontSize={11} />
+                  <YAxis stroke={colors.axis.tick} fontSize={11} />
+                  <Tooltip contentStyle={{ background: colors.tooltip.background, border: `1px solid ${colors.tooltip.border}`, borderRadius: 12, color: colors.tooltip.text }} />
+                  <Bar dataKey="baseline" fill={isDark ? 'rgba(255,255,255,0.2)' : '#9CA3AF'} radius={[4, 4, 0, 0]} />
                   <Bar dataKey="simulated" fill="#ef4444" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
 
-              <div className="rounded-xl p-4 text-xs leading-relaxed" style={{ background: 'rgba(255,255,255,0.03)', color: 'rgba(255,255,255,0.5)' }}>
-                <p className="font-semibold mb-1" style={{ color: '#00d4ff' }}>What Changed</p>
-                <ul className="list-disc list-inside space-y-1">
+              <div className="rounded-xl p-4 text-xs leading-relaxed" style={{ background: 'rgba(0,212,255,0.04)', border: '1px solid rgba(0,212,255,0.08)' }}>
+                <p className="font-semibold mb-1 text-accent">What Changed</p>
+                <ul className="list-disc list-inside space-y-1 text-body">
                   <li>Tourist arrivals +{touristChange}% increases accommodation energy demand</li>
                   <li>Temperature +{tempDeviation}&deg;C drives cooling load</li>
                   <li>Flight traffic x{flightMultiplier} affects airport energy consumption</li>
@@ -108,7 +113,7 @@ export default function SimulatorPage() {
               </div>
             </>
           ) : (
-            <div className="flex h-64 items-center justify-center text-sm" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <div className="flex h-64 items-center justify-center text-sm text-muted">
               Adjust parameters and run a simulation
             </div>
           )}

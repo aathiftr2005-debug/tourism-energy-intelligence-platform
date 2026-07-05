@@ -24,8 +24,8 @@ export default function EmptyState({
           <line x1="12" y1="13" x2="12" y2="17" />
         </svg>
       </div>
-      <h3 className="text-sm font-semibold mb-1" style={{ color: 'rgba(255,255,255,0.6)' }}>{title}</h3>
-      <p className="text-xs max-w-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.3)' }}>{description}</p>
+      <h3 className="text-muted text-sm font-semibold mb-1">{title}</h3>
+      <p className="text-caption text-xs max-w-xs leading-relaxed">{description}</p>
       {action && (
         <button onClick={action.onClick} className="btn-primary text-xs mt-4">
           {action.label}

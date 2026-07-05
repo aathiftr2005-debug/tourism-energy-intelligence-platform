@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface ErrorPageProps {
   error: Error & { digest?: string };
@@ -11,7 +12,7 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <img src="/images/map-bg.jpg" alt="" aria-hidden="true" className="w-full h-full object-cover opacity-[0.05]" />
+        <Image src="/images/map-bg.jpg" alt="" aria-hidden="true" fill className="object-cover opacity-[0.05]" />
         <div className="absolute inset-0 bg-[#0a0e1a]/70" />
       </div>
       <motion.div
@@ -30,8 +31,8 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
             <line x1="12" y1="16" x2="12.01" y2="16" />
           </svg>
         </div>
-        <h1 className="text-2xl font-bold mb-2" style={{ color: '#f0f0ff' }}>Something went wrong</h1>
-        <p className="text-sm mb-6 leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+        <h1 className="text-heading text-2xl font-bold mb-2">Something went wrong</h1>
+        <p className="text-body text-sm mb-6 leading-relaxed">
           An unexpected error occurred. Please try again.
         </p>
         <button

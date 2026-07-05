@@ -40,8 +40,8 @@ export default function ForecastPanel() {
             </svg>
           </div>
           <div>
-            <h2 className="text-sm font-bold" style={{ color: '#f0f0ff' }}>Forecast</h2>
-            <p className="text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>Short-term energy and tourism predictions</p>
+            <h2 className="text-sm font-bold text-heading">Forecast</h2>
+            <p className="text-[10px] text-caption">Short-term energy and tourism predictions</p>
           </div>
         </div>
 
@@ -51,10 +51,10 @@ export default function ForecastPanel() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className="px-3 py-1.5 rounded-md text-[11px] font-medium transition-all"
+              className={`px-3 py-1.5 rounded-md text-[11px] font-medium transition-all ${tab === t ? '' : 'text-muted'}`}
               style={{
                 background: tab === t ? 'rgba(0,212,255,0.12)' : 'transparent',
-                color: tab === t ? '#00d4ff' : 'rgba(255,255,255,0.4)',
+                color: tab === t ? '#00d4ff' : undefined,
               }}
             >
               Next {t === '24h' ? '24 Hours' : '7 Days'}
@@ -74,19 +74,19 @@ export default function ForecastPanel() {
             style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider font-medium" style={{ color: 'rgba(255,255,255,0.35)' }}>
+              <span className="text-[10px] uppercase tracking-wider font-medium text-caption">
                 {item.label}
               </span>
               <TrendIcon direction={item.direction} />
             </div>
-            <p className="text-lg font-bold" style={{ color: '#f0f0ff' }}>{item.value}</p>
+            <p className="text-heading text-lg font-bold">{item.value}</p>
             <div className="flex items-center gap-1 mt-1">
               <span className="text-[10px] font-semibold" style={{
                 color: item.direction === 'up' ? '#ef4444' : item.direction === 'down' ? '#10b981' : '#f59e0b',
               }}>
                 {item.change}
               </span>
-              <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.25)' }}>
+              <span className="text-[9px] text-caption">
                 vs previous period
               </span>
             </div>
@@ -96,10 +96,10 @@ export default function ForecastPanel() {
 
       <div className="mt-4 rounded-xl p-3 flex items-center justify-between"
         style={{ background: 'rgba(0,212,255,0.04)', border: '1px solid rgba(0,212,255,0.08)' }}>
-        <span className="text-[10px]" style={{ color: 'rgba(0,212,255,0.5)' }}>
+        <span className="text-[10px] text-accent/60">
           AI Confidence: {confidence}%
         </span>
-        <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+        <span className="text-[10px] text-muted">
           Updated {new Date().toLocaleTimeString()}
         </span>
       </div>
