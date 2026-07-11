@@ -39,8 +39,8 @@ export default function RiskPrediction() {
     >
       <div className="flex items-center gap-3 mb-5">
         <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-          style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          style={{ background: 'var(--color-elevated-15)', border: '1px solid var(--color-elevated-30)' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-elevated)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 20V10" /><path d="M18 20V4" /><path d="M6 20v-4" />
           </svg>
         </div>
@@ -53,8 +53,8 @@ export default function RiskPrediction() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {risks.map((risk, i) => {
           const lvl = levelConfig[risk.level];
-          const cardBg = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)';
-          const cardBorder = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+          const cardBg = 'var(--color-card)';
+          const cardBorder = 'var(--color-border)';
           return (
             <motion.div
               key={risk.id}

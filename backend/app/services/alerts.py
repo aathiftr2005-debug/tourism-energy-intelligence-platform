@@ -5,7 +5,7 @@ top contributing factors, and actionable recommendations.
 """
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 from app.core.config import settings
@@ -112,7 +112,7 @@ def format_alert_email(stress_data: dict) -> str:
 <a href="https://tourism-energy-intelligence.vercel.app/dashboard" style="display:inline-block;background-color:#00d4ff;color:#0a0a0a;text-decoration:none;font-weight:600;font-size:14px;padding:12px 32px;border-radius:8px;">View Dashboard</a>
 </td></tr>
 <tr><td style="padding:16px 32px;background-color:#12121e;text-align:center;">
-<p style="color:#555555;font-size:11px;margin:0;">Tourism Energy Intelligence · Automated alert · {datetime.utcnow().strftime('%Y-%m-%d %H:%M')} UTC</p>
+    <p style="color:#555555;font-size:11px;margin:0;">Tourism Energy Intelligence · Automated alert · {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC</p>
 </td></tr>
 </table>
 </td></tr>
@@ -223,7 +223,7 @@ def check_and_alert_all_countries() -> dict[str, str]:
     -------
     dict of { country_code: "alerted" | "normal" | "failed" }
     """
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     year = now.year
     month = now.month
 

@@ -10,7 +10,7 @@ export default function LoadingSpinner({ size = 'md' }: Props) {
   return (
     <div
       className={`${sizes[size]} animate-spin rounded-full border-2 border-transparent`}
-      style={{ borderTopColor: '#00d4ff', borderRightColor: '#00d4ff', filter: 'drop-shadow(0 0 6px rgba(0,212,255,0.3))' }}
+      style={{ borderTopColor: 'var(--color-accent)', borderRightColor: 'var(--color-accent)', filter: 'drop-shadow(0 0 6px var(--color-accent-20))' }}
     />
   );
 }

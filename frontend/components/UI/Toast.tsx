@@ -43,7 +43,7 @@ function ToastItemComponent({ toast, onRemove }: { toast: ToastItem; onRemove: (
     >
       <div
         className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold flex-shrink-0"
-        style={{ background: cfg.color, color: '#0a0e1a' }}
+        style={{ background: cfg.color, color: '#ffffff' }}
       >
         {cfg.icon}
       </div>
@@ -51,7 +51,7 @@ function ToastItemComponent({ toast, onRemove }: { toast: ToastItem; onRemove: (
       <button
         onClick={() => onRemove(toast.id)}
         className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-disabled hover:text-muted transition-colors"
-        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-accent-8)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
         aria-label="Dismiss notification"
       >

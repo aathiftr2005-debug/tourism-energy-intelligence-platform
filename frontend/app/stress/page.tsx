@@ -120,7 +120,7 @@ export default function StressPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05 * i }}
-            className="group relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-500 hover:scale-[1.04] hover:shadow-[0_0_50px_rgba(0,212,255,0.12)]"
+            className="group relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-500 hover:scale-[1.04]"
             style={{
               border: `1px solid ${levelColor(c.level, isDark)}25`,
             }}
@@ -147,7 +147,7 @@ export default function StressPage() {
 
             <div className="relative z-10 p-5 flex flex-col">
               <div className="flex items-center gap-3 mb-1">
-                <div className="w-9 h-6 rounded-lg overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center shadow-md flex-shrink-0 relative">
+                <div className="w-9 h-6 rounded-lg overflow-hidden border bg-white/5 backdrop-blur-sm flex items-center justify-center shadow-md flex-shrink-0 relative" style={{ borderColor: 'var(--color-border)' }}>
                   <Image
                     src={CountryService.getFlagPath(c.code)}
                     alt={c.name}
@@ -164,9 +164,9 @@ export default function StressPage() {
               <StressGauge score={c.score} level={c.level} isDark={isDark} />
 
               <div className="flex flex-wrap gap-1.5 mt-1">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-sm border text-muted" style={{ background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)', borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.08)' }}>Tourist</span>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-sm border text-muted" style={{ background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)', borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.08)' }}>Energy</span>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-sm border text-muted" style={{ background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)', borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.08)' }}>Weather</span>
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-sm border text-muted" style={{ background: 'var(--color-card-hover)', borderColor: 'var(--color-border)' }}>Tourist</span>
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-sm border text-muted" style={{ background: 'var(--color-card-hover)', borderColor: 'var(--color-border)' }}>Energy</span>
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-sm border text-muted" style={{ background: 'var(--color-card-hover)', borderColor: 'var(--color-border)' }}>Weather</span>
               </div>
 
               <div className="mt-3">{levelBadge(c.level, isDark)}</div>

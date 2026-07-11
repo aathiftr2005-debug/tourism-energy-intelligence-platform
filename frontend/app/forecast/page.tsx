@@ -67,8 +67,8 @@ export default function ForecastPage() {
               onClick={() => setMonths(m)}
               className={`px-3 py-1.5 min-w-[44px] min-h-[44px] rounded-full text-xs font-medium transition-all flex items-center justify-center ${months === m ? 'text-accent' : 'text-muted'}`}
               style={{
-                background: months === m ? 'linear-gradient(135deg, var(--color-accent-alpha, rgba(0,212,255,0.12)), var(--color-accent-secondary-alpha, rgba(124,58,237,0.12)))' : 'transparent',
-                border: `1px solid ${months === m ? 'var(--color-accent-border, rgba(0,212,255,0.3))' : 'var(--color-border, rgba(255,255,255,0.08))'}`,
+                background: months === m ? 'var(--color-accent-8)' : 'transparent',
+                border: `1px solid ${months === m ? 'var(--color-accent-20)' : 'var(--color-border)'}`,
               }}
             >
               {m}m

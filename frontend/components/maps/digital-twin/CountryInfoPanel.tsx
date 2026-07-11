@@ -34,33 +34,34 @@ export default function CountryInfoPanel({ data, onClose }: Props) {
       <div
         className="rounded-2xl p-5 h-full overflow-y-auto"
         style={{
-          background: 'rgba(10,14,26,0.92)',
+          background: 'var(--color-card)',
           backdropFilter: 'blur(24px)',
-          border: '1px solid rgba(0,212,255,0.1)',
+          border: '1px solid var(--color-border)',
+          boxShadow: 'var(--light-card-shadow-md)',
         }}
       >
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-3">
             <span className="text-3xl">{FLAGS[data.country_code] || ''}</span>
             <div>
-              <h2 className="text-base font-bold" style={{ color: '#f0f0ff' }}>{data.country}</h2>
-              <span className="text-[10px] font-medium tracking-wider" style={{ color: 'rgba(255,255,255,0.3)' }}>{data.country_code}</span>
+              <h2 className="text-base font-bold" style={{ color: 'var(--color-text-heading)' }}>{data.country}</h2>
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: 'var(--color-text-caption)' }}>{data.country_code}</span>
             </div>
           </div>
           <button onClick={onClose}
             className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(239,68,68,0.2)'; e.currentTarget.style.borderColor = 'rgba(239,68,68,0.3)'; e.currentTarget.style.color = '#ef4444'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
+            style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)', color: 'var(--color-text-muted)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-critical-15)'; e.currentTarget.style.borderColor = 'var(--color-critical-30)'; e.currentTarget.style.color = 'var(--color-critical)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-card-hover)'; e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.color = 'var(--color-text-muted)'; }}
             aria-label="Close panel"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
           </button>
         </div>
 
-        <div className="flex items-center justify-center py-4 mb-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="flex items-center justify-center py-4 mb-4 rounded-xl" style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}>
           <div className="text-center">
-            <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: 'rgba(255,255,255,0.35)' }}>Risk Level</p>
+            <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: 'var(--color-text-caption)' }}>Risk Level</p>
             <motion.p
               key={data.country_code}
               initial={{ scale: 0.8, opacity: 0 }}
@@ -70,7 +71,7 @@ export default function CountryInfoPanel({ data, onClose }: Props) {
             >
               {data.riskLevel}
             </motion.p>
-            <span className="text-[10px] font-medium" style={{ color: `rgba(255,255,255,0.3)` }}>
+            <span className="text-[10px] font-medium" style={{ color: 'var(--color-text-caption)' }}>
               Overall Risk Assessment
             </span>
           </div>
@@ -85,21 +86,21 @@ export default function CountryInfoPanel({ data, onClose }: Props) {
             { label: 'Weather', value: `${data.weather.temperature}\u00b0C ${data.weather.condition}`, color: '#f0f0ff' },
             { label: 'Grid Health', value: `${data.gridHealth}%`, color: getLayerColor(data.gridHealth, 'grid') },
           ].map((item) => (
-            <div key={item.label} className="rounded-xl p-3 text-center" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: 'rgba(255,255,255,0.35)' }}>{item.label}</p>
+            <div key={item.label} className="rounded-xl p-3 text-center" style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}>
+              <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: 'var(--color-text-caption)' }}>{item.label}</p>
               <p className="text-sm font-bold" style={{ color: item.color }}>{item.value}</p>
             </div>
           ))}
         </div>
 
         <div className="mb-4">
-          <p className="text-[10px] uppercase tracking-wider mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>24h Forecast</p>
+          <p className="text-[10px] uppercase tracking-wider mb-3" style={{ color: 'var(--color-text-caption)' }}>24h Forecast</p>
           <div className="grid grid-cols-2 gap-2">
             {data.forecast24h.map((f) => (
-              <div key={f.label} className="rounded-xl p-3 flex items-center justify-between" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div key={f.label} className="rounded-xl p-3 flex items-center justify-between" style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}>
                 <div>
-                  <p className="text-[9px] uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.3)' }}>{f.label}</p>
-                  <p className="text-xs font-semibold mt-0.5" style={{ color: '#f0f0ff' }}>{f.value}</p>
+                  <p className="text-[9px] uppercase tracking-wider" style={{ color: 'var(--color-text-caption)' }}>{f.label}</p>
+                  <p className="text-xs font-semibold mt-0.5" style={{ color: 'var(--color-text-heading)' }}>{f.value}</p>
                 </div>
                 <TrendArrow direction={f.direction} />
               </div>
@@ -107,16 +108,16 @@ export default function CountryInfoPanel({ data, onClose }: Props) {
           </div>
         </div>
 
-        <div className="mb-4 rounded-xl p-3" style={{ background: 'rgba(0,212,255,0.04)', border: '1px solid rgba(0,212,255,0.1)' }}>
-          <p className="text-[10px] uppercase tracking-wider mb-1.5" style={{ color: 'rgba(0,212,255,0.5)' }}>AI Summary</p>
-          <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>
+        <div className="mb-4 rounded-xl p-3" style={{ background: 'var(--color-accent-5)', border: '1px solid var(--color-accent-8)' }}>
+          <p className="text-[10px] uppercase tracking-wider mb-1.5" style={{ color: 'var(--color-accent)' }}>AI Summary</p>
+          <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-body)' }}>
             {data.aiSummary}
           </p>
         </div>
 
         <div className="rounded-xl p-3" style={{ background: `${riskColor}10`, border: `1px solid ${riskColor}20` }}>
           <p className="text-[10px] uppercase tracking-wider mb-1.5" style={{ color: `${riskColor}70` }}>AI Recommendation</p>
-          <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>
+          <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-body)' }}>
             {data.aiRecommendation}
           </p>
         </div>

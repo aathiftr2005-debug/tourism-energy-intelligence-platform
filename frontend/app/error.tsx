@@ -13,7 +13,7 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="fixed inset-0 z-[-1] pointer-events-none">
         <Image src="/images/map-bg.jpg" alt="" aria-hidden="true" fill className="object-cover opacity-[0.05]" />
-        <div className="absolute inset-0 bg-[#0a0e1a]/70" />
+        <div className="absolute inset-0" style={{ background: 'var(--color-overlay)' }} />
       </div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -23,9 +23,9 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
       >
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-          style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.12)' }}
+          style={{ background: 'var(--color-critical-15)', border: '1px solid var(--color-critical-30)' }}
         >
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(239,68,68,0.5)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-critical)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="8" x2="12" y2="12" />
             <line x1="12" y1="16" x2="12.01" y2="16" />

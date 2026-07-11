@@ -10,11 +10,11 @@ Usage
 -----
   from app.services.scheduler import start_scheduler
 
-  @app.on_event("startup")
-  async def startup():
+  In the FastAPI lifespan:
       start_scheduler()
 """
 
+import asyncio
 import logging
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -94,14 +94,16 @@ def _run_weekly_etl() -> None:
     """Job: run the full ETL pipeline for all countries."""
     logger.info("Scheduled job: weekly ETL pipeline")
     try:
-        import asyncio
         from app.etl.pipeline import run_all_countries
+
         loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        results = loop.run_until_complete(run_all_countries())
-        loop.close()
-        successful = sum(1 for df in results.values() if not df.empty)
-        logger.info("Weekly ETL complete — %d/%d countries succeeded", successful, len(results))
+        try:
+            asyncio.set_event_loop(loop)
+            results = loop.run_until_complete(run_all_countries())
+            successful = sum(1 for df in results.values() if not df.empty)
+            logger.info("Weekly ETL complete — %d/%d countries succeeded", successful, len(results))
+        finally:
+            loop.close()
     except Exception as e:
         logger.error("Weekly ETL job failed: %s", e, exc_info=True)
 

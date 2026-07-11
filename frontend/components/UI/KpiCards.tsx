@@ -42,10 +42,11 @@ export default function KpiCards() {
           transition={{ duration: 0.4, delay: 0.05 * i }}
           className="rounded-2xl p-4 relative overflow-hidden w-full"
           style={{
-            background: 'rgba(255,255,255,0.03)',
+            background: 'var(--color-card)',
             backdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            border: '1px solid var(--color-border)',
             borderTop: `2px solid ${card.color}`,
+            boxShadow: 'var(--light-card-shadow)',
           }}
         >
           <div className="flex items-center justify-between mb-2">
@@ -68,8 +69,8 @@ export default function KpiCards() {
           <p className="text-caption text-[11px] mt-1 font-medium">
             {card.label}
           </p>
-          <div className="absolute bottom-0 left-0 right-0 h-px" style={{
-            background: `linear-gradient(90deg, transparent, ${card.color}40, transparent)`,
+          <div className="absolute bottom-0 left-0 right-0 h-px opacity-40" style={{
+            background: `linear-gradient(90deg, transparent, ${card.color}, transparent)`,
           }} />
         </motion.div>
       ))}

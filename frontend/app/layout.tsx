@@ -1,4 +1,5 @@
 import './globals.css';
+import type { Viewport } from 'next';
 import Sidebar from '@/components/UI/Sidebar';
 import CustomCursor from '@/components/UI/CustomCursor';
 import { ToastProvider } from '@/components/UI/Toast';
@@ -7,6 +8,13 @@ import { ThemeProvider } from '@/lib/theme/ThemeContext';
 export const metadata = {
   title: 'Tourism Energy Intelligence',
   description: 'AI-powered seasonal energy demand forecasting for European tourism regions',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

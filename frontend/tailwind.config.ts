@@ -24,6 +24,11 @@ const config: Config = {
         heading: ['Inter', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
       },
+      boxShadow: {
+        'card': 'var(--light-card-shadow)',
+        'card-md': 'var(--light-card-shadow-md)',
+        'card-lg': 'var(--light-card-shadow-lg)',
+      },
       animation: {
         'pulse-glow': 'pulse-glow 2s infinite',
         'pulse-critical': 'pulse-critical 2s infinite',

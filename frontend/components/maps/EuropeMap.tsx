@@ -62,13 +62,13 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
 
   const europePath = "M30,15 L35,10 L50,5 L65,8 L75,10 L80,15 L85,20 L80,30 L75,40 L70,50 L65,58 L60,60 L55,58 L50,55 L45,58 L40,55 L35,50 L30,45 L25,40 L28,30 L30,20 Z";
 
-  const tooltipBg = isDark ? 'rgba(17,24,39,0.92)' : 'rgba(255,255,255,0.95)';
-  const legendBg = isDark ? 'rgba(17,24,39,0.85)' : 'rgba(255,255,255,0.9)';
-  const legendBorder = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)';
+  const tooltipBg = 'var(--color-card)';
+  const legendBg = 'var(--color-card)';
+  const legendBorder = 'var(--color-border)';
 
   return (
     <div className="w-full h-full relative overflow-hidden rounded-2xl">
-      <div className="w-full h-full min-h-[300px] rounded-2xl overflow-hidden relative" style={{ background: isDark ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.04)' }}>
+      <div className="w-full h-full min-h-[300px] rounded-2xl overflow-hidden relative" style={{ background: 'var(--color-card-hover)' }}>
 
         <motion.svg
           viewBox="0 0 100 70"
@@ -119,9 +119,9 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
                   cx={pos.x}
                   cy={pos.y}
                   r={size}
-                  fill={hasData ? getHeatColor(score) : (isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)')}
-                  stroke={isHovered || isZoomed ? 'rgba(0,212,255,0.9)' : hasData ? (isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)') : (isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.08)')}
-                  strokeWidth={isHovered || isZoomed ? 2 : 0.5}
+                  fill={hasData ? getHeatColor(score) : 'var(--color-card)'}
+            stroke={isHovered || isZoomed ? 'var(--color-accent)' : hasData ? 'var(--color-border)' : 'var(--color-border)'}
+            strokeWidth={isHovered || isZoomed ? 2 : 0.5}
                   animate={{ r: size, scale: isHovered ? 1.3 : 1 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
                   style={{ filter: hasData ? `drop-shadow(${getHeatGlow(score)})` : 'none', transformOrigin: `${pos.x}px ${pos.y}px` }}
@@ -141,8 +141,8 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
                         width={36}
                         height={18}
                         rx={4}
-                        fill={isDark ? 'rgba(10,14,26,0.95)' : 'rgba(255,255,255,0.95)'}
-                        stroke="rgba(0,212,255,0.2)"
+                        fill={isDark ? 'rgba(10,14,26,0.95)' : 'var(--color-card)'}
+                        stroke="var(--color-accent-20)"
                         strokeWidth="0.5"
                       />
                       <text x={pos.x} y={pos.y - 10} textAnchor="middle" fill={isDark ? 'white' : '#111827'} fontSize="3.5" fontWeight="bold">

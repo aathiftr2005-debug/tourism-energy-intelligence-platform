@@ -13,17 +13,17 @@ export interface ChartColors {
 }
 
 const light: ChartColors = {
-  axis: { label: '#374151', tick: '#6B7280', line: '#D1D5DB' },
-  grid: '#E5E7EB',
-  tooltip: { background: '#FFFFFF', text: '#111827', border: '#E5E7EB' },
+  axis: { label: '#374151', tick: '#6b7280', line: '#e5e7eb' },
+  grid: '#f1f5f9',
+  tooltip: { background: '#ffffff', text: '#111827', border: '#e5e7eb' },
   legend: '#374151',
   title: '#111827',
-  subtitle: '#6B7280',
-  line: { historical: '#2563EB', prediction: '#EA580C', ensemble: '#7C3AED', confidence: '#059669' },
-  bar: { critical: '#DC2626', elevated: '#D97706', moderate: '#CA8A04', normal: '#059669' },
-  area: { fill: 'rgba(37,99,235,0.08)' },
-  track: '#E5E7EB',
-  badgeText: '#6B7280',
+  subtitle: '#6b7280',
+  line: { historical: '#2563eb', prediction: '#ea580c', ensemble: '#7c3aed', confidence: '#059669' },
+  bar: { critical: '#dc2626', elevated: '#d97706', moderate: '#ca8a04', normal: '#059669' },
+  area: { fill: 'rgba(37,99,235,0.06)' },
+  track: '#f1f5f9',
+  badgeText: '#6b7280',
 };
 
 const dark: ChartColors = {

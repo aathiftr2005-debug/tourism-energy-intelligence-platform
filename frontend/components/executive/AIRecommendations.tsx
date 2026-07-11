@@ -23,7 +23,7 @@ export default function AIRecommendations() {
       <div className="flex items-center gap-3 mb-5">
         <div className="w-8 h-8 rounded-lg flex items-center justify-center"
           style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
           </svg>
         </div>
@@ -43,7 +43,7 @@ export default function AIRecommendations() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.08 }}
               className="rounded-xl p-4 transition-all hover:scale-[1.01]"
-              style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
+              style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)' }}
             >
               <div className="flex items-start justify-between gap-3 mb-2">
                 <h3 className="text-xs font-semibold text-heading">{rec.title}</h3>
@@ -56,10 +56,10 @@ export default function AIRecommendations() {
                 {rec.description}
               </p>
               <div className="flex items-center gap-1.5">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(16,185,129,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-normal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
                 </svg>
-                <span className="text-[10px]" style={{ color: 'rgba(16,185,129,0.6)' }}>{rec.impact}</span>
+                <span className="text-[10px]" style={{ color: 'var(--color-normal)' }}>{rec.impact}</span>
               </div>
             </motion.div>
           );

@@ -39,7 +39,7 @@ export default function DigitalTwinMap() {
       </div>
 
       <div className="flex-1 min-w-0">
-        <div className="w-full h-[400px] md:h-[600px] min-h-[300px] relative overflow-hidden rounded-2xl" style={{ background: 'rgba(0,0,0,0.3)' }}>
+        <div className="w-full h-[400px] md:h-[600px] min-h-[300px] relative overflow-hidden rounded-2xl" style={{ background: 'var(--color-card-hover)' }}>
           <motion.svg
             viewBox="0 0 100 70"
             className="w-full h-full"
@@ -80,8 +80,8 @@ export default function DigitalTwinMap() {
                     cx={pos.x}
                     cy={pos.y}
                     r={size}
-                    fill={layerValue > 0 ? color : 'rgba(255,255,255,0.04)'}
-                    stroke={isHovered || isSelected ? 'rgba(0,212,255,0.9)' : layerValue > 0 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.05)'}
+                    fill={layerValue > 0 ? color : 'var(--color-card)'}
+                    stroke={isHovered || isSelected ? 'var(--color-accent)' : layerValue > 0 ? 'var(--color-border)' : 'var(--color-border)'}
                     strokeWidth={isHovered || isSelected ? 2 : 0.5}
                     animate={{ scale: isHovered ? 1.3 : 1 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
@@ -97,9 +97,9 @@ export default function DigitalTwinMap() {
                         transition={{ duration: 0.2 }}
                       >
                         <rect x={pos.x - 18} y={pos.y - 22} width={36} height={18} rx={4}
-                          fill="rgba(10,14,26,0.95)" stroke="rgba(0,212,255,0.2)" strokeWidth="0.5"
+                          fill="var(--color-card)" stroke="var(--color-accent-20)" strokeWidth="0.5"
                         />
-                        <text x={pos.x} y={pos.y - 10} textAnchor="middle" fill="white" fontSize="3.5" fontWeight="bold">
+                        <text x={pos.x} y={pos.y - 10} textAnchor="middle" fill="var(--color-text-heading)" fontSize="3.5" fontWeight="bold">
                           {pos.label}
                         </text>
                       </motion.g>
@@ -145,8 +145,8 @@ export default function DigitalTwinMap() {
           </motion.svg>
 
           <div className="absolute bottom-4 left-4 p-2.5 rounded-xl" style={{
-            background: 'rgba(17,24,39,0.85)', backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.06)',
+            background: 'var(--color-card)', backdropFilter: 'blur(12px)',
+            border: '1px solid var(--color-border)',
           }}>
             <div className="flex items-center gap-3">
               {[70, 50, 30, 10].map((val) => (
@@ -155,7 +155,7 @@ export default function DigitalTwinMap() {
                     background: getLayerColor(val, activeLayer),
                     boxShadow: `0 0 6px ${getLayerColor(val, activeLayer)}60`,
                   }} />
-                  <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  <span className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
                     {val === 70 ? 'High' : val === 50 ? 'Elevated' : val === 30 ? 'Moderate' : 'Low'}
                   </span>
                 </div>
@@ -164,8 +164,8 @@ export default function DigitalTwinMap() {
           </div>
 
           <div className="absolute bottom-4 right-4 p-2 rounded-xl text-[10px]" style={{
-            background: 'rgba(17,24,39,0.85)', backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)',
+            background: 'var(--color-card)', backdropFilter: 'blur(12px)',
+            border: '1px solid var(--color-border)', color: 'var(--color-text-caption)',
           }}>
             {Object.keys(DIGITAL_TWIN_DATA).length} countries monitored
           </div>

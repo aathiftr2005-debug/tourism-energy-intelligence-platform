@@ -1,0 +1,85 @@
+# ==============================================================================
+# Docker Compose — Production Deployment
+# ==============================================================================
+# Usage:
+#   cp backend/.env.example backend/.env
+#   # Fill in production values in backend/.env
+#   docker compose -f docker-compose.prod.yml up -d --build
+# ==============================================================================
+
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: tei-db
+    environment:
+      POSTGRES_DB: tei
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - tei-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tei-backend
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://postgres:${DATABASE_PASSWORD}@postgres:5432/tei
+      ENVIRONMENT: production
+      WORKERS: 2
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+    volumes:
+      - ./ml/data:/app/ml/data
+      - ./backend/app/ml/saved_models:/app/app/ml/saved_models
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - tei-network
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: tei-frontend
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file: ./frontend/.env
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - tei-network
+
+networks:
+  tei-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

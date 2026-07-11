@@ -40,13 +40,13 @@ export default function AssistantPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] space-y-4">
+    <div className="flex flex-col h-full min-h-0 space-y-4">
       <div className="page-header">
         <h1 className="page-title">TEI Intelligence</h1>
         <p className="page-subtitle">AI-powered assistant for energy insights</p>
       </div>
 
-      <div className="flex-1 overflow-y-auto space-y-4 rounded-2xl border border-[rgba(255,255,255,0.08)] p-4" style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(12px)' }}>
+      <div className="flex-1 overflow-y-auto space-y-4 rounded-2xl border p-4" style={{ background: 'var(--color-card)', borderColor: 'var(--color-border)', backdropFilter: 'blur(12px)' }}>
         {messages.map((m, i) => (
           <motion.div
             key={i}
@@ -57,7 +57,7 @@ export default function AssistantPage() {
           >
             <div className="flex gap-3 max-w-[80%]">
               {m.role === 'assistant' && (
-                <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-[0_0_10px_rgba(0,212,255,0.2)]" style={{ background: 'linear-gradient(135deg, #00d4ff22, #7c3aed22)' }}>
+                <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ background: 'var(--color-accent-8)', boxShadow: '0 0 10px var(--color-accent-5)' }}>
                   ⚡
                 </div>
               )}
@@ -69,10 +69,10 @@ export default function AssistantPage() {
                 }`}
                 style={{
                   background: m.role === 'user'
-                    ? 'linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15))'
-                    : 'rgba(255,255,255,0.05)',
-                  border: m.role === 'assistant' ? '1px solid rgba(0,212,255,0.1)' : 'none',
-                  color: '#f0f0ff',
+                    ? 'var(--color-accent-8)'
+                    : 'var(--color-card-hover)',
+                  border: m.role === 'assistant' ? '1px solid var(--color-border)' : 'none',
+                  color: 'var(--color-text-body)',
                 }}
               >
                 {m.content}
@@ -82,9 +82,9 @@ export default function AssistantPage() {
         ))}
         {loading && (
           <div className="flex items-center gap-2 px-4">
-            <span className="w-2 h-2 rounded-full bg-[#00d4ff] animate-bounce" style={{ animationDelay: '0ms', boxShadow: '0 0 6px #00d4ff' }} />
-            <span className="w-2 h-2 rounded-full bg-[#00d4ff] animate-bounce" style={{ animationDelay: '150ms', boxShadow: '0 0 6px #00d4ff' }} />
-            <span className="w-2 h-2 rounded-full bg-[#00d4ff] animate-bounce" style={{ animationDelay: '300ms', boxShadow: '0 0 6px #00d4ff' }} />
+            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--color-accent)', boxShadow: '0 0 6px var(--color-accent)', animationDelay: '0ms' }} />
+            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--color-accent)', boxShadow: '0 0 6px var(--color-accent)', animationDelay: '150ms' }} />
+            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--color-accent)', boxShadow: '0 0 6px var(--color-accent)', animationDelay: '300ms' }} />
           </div>
         )}
         <div ref={endRef} />
@@ -97,12 +97,12 @@ export default function AssistantPage() {
             onClick={() => handleSend(s)}
             className="px-3 py-1.5 rounded-full text-xs border transition-all"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              borderColor: 'rgba(255,255,255,0.1)',
-              color: 'rgba(255,255,255,0.5)',
+              background: 'var(--color-card)',
+              borderColor: 'var(--color-border)',
+              color: 'var(--color-text-muted)',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0,212,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(0,212,255,0.3)'; e.currentTarget.style.color = '#00d4ff'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-accent-8)'; e.currentTarget.style.borderColor = 'var(--color-accent-20)'; e.currentTarget.style.color = 'var(--color-accent)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-card)'; e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.color = 'var(--color-text-muted)'; }}
           >
             {s}
           </button>

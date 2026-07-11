@@ -6,8 +6,8 @@ Fallback: Local analytics engine using tourism/energy/stress datasets
 """
 
 import logging
-from fastapi import APIRouter
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel, Field
 from google import genai
 from app.core.config import settings
 from app.core.database import get_supabase
@@ -17,9 +17,11 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/assistant", tags=["AI Assistant"])
 
+MAX_MESSAGE_LENGTH = 2000
+
 
 class ChatRequest(BaseModel):
-    message: str
+    message: str = Field(..., min_length=1, max_length=MAX_MESSAGE_LENGTH)
 
 
 class ChatResponse(BaseModel):
@@ -34,6 +36,11 @@ async def chat(request: ChatRequest):
     API error, network issue) falls back to the local analytics engine
     which answers from Supabase datasets.
     """
+    if not settings.gemini_api_key:
+        logger.warning("Gemini API key not configured — using local fallback")
+        fallback_reply = generate_local_response(request.message)
+        return ChatResponse(reply=fallback_reply)
+
     try:
         supabase = get_supabase()
         stress_data = (

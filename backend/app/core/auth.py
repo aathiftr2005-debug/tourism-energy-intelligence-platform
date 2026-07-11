@@ -11,7 +11,7 @@ import hashlib
 import hmac
 import logging
 import secrets
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import Header, HTTPException
@@ -88,7 +88,7 @@ def verify_api_key(key: str) -> bool:
             return False
 
         supabase.table("api_keys").update({
-            "last_used": datetime.utcnow().isoformat(),
+            "last_used": datetime.now(timezone.utc).isoformat(),
             "request_count": (record.get("request_count", 0) or 0) + 1,
         }).eq("id", record["id"]).execute()
 

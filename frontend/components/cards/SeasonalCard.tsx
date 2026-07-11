@@ -39,9 +39,9 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
   const colors = getChartColors(isDark);
   const color = getStressColor(stress);
 
-  const cardBg = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)';
-  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
-  const trackBg = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  const cardBg = 'var(--color-card)';
+  const cardBorder = 'var(--color-border)';
+  const trackBg = 'var(--color-border)';
 
   return (
     <motion.div
@@ -79,11 +79,11 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
       </div>
 
       <div className="mt-4 flex items-center gap-2">
-        <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, transparent, ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)'}, transparent)` }} />
+        <div className="flex-1 h-px" style={{ background: 'var(--color-border)' }} />
         <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color }}>
           {stress >= 70 ? 'High Risk' : stress >= 50 ? 'Elevated' : stress >= 30 ? 'Moderate' : 'Stable'}
         </span>
-        <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, transparent, ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)'}, transparent)` }} />
+        <div className="flex-1 h-px" style={{ background: 'var(--color-border)' }} />
       </div>
     </motion.div>
   );

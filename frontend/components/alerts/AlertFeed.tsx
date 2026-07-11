@@ -36,14 +36,14 @@ export default function AlertFeed({ data }: Props) {
             key={code}
             className="flex items-start gap-3 p-3 rounded-xl border transition-all"
             style={{
-              background: isCritical ? 'rgba(239,68,68,0.08)' : 'rgba(245,158,11,0.06)',
-              borderColor: isCritical ? 'rgba(239,68,68,0.2)' : 'rgba(245,158,11,0.15)',
+              background: isCritical ? 'var(--color-critical-15)' : 'var(--color-elevated-15)',
+              borderColor: isCritical ? 'var(--color-critical-30)' : 'var(--color-elevated-30)',
             }}
           >
             {isCritical ? (
-              <AlertTriangle className="w-5 h-5 mt-0.5 shrink-0" style={{ color: '#ef4444' }} />
+              <AlertTriangle className="w-5 h-5 mt-0.5 shrink-0" style={{ color: isCritical ? 'var(--color-critical)' : 'var(--color-elevated)' }} />
             ) : (
-              <AlertTriangle className="w-5 h-5 mt-0.5 shrink-0" style={{ color: '#f59e0b' }} />
+              <AlertTriangle className="w-5 h-5 mt-0.5 shrink-0" style={{ color: 'var(--color-elevated)' }} />
             )}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">

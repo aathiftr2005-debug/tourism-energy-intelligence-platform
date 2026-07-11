@@ -1,14 +1,15 @@
 """Supabase client factory and table helpers.
 
 Provides:
-  - get_supabase() — cached Supabase client singleton
+  - get_supabase() — cached Supabase client singleton (thread-safe)
   - log_etl_run()  — insert a row into etl_run_logs
   - get_last_etl_run() — fetch the most recent ETL run log
   - get_energy_tourism_data() — query the main data table
 """
 
 import logging
-from datetime import datetime
+import threading
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 from supabase import Client, create_client
@@ -18,16 +19,19 @@ from app.core.config import settings
 logger = logging.getLogger(__name__)
 
 _supabase: Client | None = None
+_lock = threading.Lock()
 
 
 def get_supabase() -> Client:
-    """Return a cached Supabase client singleton."""
+    """Return a cached Supabase client singleton (thread-safe)."""
     global _supabase
     if _supabase is None:
-        _supabase = create_client(
-            settings.supabase_url,
-            settings.supabase_key,
-        )
+        with _lock:
+            if _supabase is None:
+                _supabase = create_client(
+                    settings.supabase_url,
+                    settings.supabase_key,
+                )
     return _supabase
 
 
@@ -45,7 +49,7 @@ def log_etl_run(
             "rows_inserted": rows_inserted,
             "status": status,
             "error_message": error_message,
-            "run_at": datetime.utcnow().isoformat(),
+            "run_at": datetime.now(timezone.utc).isoformat(),
         }
         response = supabase.table("etl_run_logs").insert(payload).execute()
         if response.data:

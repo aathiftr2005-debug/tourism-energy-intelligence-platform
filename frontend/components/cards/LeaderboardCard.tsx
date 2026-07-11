@@ -52,10 +52,10 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const colors = getChartColors(isDark);
-  const cardBg = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)';
-  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
-  const entryBg = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)';
-  const entryBorder = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)';
+  const cardBg = 'var(--color-card)';
+  const cardBorder = 'var(--color-border)';
+  const entryBg = 'var(--color-card-hover)';
+  const entryBorder = 'var(--color-border)';
 
   return (
     <motion.div
@@ -93,14 +93,14 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
             >
               <div className="flex items-center justify-center w-6 h-6 rounded-lg text-[10px] font-bold flex-shrink-0"
                 style={{
-                  background: entry.rank <= 3 ? `${accentColor}20` : (isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'),
+                  background: entry.rank <= 3 ? `${accentColor}20` : 'var(--color-card-hover)',
                   color: entry.rank <= 3 ? accentColor : 'var(--color-text-caption)',
-                  border: `1px solid ${entry.rank <= 3 ? `${accentColor}40` : (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)')}`,
+                  border: `1px solid ${entry.rank <= 3 ? `${accentColor}40` : 'var(--color-border)'}`,
                 }}>
                 {entry.rank}
               </div>
 
-              <div className="w-7 h-5 rounded overflow-hidden flex-shrink-0 border border-white/10 bg-white/5 relative">
+              <div className="w-7 h-5 rounded overflow-hidden flex-shrink-0 border bg-white/5 relative" style={{ borderColor: 'var(--color-border)' }}>
                 {flagImages[entry.countryCode] && (
                   <Image src={flagImages[entry.countryCode]} alt={entry.country} fill className="object-cover" />
                 )}
@@ -124,7 +124,7 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
         })}
       </div>
 
-      <div className="mt-3 pt-3 border-t" style={{ borderColor: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.08)' }}>
+      <div className="mt-3 pt-3 border-t" style={{ borderColor: 'var(--color-border)' }}>
         <span className="text-disabled text-[10px] uppercase tracking-wider">
           {valueLabel}
         </span>

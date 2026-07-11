@@ -46,36 +46,36 @@ export default function ApiAccessPage() {
           </button>
         </div>
         {message && (
-          <p className="mt-3 text-sm" style={{ color: '#00d4ff' }}>{message}</p>
+          <p className="mt-3 text-sm" style={{ color: 'var(--color-accent)' }}>{message}</p>
         )}
-        <p className="mt-3 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Rate limit: 100 requests/hour per key &middot; Keys sent via email</p>
+        <p className="mt-3 text-xs" style={{ color: 'var(--color-text-caption)' }}>Rate limit: 100 requests/hour per key &middot; Keys sent via email</p>
       </div>
 
       <div className="glass-card">
         <h2 className="section-title">API Documentation</h2>
 
         <div className="mb-6 space-y-3">
-          <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
-            <p className="mb-2 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Get forecast for Germany</p>
-            <pre className="text-sm font-mono" style={{ color: '#00d4ff' }}>GET /api/public/forecast/DE</pre>
-            <pre className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+          <div className="rounded-xl p-4" style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)' }}>
+            <p className="mb-2 text-xs" style={{ color: 'var(--color-text-caption)' }}>Get forecast for Germany</p>
+            <pre className="text-sm font-mono" style={{ color: 'var(--color-accent)' }}>GET /api/public/forecast/DE</pre>
+            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
           </div>
-          <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
-            <p className="mb-2 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Get stress score for Spain</p>
-            <pre className="text-sm font-mono" style={{ color: '#00d4ff' }}>GET /api/public/stress-score/ES</pre>
-            <pre className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+          <div className="rounded-xl p-4" style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)' }}>
+            <p className="mb-2 text-xs" style={{ color: 'var(--color-text-caption)' }}>Get stress score for Spain</p>
+            <pre className="text-sm font-mono" style={{ color: 'var(--color-accent)' }}>GET /api/public/stress-score/ES</pre>
+            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
           </div>
-          <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
-            <p className="mb-2 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Get all stress scores</p>
-            <pre className="text-sm font-mono" style={{ color: '#00d4ff' }}>GET /api/public/stress-score/all</pre>
-            <pre className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+          <div className="rounded-xl p-4" style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)' }}>
+            <p className="mb-2 text-xs" style={{ color: 'var(--color-text-caption)' }}>Get all stress scores</p>
+            <pre className="text-sm font-mono" style={{ color: 'var(--color-accent)' }}>GET /api/public/stress-score/all</pre>
+            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
           </div>
         </div>
 
         <div className="overflow-x-auto -mx-4 md:-mx-0 px-4 md:px-0">
           <table className="data-table" style={{ minWidth: '420px' }}>
             <thead>
-              <tr className="text-left text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
+              <tr className="text-left text-xs" style={{ color: 'var(--color-text-caption)' }}>
                 <th className="pb-2 font-semibold whitespace-nowrap pr-2">Method</th>
                 <th className="pb-2 font-semibold whitespace-nowrap pr-2">Endpoint</th>
                 <th className="pb-2 font-semibold whitespace-nowrap pr-2">Description</th>
@@ -84,15 +84,15 @@ export default function ApiAccessPage() {
             </thead>
             <tbody>
               {endpoints.map((ep) => (
-                <tr key={ep.path} className="border-b border-[rgba(255,255,255,0.03)]">
+                <tr key={ep.path} style={{ borderBottom: '1px solid var(--color-border)' }}>
                   <td className="py-2.5 pr-2 whitespace-nowrap">
-                    <span className={`rounded px-2 py-0.5 text-xs font-mono ${ep.method === 'GET' ? 'text-[#00d4ff]' : 'text-[#f59e0b]'}`}
-                      style={{ background: ep.method === 'GET' ? 'rgba(0,212,255,0.1)' : 'rgba(245,158,11,0.1)' }}>
+                    <span className={`rounded px-2 py-0.5 text-xs font-mono ${ep.method === 'GET' ? 'text-accent' : 'text-elevated'}`}
+                      style={{ background: ep.method === 'GET' ? 'var(--color-accent-8)' : 'var(--color-elevated-15)' }}>
                       {ep.method}
                     </span>
                   </td>
-                  <td className="py-2.5 pr-2 font-mono text-xs max-w-[120px] md:max-w-none" style={{ color: '#f0f0ff', wordBreak: 'break-word' }}>{ep.path}</td>
-                  <td className="py-2.5 pr-2 text-xs min-w-0" style={{ color: 'rgba(255,255,255,0.5)' }}>{ep.desc}</td>
+                  <td className="py-2.5 pr-2 font-mono text-xs max-w-[120px] md:max-w-none" style={{ color: 'var(--color-text-heading)', wordBreak: 'break-word' }}>{ep.path}</td>
+                  <td className="py-2.5 pr-2 text-xs min-w-0" style={{ color: 'var(--color-text-muted)' }}>{ep.desc}</td>
                   <td className="py-2.5 text-xs whitespace-nowrap">
                     {ep.auth
                       ? <span className="badge-elevated text-[10px]">Required</span>

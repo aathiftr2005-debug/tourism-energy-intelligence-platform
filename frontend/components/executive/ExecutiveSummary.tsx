@@ -29,15 +29,15 @@ export default function ExecutiveSummary() {
     >
       <div className="absolute top-0 right-0 w-72 h-72 rounded-full opacity-[0.03] pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, #00d4ff 0%, transparent 70%)',
+          background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)',
           transform: 'translate(30%, -30%)',
         }}
       />
 
       <div className="flex items-center gap-3 mb-5">
         <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-          style={{ background: 'rgba(0,212,255,0.1)', border: '1px solid rgba(0,212,255,0.2)' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          style={{ background: 'var(--color-accent-8)', border: '1px solid var(--color-accent-20)' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 20V10" /><path d="M18 20V4" /><path d="M6 20v-4" />
           </svg>
         </div>
@@ -49,7 +49,7 @@ export default function ExecutiveSummary() {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-5">
         <div className="rounded-xl p-4 flex flex-col items-center justify-center"
-          style={{ background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)'}` }}>
+          style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}>
           <div className="relative w-16 h-16 mb-2">
             <svg width="64" height="64" viewBox="0 0 64 64" className="transform -rotate-90">
               <circle cx="32" cy="32" r="28" fill="none" stroke={colors.track} strokeWidth="4" />
@@ -75,7 +75,7 @@ export default function ExecutiveSummary() {
           { label: 'Overall Risk', value: 'Moderate', icon: '\u2696\ufe0f', color: '#f59e0b' },
         ].map((item) => (
           <div key={item.label} className="rounded-xl p-4 flex flex-col items-center justify-center text-center"
-            style={{ background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)'}` }}>
+            style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}>
             <span className="text-lg mb-1">{item.icon}</span>
             <span className="text-[10px] uppercase tracking-wider font-medium mb-1 text-caption">
               {item.label}
@@ -88,9 +88,9 @@ export default function ExecutiveSummary() {
       </div>
 
       <div className="rounded-xl p-4 text-xs leading-relaxed"
-        style={{ background: isDark ? 'rgba(0,212,255,0.04)' : 'rgba(0,212,255,0.06)', border: `1px solid ${isDark ? 'rgba(0,212,255,0.08)' : 'rgba(0,212,255,0.15)'}` }}>
+        style={{ background: 'var(--color-accent-5)', border: '1px solid var(--color-accent-8)' }}>
         <div className="flex items-center gap-2 mb-2">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,212,255,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
             <circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" />
           </svg>
           <span className="text-[10px] font-semibold uppercase tracking-wider text-accent opacity-60">

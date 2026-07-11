@@ -27,10 +27,10 @@ export default function CountryCard({ country, flagSrc, stressScore, status }: C
     <div className="glass-card p-4 text-center hover:scale-[1.03] transition-all cursor-pointer group">
       <Image src={flagSrc} alt={`${country} flag`} width={640} height={427} className="w-12 h-auto mx-auto mb-2 object-contain rounded-sm" />
       <h3 className="font-semibold text-sm md:text-base truncate">{country}</h3>
-      <div className="my-2 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="my-2 h-px bg-gradient-to-r from-transparent via-current to-transparent" style={{ color: 'var(--color-border)' }} />
       <div
         className="text-3xl md:text-4xl font-bold"
-        style={{ color: getStatusColor(stressScore), textShadow: stressScore >= 70 ? '0 0 20px rgba(239,68,68,0.3)' : 'none' }}
+        style={{ color: getStatusColor(stressScore), textShadow: stressScore >= 70 ? '0 0 20px var(--color-critical-30)' : 'none' }}
       >
         {Math.round(stressScore)}
       </div>

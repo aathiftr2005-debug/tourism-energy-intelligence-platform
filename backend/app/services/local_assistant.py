@@ -7,7 +7,7 @@ stress, and forecast datasets.
 
 import logging
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 from app.core.database import get_supabase
@@ -109,7 +109,7 @@ def _is_overview_query(message: str) -> bool:
 
 def _get_stress_summary(country_code: Optional[str] = None) -> str:
     """Generate a natural-language stress score briefing."""
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     year, month = now.year, now.month
 
     if country_code:
@@ -706,7 +706,7 @@ def _get_comparison_summary(message: str) -> str:
         or COUNTRY_NAMES.get(code, "").lower() in msg_lower
     ]
 
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     all_scores = calculate_all_countries(now.year, now.month)
     sorted_scores = sorted(
         all_scores.items(), key=lambda x: x[1].get("stress_score", 0), reverse=True
@@ -867,7 +867,7 @@ def _get_explanation_summary(country_code: Optional[str] = None) -> str:
     ]
 
     if country_code:
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         result = calculate_stress_score(country_code, now.year, now.month)
         name = COUNTRY_NAMES.get(country_code, country_code)
         score = result.get("stress_score", 0)

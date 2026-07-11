@@ -23,7 +23,7 @@ router = APIRouter(tags=["Forecast"])
 
 _jobs: dict[str, dict[str, Any]] = {}
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 @router.get("/forecast/{country_code}")
@@ -123,7 +123,7 @@ async def trigger_ml_training(background_tasks: BackgroundTasks):
     _jobs[job_id] = {
         "job_id": job_id,
         "status": "started",
-        "created_at": datetime.utcnow().isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
     }
 
     background_tasks.add_task(_run_training_job, job_id)
@@ -141,7 +141,7 @@ def _run_training_job(job_id: str) -> None:
     try:
         summary = train_all_countries()
         _jobs[job_id]["status"] = "completed"
-        _jobs[job_id]["completed_at"] = datetime.utcnow().isoformat()
+        _jobs[job_id]["completed_at"] = datetime.now(timezone.utc).isoformat()
         _jobs[job_id]["summary"] = {
             country: {
                 k: v for k, v in info.items() if k != "model"

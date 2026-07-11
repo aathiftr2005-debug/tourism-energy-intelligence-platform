@@ -9,7 +9,7 @@ export default function NotFoundPage() {
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="fixed inset-0 z-[-1] pointer-events-none">
         <Image src="/images/map-bg.jpg" alt="" aria-hidden="true" fill className="object-cover opacity-[0.05]" />
-        <div className="absolute inset-0 bg-[#0a0e1a]/70" />
+        <div className="absolute inset-0" style={{ background: 'var(--color-overlay)' }} />
       </div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ export default function NotFoundPage() {
       >
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-          style={{ background: 'rgba(0,212,255,0.06)', border: '1px solid rgba(0,212,255,0.12)' }}
+          style={{ background: 'var(--color-accent-8)', border: '1px solid var(--color-accent-20)' }}
         >
           <span className="text-4xl font-bold text-accent opacity-30">404</span>
         </div>

@@ -11,7 +11,7 @@ Endpoints
 """
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Path, Query, Body
@@ -62,13 +62,13 @@ async def public_get_forecast(
         if forecast_df.empty:
             return {
                 "country": country_code,
-                "generated_at": datetime.utcnow().isoformat(),
+                "generated_at": datetime.now(timezone.utc).isoformat(),
                 "forecast": [],
                 "error": "No forecast available",
             }
         return {
             "country": country_code,
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": datetime.now(timezone.utc).isoformat(),
             "forecast": forecast_df.to_dict(orient="records"),
         }
     except FileNotFoundError:
@@ -115,7 +115,7 @@ async def public_get_all_stress_scores(
             "level": data.get("stress_level"),
             "traffic_light": data.get("traffic_light"),
         })
-    return {"generated_at": datetime.utcnow().isoformat(), "scores": scores}
+    return {"generated_at": datetime.now(timezone.utc).isoformat(), "scores": scores}
 
 
 @router.get("/public/regions")

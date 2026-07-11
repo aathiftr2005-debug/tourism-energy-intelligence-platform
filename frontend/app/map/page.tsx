@@ -124,7 +124,7 @@ export default function MapPage() {
     <div className="min-h-screen relative">
       <div className="fixed inset-0 z-[-1] pointer-events-none">
         <Image src="/images/map-bg.jpg" alt="" aria-hidden="true" fill className="object-cover opacity-[0.05]" />
-        <div className="absolute inset-0 bg-[#0a0e1a]/70" />
+        <div className="absolute inset-0" style={{ background: 'var(--color-overlay)' }} />
       </div>
 
       <div className="glass-card p-6 mb-6">
@@ -140,8 +140,8 @@ export default function MapPage() {
             </p>
           </div>
           <div className="flex items-center gap-2 p-1 rounded-2xl flex-shrink-0" style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.06)',
+            background: 'var(--color-card)',
+            border: '1px solid var(--color-border)',
           }}>
             {(['stress', 'digital-twin'] as const).map((mode) => (
               <button
@@ -149,8 +149,8 @@ export default function MapPage() {
                 onClick={() => setViewMode(mode)}
                 className={`px-3 md:px-4 py-2 rounded-xl text-[10px] md:text-xs font-semibold transition-all tracking-wider uppercase ${viewMode === mode ? 'text-accent' : 'text-muted'}`}
                 style={{
-                  background: viewMode === mode ? 'linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15))' : 'transparent',
-                  border: `1px solid ${viewMode === mode ? 'rgba(0,212,255,0.25)' : 'transparent'}`,
+                  background: viewMode === mode ? 'var(--color-accent-8)' : 'transparent',
+                  border: `1px solid ${viewMode === mode ? 'var(--color-accent-20)' : 'transparent'}`,
                 }}
               >
                 {mode === 'stress' ? 'Stress Map' : 'Digital Twin'}
@@ -187,9 +187,10 @@ export default function MapPage() {
               <div
                 className="rounded-2xl p-5 h-full overflow-y-auto"
                 style={{
-                  background: 'rgba(10,14,26,0.9)',
+                  background: 'var(--color-card)',
                   backdropFilter: 'blur(24px)',
-                  border: '1px solid rgba(0,212,255,0.1)',
+                  border: '1px solid var(--color-border)',
+                  boxShadow: 'var(--light-card-shadow-md)',
                   width: '100%', maxWidth: 360,
                 }}
               >
@@ -204,16 +205,16 @@ export default function MapPage() {
                   <button
                     onClick={closePanel}
                     className="w-8 h-8 rounded-full flex items-center justify-center transition-all text-muted"
-                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(239,68,68,0.2)'; e.currentTarget.style.borderColor = 'rgba(239,68,68,0.3)'; e.currentTarget.style.color = '#ef4444'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = ''; }}
+                    style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-critical-15)'; e.currentTarget.style.borderColor = 'var(--color-critical-30)'; e.currentTarget.style.color = 'var(--color-critical)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-card-hover)'; e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.color = ''; }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
                   </button>
                 </div>
 
                 <div className="flex items-center justify-center py-4 mb-4 rounded-xl" style={{
-                  background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)',
+                  background: 'var(--color-card-hover)', border: '1px solid var(--color-border)',
                 }}>
                   <div className="text-center">
                     <p className="text-caption text-[10px] uppercase tracking-wider mb-1">Stress Score</p>
@@ -259,7 +260,7 @@ export default function MapPage() {
                       color: getScoreColor(selectedCountry.stress_score),
                     },
                   ].map((item) => (
-                    <div key={item.label} className="rounded-xl p-3 text-center" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div key={item.label} className="rounded-xl p-3 text-center" style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}>
                       <p className="text-caption text-[10px] uppercase tracking-wider mb-1">{item.label}</p>
                       <p className="text-lg font-bold" style={{ color: item.color }}>
                         {item.label === 'Trend' ? (
@@ -288,7 +289,7 @@ export default function MapPage() {
                           <span className="text-xs text-muted">{factor.label}</span>
                           <span className="text-xs font-mono" style={{ color }}>{pct}%</span>
                         </div>
-                        <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                        <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--color-border)' }}>
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${pct}%` }}
@@ -302,7 +303,7 @@ export default function MapPage() {
                   })}
                 </div>
 
-                <div className="mb-4 rounded-xl p-3" style={{ background: 'rgba(0,212,255,0.04)', border: '1px solid rgba(0,212,255,0.1)' }}>
+                <div className="mb-4 rounded-xl p-3" style={{ background: 'var(--color-accent-5)', border: '1px solid var(--color-accent-8)' }}>
                   <p className="text-caption text-[10px] uppercase tracking-wider mb-1.5">AI Insight</p>
                   <p className="text-body text-xs leading-relaxed">
                     {generateInsight(selectedCountry.country_code || selectedCountry.country, selectedCountry.stress_score, getTrend(selectedCountry.stress_score, selectedCountry.country_code || ''))}
@@ -331,8 +332,8 @@ export default function MapPage() {
                   onClick={() => setTimelineIndex(idx)}
                   className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${timelineIndex === idx ? 'text-accent' : 'text-muted'}`}
                   style={{
-                    background: timelineIndex === idx ? 'linear-gradient(135deg, #00d4ff22, #7c3aed22)' : 'rgba(255,255,255,0.04)',
-                    border: `1px solid ${timelineIndex === idx ? 'rgba(0,212,255,0.3)' : 'rgba(255,255,255,0.08)'}`,
+                    background: timelineIndex === idx ? 'var(--color-accent-8)' : 'var(--color-card)',
+                    border: `1px solid ${timelineIndex === idx ? 'var(--color-accent-20)' : 'var(--color-border)'}`,
                   }}
                 >
                   {TIMELINE_LABELS[idx]}

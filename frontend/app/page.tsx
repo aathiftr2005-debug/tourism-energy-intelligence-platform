@@ -67,7 +67,7 @@ export default function Dashboard() {
           fill
           className="object-cover opacity-[0.05]"
         />
-        <div className="absolute inset-0 bg-[#0a0e1a]/70" />
+        <div className="absolute inset-0" style={{ background: 'var(--color-overlay)' }} />
       </div>
 
       <div className="glass-card p-4 md:p-8 mb-4 md:mb-6 w-full max-w-full">
@@ -154,8 +154,8 @@ export default function Dashboard() {
       <div className="mt-8 md:mt-10 mb-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, rgba(0,212,255,0.12), rgba(124,58,237,0.12))', border: '1px solid rgba(0,212,255,0.2)' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            style={{ background: 'var(--color-accent-8)', border: '1px solid var(--color-accent-20)' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
             </svg>
           </div>
@@ -199,7 +199,8 @@ export default function Dashboard() {
             return (
               <div
                 key={item.code}
-                className="group relative rounded-2xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-500 hover:scale-[1.04] hover:shadow-[0_0_40px_rgba(0,212,255,0.15)] cursor-pointer"
+                className="group relative rounded-2xl overflow-hidden border hover:scale-[1.04] transition-all duration-500 cursor-pointer"
+                style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--light-card-shadow)' }}
               >
                   <div className="absolute inset-0 w-full h-full">
                     <Image
@@ -210,10 +211,11 @@ export default function Dashboard() {
                     />
                   </div>
 
-                <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,14,26,0.4)] via-[rgba(10,14,26,0.6)] to-[rgba(10,14,26,0.85)]" />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, var(--color-card), var(--color-card-hover), var(--color-card))' }} />
 
                 <div className="relative z-10 p-3 md:p-4 flex flex-col items-center text-center min-h-[140px] md:min-h-[160px]">
-                  <div className="w-10 h-7 md:w-12 md:h-8 rounded-lg overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm mb-2 flex items-center justify-center shadow-lg relative">
+                  <div className="w-10 h-7 md:w-12 md:h-8 rounded-lg overflow-hidden border bg-white/5 backdrop-blur-sm mb-2 flex items-center justify-center shadow-lg relative"
+                    style={{ borderColor: 'var(--color-border)' }}>
                     <Image
                       src={getFlagImage(item.name)}
                       alt={item.name}

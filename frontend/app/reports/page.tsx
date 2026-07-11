@@ -127,8 +127,8 @@ export default function ReportsPage() {
               onClick={() => setReportType(type)}
               className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${reportType === type ? 'text-accent' : 'text-muted'}`}
               style={{
-                background: reportType === type ? 'linear-gradient(135deg, #00d4ff22, #7c3aed22)' : (isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'),
-                border: `1px solid ${reportType === type ? 'rgba(0,212,255,0.3)' : (isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)')}`,
+                background: reportType === type ? 'var(--color-accent-8)' : 'var(--color-card)',
+                border: `1px solid ${reportType === type ? 'var(--color-accent-20)' : 'var(--color-border)'}`,
                 textTransform: 'capitalize',
               }}
             >
@@ -159,7 +159,7 @@ export default function ReportsPage() {
         </div>
       </div>
 
-      <div className="glass-card overflow-hidden" style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)' }}>
+      <div className="glass-card overflow-hidden" style={{ background: 'var(--color-card)' }}>
         <div id="report-content" ref={reportRef} style={{ overflow: 'auto', maxHeight: '70vh' }}>
           <ReportContent
             country_code={data.country_code}

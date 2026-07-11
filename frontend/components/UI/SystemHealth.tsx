@@ -52,9 +52,10 @@ export default function SystemHealth() {
               transition={{ duration: 0.3, delay: 0.05 * i }}
               className="rounded-2xl p-4"
               style={{
-                background: 'rgba(255,255,255,0.03)',
+                background: 'var(--color-card)',
                 backdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                border: '1px solid var(--color-border)',
+                boxShadow: 'var(--light-card-shadow)',
               }}
             >
               <div className="flex items-center justify-between mb-2">

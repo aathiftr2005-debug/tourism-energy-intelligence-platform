@@ -10,7 +10,7 @@ Endpoints
 import asyncio
 import logging
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 from fastapi import APIRouter, BackgroundTasks, Query
@@ -41,7 +41,7 @@ async def trigger_etl(background_tasks: BackgroundTasks):
     _jobs[job_id] = {
         "job_id": job_id,
         "status": "started",
-        "created_at": datetime.utcnow().isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
         "countries": TARGET_COUNTRIES.copy(),
         "completed_countries": [],
         "errors": [],
@@ -74,7 +74,7 @@ async def _run_etl_job(job_id: str) -> None:
             logger.error("Job %s: %s failed — %s", job_id, country, e)
 
     _jobs[job_id]["status"] = "completed"
-    _jobs[job_id]["completed_at"] = datetime.utcnow().isoformat()
+    _jobs[job_id]["completed_at"] = datetime.now(timezone.utc).isoformat()
     logger.info("Background ETL job %s finished", job_id)
 
 

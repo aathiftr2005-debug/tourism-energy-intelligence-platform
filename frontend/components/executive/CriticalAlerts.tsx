@@ -60,8 +60,8 @@ export default function CriticalAlerts() {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)' }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            style={{ background: 'var(--color-critical-15)', border: '1px solid var(--color-critical-30)' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-critical)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
               <path d="M13.73 21a2 2 0 0 1-3.46 0" />
             </svg>
@@ -97,8 +97,8 @@ export default function CriticalAlerts() {
               transition={{ delay: i * 0.05 }}
               className="rounded-xl overflow-hidden cursor-pointer transition-all"
               style={{
-                background: isExpanded ? cfg.bg : 'rgba(255,255,255,0.02)',
-                border: `1px solid ${isExpanded ? cfg.border : 'rgba(255,255,255,0.05)'}`,
+                background: isExpanded ? cfg.bg : 'var(--color-card)',
+                border: `1px solid ${isExpanded ? cfg.border : 'var(--color-border)'}`,
               }}
               onClick={() => setExpanded(isExpanded ? null : alert.id)}
               role="button"
@@ -146,7 +146,7 @@ export default function CriticalAlerts() {
                     className="overflow-hidden"
                   >
                     <div className="px-3 pb-3 pt-0">
-                      <div className="h-px w-full mb-2" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)' }} />
+                      <div className="h-px w-full mb-2" style={{ background: 'linear-gradient(90deg, transparent, var(--color-border), transparent)' }} />
                       <p className="text-xs leading-relaxed text-body">
                         {alert.description}
                       </p>
