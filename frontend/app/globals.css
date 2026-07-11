@@ -85,7 +85,7 @@
   --color-sidebar-border: #e2e8f0;
   --color-glass-bg: #ffffff;
   --color-glass-border: #e2e8f0;
-  --color-overlay: rgba(240,242,245,0.88);
+  --color-overlay: rgba(240,242,245,0.90);
   --color-gradient-primary: linear-gradient(135deg, #2563eb, #7c3aed);
   --color-page-title-gradient: linear-gradient(135deg, #0f172a 40%, #2563eb);
   --color-kpi-border-top: rgba(37,99,235,0.25);
@@ -184,26 +184,6 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ===== LIGHT THEME WALLPAPER ===== */
-[data-theme="light"] body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background: url('/images/light-theme-wallpaper.png') center center / cover no-repeat fixed;
-  opacity: 0.08;
-  pointer-events: none;
-}
-
-[data-theme="light"] body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background: rgba(240, 242, 245, 0.85);
-  pointer-events: none;
-}
-
 /* ===== SEMANTIC TEXT UTILITY CLASSES ===== */
 .text-heading { color: var(--color-text-heading); }
 .text-body { color: var(--color-text-body); }
@@ -283,7 +263,8 @@ img[loading="lazy"] {
 }
 
 [data-theme="light"] .map-wallpaper {
-  opacity: 0.15;
+  background-image: url('/images/wallpapers/light-theme-wallpaper.png');
+  opacity: 1;
 }
 
 .map-wallpaper-overlay {
