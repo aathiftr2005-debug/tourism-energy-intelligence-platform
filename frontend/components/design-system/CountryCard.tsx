@@ -33,38 +33,48 @@ function getGlow(score: number): string {
   return '0 0 15px var(--color-normal-15)';
 }
 
+function getStatusLabel(score: number): string {
+  if (score >= 70) return 'Critical';
+  if (score >= 50) return 'High';
+  if (score >= 30) return 'Moderate';
+  return 'Stable';
+}
+
 export default function CountryCard({ country, code, flagSrc, stressScore, className = '', compact = false }: Props) {
   const variant = getBadgeVariant(stressScore);
-  const statusLabel = variant === 'critical' ? 'Critical' : variant === 'elevated' ? 'High' : 'Low';
+  const statusLabel = getStatusLabel(stressScore);
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-      className={`country-card ${compact ? 'country-card--compact' : ''} ${className}`}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+      className={`country-card-v2 ${compact ? 'country-card-v2--compact' : ''} ${className}`}
     >
-      <div className="country-card__flag-bg">
+      <div className="country-card-v2__flag">
         <Image
           src={flagSrc}
-          alt=""
+          alt={`${country} flag`}
           fill
-          className="object-cover scale-110 blur-sm opacity-25 group-hover:opacity-35 group-hover:scale-125 transition-all duration-700"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 200px"
         />
+        <div className="country-card-v2__flag-gradient" />
       </div>
-      <div className="country-card__overlay" />
-      <div className="country-card__content">
-        <div className="country-card__flag-badge">
-          <Image src={flagSrc} alt={`${country} flag`} fill className="object-cover" />
-        </div>
-        <h3 className="country-card__name">{country}</h3>
+
+      <div className="country-card-v2__body">
+        <h3 className="country-card-v2__name">{country}</h3>
+
         <div
-          className="country-card__score"
+          className="country-card-v2__score"
           style={{ color: getStatusColor(stressScore), textShadow: getGlow(stressScore) }}
         >
           {Math.round(stressScore)}
         </div>
-        <span className={`badge badge--${variant}`}>{statusLabel}</span>
+
+        <span className={`badge badge--${variant} badge--md country-card-v2__badge`}>
+          {statusLabel}
+        </span>
       </div>
     </motion.div>
   );
