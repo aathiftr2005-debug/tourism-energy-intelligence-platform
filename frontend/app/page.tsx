@@ -16,6 +16,11 @@ import {
   GovernmentReadiness,
 } from '@/components/executive';
 import { CountryService } from '@/lib/services';
+import {
+  DashboardCard,
+  SectionContainer,
+  CountryCard,
+} from '@/components/design-system';
 
 const ALL_COUNTRIES = CountryService.getAllCountries();
 const MOCK_DATA = CountryService.getDashboardStressScores();
@@ -26,24 +31,24 @@ function getFlagImage(countryName: string): string {
 }
 
 function getStressColor(score: number): string {
-  if (score >= 70) return 'text-red-400';
-  if (score >= 50) return 'text-orange-400';
-  if (score >= 30) return 'text-yellow-400';
-  return 'text-green-400';
+  if (score >= 70) return 'text-critical';
+  if (score >= 50) return 'text-elevated';
+  if (score >= 30) return 'text-elevated';
+  return 'text-normal';
 }
 
 function getStressGlow(score: number): string {
-  if (score >= 70) return '0 0 30px rgba(239,68,68,0.3)';
-  if (score >= 50) return '0 0 25px rgba(251,146,60,0.2)';
-  if (score >= 30) return '0 0 20px rgba(234,179,8,0.15)';
-  return '0 0 15px rgba(34,197,94,0.15)';
+  if (score >= 70) return '0 0 30px var(--color-critical-30)';
+  if (score >= 50) return '0 0 25px var(--color-elevated-30)';
+  if (score >= 30) return '0 0 20px var(--color-elevated-15)';
+  return '0 0 15px var(--color-normal-15)';
 }
 
 function getStatusBadge(score: number): string {
-  if (score >= 70) return 'bg-red-500/20 text-red-400 border-red-500/30';
-  if (score >= 50) return 'bg-orange-500/20 text-orange-400 border-orange-500/30';
-  if (score >= 30) return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-  return 'bg-green-500/20 text-green-400 border-green-500/30';
+  if (score >= 70) return 'badge-critical';
+  if (score >= 50) return 'badge-elevated';
+  if (score >= 30) return 'badge-elevated';
+  return 'badge-normal';
 }
 
 function getStatusText(score: number): string {
@@ -70,9 +75,9 @@ export default function Dashboard() {
         <div className="absolute inset-0" style={{ background: 'var(--color-overlay)' }} />
       </div>
 
-      <div className="glass-card p-4 md:p-8 mb-4 md:mb-6 w-full max-w-full">
+      <DashboardCard className="mb-4 md:mb-6 w-full max-w-full">
         <h1 className="text-2xl md:text-5xl font-bold break-words min-w-0">
-          <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <span className="page-title">
             Tourism Energy Intelligence
           </span>
         </h1>
@@ -83,16 +88,17 @@ export default function Dashboard() {
         <div className="mt-4 md:mt-6 min-w-0">
           <KpiCards />
         </div>
-      </div>
+      </DashboardCard>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-        <div className="lg:col-span-2 glass-card p-3 md:p-4 h-[300px] md:h-[500px]">
-          <h2 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Interactive Map</h2>
-          <EuropeMap data={data} />
-        </div>
+        <DashboardCard className="lg:col-span-2 h-[300px] md:h-[500px]" noPadding>
+          <div className="p-3 md:p-4 h-full">
+            <h2 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Interactive Map</h2>
+            <EuropeMap data={data} />
+          </div>
+        </DashboardCard>
 
-        <div className="glass-card p-3 md:p-4">
-          <h2 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Top 10</h2>
+        <DashboardCard title="Top 10">
           <div className="space-y-1 md:space-y-2 max-h-[300px] md:max-h-[420px] overflow-y-auto">
             {[...data]
               .sort((a, b) => b.stress_score - a.stress_score)
@@ -100,7 +106,8 @@ export default function Dashboard() {
               .map((item, index) => (
                 <div
                   key={item.country}
-                  className="flex items-center justify-between p-2 glass-card hover:scale-[1.02] transition-all text-sm md:text-base"
+                  className="flex items-center justify-between p-2 rounded-xl hover:scale-[1.02] transition-all text-sm md:text-base"
+                  style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}
                 >
                   <div className="flex items-center gap-2 min-w-0">
                     <span className="text-caption text-xs md:text-sm w-5 flex-shrink-0">#{index + 1}</span>
@@ -124,7 +131,7 @@ export default function Dashboard() {
                 </div>
               ))}
           </div>
-        </div>
+        </DashboardCard>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mt-4 md:mt-6">
@@ -132,41 +139,33 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="glass-card p-4"
         >
-          <h2 className="text-heading text-lg md:text-xl font-bold mb-3">Alert Center</h2>
-          <p className="text-caption text-xs mb-3">Countries requiring attention</p>
-          <AlertFeed data={data.map(d => ({ country: d.country, stress_score: d.stress_score }))} />
+          <DashboardCard title="Alert Center" subtitle="Countries requiring attention">
+            <AlertFeed data={data.map(d => ({ country: d.country, stress_score: d.stress_score }))} />
+          </DashboardCard>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="glass-card p-4"
         >
-          <h2 className="text-heading text-lg md:text-xl font-bold mb-3">System Health</h2>
-          <p className="text-caption text-xs mb-3">Infrastructure and model status</p>
-          <SystemHealth />
+          <DashboardCard title="System Health" subtitle="Infrastructure and model status">
+            <SystemHealth />
+          </DashboardCard>
         </motion.div>
       </div>
 
-      <div className="mt-8 md:mt-10 mb-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ background: 'var(--color-accent-8)', border: '1px solid var(--color-accent-20)' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-          </div>
-          <div>
-            <h2 className="text-heading text-xl font-bold">AI Executive Command Center</h2>
-            <p className="text-caption text-xs">
-              Real-time operational intelligence and decision support
-            </p>
-          </div>
-        </div>
-
+      <SectionContainer
+        title="AI Executive Command Center"
+        subtitle="Real-time operational intelligence and decision support"
+        icon={
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+        }
+        className="mt-8 md:mt-10 mb-6"
+      >
         <div className="space-y-5">
           <ExecutiveSummary />
 
@@ -186,71 +185,29 @@ export default function Dashboard() {
 
           <ForecastPanel />
         </div>
-      </div>
+      </SectionContainer>
 
-      <div className="mt-4 md:mt-6">
-        <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4">EU All European Countries</h2>
-
+      <SectionContainer
+        title="EU All European Countries"
+        className="mt-4 md:mt-6"
+      >
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
           {ALL_COUNTRIES.map((item) => {
             const stressData = data.find(d => d.country === item.name);
             const score = stressData?.stress_score || 0;
 
             return (
-              <div
+              <CountryCard
                 key={item.code}
-                className="group relative rounded-2xl overflow-hidden border hover:scale-[1.04] transition-all duration-500 cursor-pointer"
-                style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--light-card-shadow)' }}
-              >
-                  <div className="absolute inset-0 w-full h-full">
-                    <Image
-                      src={getFlagImage(item.name)}
-                      alt=""
-                      fill
-                      className="object-cover scale-110 group-hover:scale-125 transition-transform duration-700 opacity-25 group-hover:opacity-35 blur-sm"
-                    />
-                  </div>
-
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, var(--color-card), var(--color-card-hover), var(--color-card))' }} />
-
-                <div className="relative z-10 p-3 md:p-4 flex flex-col items-center text-center min-h-[140px] md:min-h-[160px]">
-                  <div className="w-10 h-7 md:w-12 md:h-8 rounded-lg overflow-hidden border bg-white/5 backdrop-blur-sm mb-2 flex items-center justify-center shadow-lg relative"
-                    style={{ borderColor: 'var(--color-border)' }}>
-                    <Image
-                      src={getFlagImage(item.name)}
-                      alt={item.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <h3 className="font-semibold text-heading text-xs md:text-sm truncate w-full">
-                    {item.name}
-                  </h3>
-
-                  <div className="mt-auto">
-                    {stressData ? (
-                      <>
-                        <div
-                          className={`text-2xl md:text-3xl font-extrabold tracking-tight ${getStressColor(score)}`}
-                          style={{ textShadow: getStressGlow(score) }}
-                        >
-                          {Math.round(score)}
-                        </div>
-                        <span className={`inline-block mt-1 text-[10px] md:text-xs px-2.5 py-0.5 rounded-full border ${getStatusBadge(score)} backdrop-blur-sm`}>
-                          {getStatusText(score)}
-                        </span>
-                      </>
-                    ) : (
-                      <div className="text-caption text-xs py-3">No data</div>
-                    )}
-                  </div>
-                </div>
-              </div>
+                country={item.name}
+                code={item.code}
+                flagSrc={getFlagImage(item.name)}
+                stressScore={score}
+              />
             );
           })}
         </div>
-      </div>
+      </SectionContainer>
     </div>
   );
 }

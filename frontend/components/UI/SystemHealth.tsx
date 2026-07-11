@@ -10,9 +10,9 @@ interface HealthItem {
 }
 
 const statusConfig = {
-  operational: { color: '#10b981', glow: '0 0 8px rgba(16,185,129,0.4)', label: 'Operational' },
-  degraded: { color: '#f59e0b', glow: '0 0 8px rgba(245,158,11,0.4)', label: 'Degraded' },
-  down: { color: '#ef4444', glow: '0 0 8px rgba(239,68,68,0.4)', label: 'Down' },
+  operational: { color: 'var(--color-normal)', glow: '0 0 8px var(--color-normal-30)', label: 'Operational' },
+  degraded: { color: 'var(--color-elevated)', glow: '0 0 8px var(--color-elevated-30)', label: 'Degraded' },
+  down: { color: 'var(--color-critical)', glow: '0 0 8px var(--color-critical-30)', label: 'Down' },
 };
 
 function HealthDot({ status }: { status: keyof typeof statusConfig }) {
@@ -69,7 +69,7 @@ export default function SystemHealth() {
         })}
       </div>
       <div className="flex items-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#10b981', boxShadow: '0 0 6px rgba(16,185,129,0.4)', animation: 'breathing-glow 2s ease-in-out infinite' }} />
+        <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--color-normal)', boxShadow: '0 0 6px var(--color-normal-30)', animation: 'breathing-glow 2s ease-in-out infinite' }} />
         <span className="text-caption text-[11px]">
           All systems operational &mdash; Last updated {lastUpdated}
         </span>

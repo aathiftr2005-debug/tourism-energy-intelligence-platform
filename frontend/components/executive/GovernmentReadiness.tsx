@@ -4,13 +4,14 @@ import { motion } from 'framer-motion';
 import data from '@/data/executive.json';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors } from '@/lib/theme/chartColors';
+import ExecutiveCard from '@/components/design-system/ExecutiveCard';
 
 const { overall, scores } = data.governmentReadiness;
 
 function getScoreColor(score: number): string {
-  if (score >= 80) return '#10b981';
-  if (score >= 65) return '#f59e0b';
-  return '#ef4444';
+  if (score >= 80) return 'var(--color-normal)';
+  if (score >= 65) return 'var(--color-elevated)';
+  return 'var(--color-critical)';
 }
 
 export default function GovernmentReadiness() {
@@ -19,25 +20,15 @@ export default function GovernmentReadiness() {
   const colors = getChartColors(isDark);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.25 }}
-      className="glass-card"
+    <ExecutiveCard
+      title="Government Readiness"
+      subtitle="Preparedness assessment by category"
+      icon={
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-normal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      }
     >
-      <div className="flex items-center gap-3 mb-5">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{ background: 'var(--color-normal-15)', border: '1px solid var(--color-normal-30)' }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-normal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          </svg>
-        </div>
-        <div>
-          <h2 className="text-sm font-bold text-heading">Government Readiness</h2>
-          <p className="text-[10px] text-caption">Preparedness assessment by category</p>
-        </div>
-      </div>
-
       <div className="flex items-center justify-center mb-5">
         <div className="text-center">
           <div className="relative w-20 h-20 mx-auto mb-2">
@@ -54,9 +45,7 @@ export default function GovernmentReadiness() {
               <span className="text-xl font-bold" style={{ color: getScoreColor(overall) }}>{overall}</span>
             </div>
           </div>
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-            Overall
-          </span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">Overall</span>
         </div>
       </div>
 
@@ -64,12 +53,7 @@ export default function GovernmentReadiness() {
         {scores.map((item, i) => {
           const color = getScoreColor(item.score);
           return (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.06 }}
-            >
+            <motion.div key={item.label} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}>
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2">
                   <span className="text-sm">{item.icon}</span>
@@ -90,6 +74,6 @@ export default function GovernmentReadiness() {
           );
         })}
       </div>
-    </motion.div>
+    </ExecutiveCard>
   );
 }

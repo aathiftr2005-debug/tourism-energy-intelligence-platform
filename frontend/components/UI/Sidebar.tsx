@@ -63,26 +63,57 @@ export default function Sidebar() {
 
       <aside className={`tei-sidebar ${open ? 'sidebar-open' : ''}`} aria-label="Main navigation">
         <div className="sb-logo">
-          <h1>{'\u26a1'} Tourism Energy Intelligence</h1>
-          <p>Real-time monitoring platform</p>
+          <div className="sb-logo__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#sb-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <defs><linearGradient id="sb-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="var(--color-accent)" /><stop offset="100%" stopColor="var(--color-accent-secondary)" /></linearGradient></defs>
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+          </div>
+          <div>
+            <h1 className="sb-logo__text">Tourism Energy</h1>
+            <p className="sb-logo__sub">Intelligence Platform</p>
+          </div>
         </div>
+
         <nav className="sb-nav" aria-label="Page sections">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`nav-item ${pathname === item.href ? 'active' : ''}`}
-              aria-current={pathname === item.href ? 'page' : undefined}
-            >
-              <span className="nav-icon" aria-hidden="true">{item.icon}</span>
-              <span>{item.label}</span>
-            </Link>
-          ))}
+          <div className="sb-nav__group">
+            <span className="sb-nav__label">Overview</span>
+            {navItems.slice(0, 4).map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`nav-item ${pathname === item.href ? 'active' : ''}`}
+                aria-current={pathname === item.href ? 'page' : undefined}
+              >
+                <span className="nav-icon" aria-hidden="true">{item.icon}</span>
+                <span>{item.label}</span>
+                {pathname === item.href && <span className="nav-item__indicator" />}
+              </Link>
+            ))}
+          </div>
+          <div className="sb-nav__group">
+            <span className="sb-nav__label">Tools</span>
+            {navItems.slice(4).map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`nav-item ${pathname === item.href ? 'active' : ''}`}
+                aria-current={pathname === item.href ? 'page' : undefined}
+              >
+                <span className="nav-icon" aria-hidden="true">{item.icon}</span>
+                <span>{item.label}</span>
+                {pathname === item.href && <span className="nav-item__indicator" />}
+              </Link>
+            ))}
+          </div>
         </nav>
+
         <div className="sb-footer">
-          <div className="live-dot" aria-hidden="true" />
-          <span>Live Data</span>
-          <span style={{ marginLeft: 'auto', fontSize: '16px' }} aria-hidden="true">{'\ud83c\uddea\ud83c\uddfa'}</span>
+          <div className="sb-footer__status">
+            <div className="live-dot" aria-hidden="true" />
+            <span>Live Data</span>
+          </div>
+          <span className="sb-footer__flag" aria-hidden="true">{'\ud83c\uddea\ud83c\uddfa'}</span>
         </div>
       </aside>
     </>

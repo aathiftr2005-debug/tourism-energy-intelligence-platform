@@ -6,6 +6,7 @@ import Image from 'next/image';
 import EuropeMap from '@/components/maps/EuropeMap';
 import { DigitalTwinMap } from '@/components/maps/digital-twin';
 import { CountryService } from '@/lib/services';
+import { DashboardCard, PremiumButton } from '@/components/design-system';
 
 const MOCK_DATA = CountryService.getMapStressScores();
 const FLAGS = CountryService.getAll().emojiFlags;
@@ -127,7 +128,7 @@ export default function MapPage() {
         <div className="absolute inset-0" style={{ background: 'var(--color-overlay)' }} />
       </div>
 
-      <div className="glass-card p-6 mb-6">
+      <DashboardCard className="p-6 mb-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
           <div className="min-w-0 break-words">
             <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent break-words">
@@ -144,25 +145,23 @@ export default function MapPage() {
             border: '1px solid var(--color-border)',
           }}>
             {(['stress', 'digital-twin'] as const).map((mode) => (
-              <button
+              <PremiumButton
                 key={mode}
+                variant="accent"
+                size="sm"
                 onClick={() => setViewMode(mode)}
-                className={`px-3 md:px-4 py-2 rounded-xl text-[10px] md:text-xs font-semibold transition-all tracking-wider uppercase ${viewMode === mode ? 'text-accent' : 'text-muted'}`}
-                style={{
-                  background: viewMode === mode ? 'var(--color-accent-8)' : 'transparent',
-                  border: `1px solid ${viewMode === mode ? 'var(--color-accent-20)' : 'transparent'}`,
-                }}
+                className="uppercase tracking-wider"
               >
                 {mode === 'stress' ? 'Stress Map' : 'Digital Twin'}
-              </button>
+              </PremiumButton>
             ))}
           </div>
         </div>
-      </div>
+      </DashboardCard>
 
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1 min-w-0">
-          <div className="glass-card p-4 h-[400px] md:h-[600px]">
+          <DashboardCard className="p-4 h-[400px] md:h-[600px]">
             {viewMode === 'stress' ? (
               <EuropeMap
                 data={data}
@@ -172,7 +171,7 @@ export default function MapPage() {
             ) : (
               <DigitalTwinMap />
             )}
-          </div>
+          </DashboardCard>
         </div>
 
         <AnimatePresence>
@@ -202,15 +201,14 @@ export default function MapPage() {
                       <span className="text-caption text-[10px] font-medium tracking-wider">{selectedCountry.country_code}</span>
                     </div>
                   </div>
-                  <button
+                  <PremiumButton
+                    variant="ghost"
+                    size="sm"
                     onClick={closePanel}
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all text-muted"
-                    style={{ background: 'var(--color-card-hover)', border: '1px solid var(--color-border)' }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-critical-15)'; e.currentTarget.style.borderColor = 'var(--color-critical-30)'; e.currentTarget.style.color = 'var(--color-critical)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-card-hover)'; e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.color = ''; }}
+                    className="w-8 h-8 rounded-full flex items-center justify-center p-0"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                  </button>
+                  </PremiumButton>
                 </div>
 
                 <div className="flex items-center justify-center py-4 mb-4 rounded-xl" style={{
@@ -327,17 +325,14 @@ export default function MapPage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 gap-2">
             <div className="flex items-center gap-2 flex-wrap">
               {[0, 1, 2, 3].map((idx) => (
-                <button
+                <PremiumButton
                   key={idx}
+                  variant="accent"
+                  size="sm"
                   onClick={() => setTimelineIndex(idx)}
-                  className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${timelineIndex === idx ? 'text-accent' : 'text-muted'}`}
-                  style={{
-                    background: timelineIndex === idx ? 'var(--color-accent-8)' : 'var(--color-card)',
-                    border: `1px solid ${timelineIndex === idx ? 'var(--color-accent-20)' : 'var(--color-border)'}`,
-                  }}
                 >
                   {TIMELINE_LABELS[idx]}
-                </button>
+                </PremiumButton>
               ))}
             </div>
 
@@ -347,28 +342,28 @@ export default function MapPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-            <div className="glass-card p-4 text-center">
+            <DashboardCard className="p-4 text-center">
               <div className="text-2xl font-bold text-cyan-400">{data.length}</div>
               <div className="text-muted text-sm">Countries</div>
-            </div>
-            <div className="glass-card p-4 text-center">
+            </DashboardCard>
+            <DashboardCard className="p-4 text-center">
               <div className="text-2xl font-bold text-red-500">
                 {data.filter(d => d.stress_score >= 70).length}
               </div>
               <div className="text-muted text-sm">Critical</div>
-            </div>
-            <div className="glass-card p-4 text-center">
+            </DashboardCard>
+            <DashboardCard className="p-4 text-center">
               <div className="text-2xl font-bold text-yellow-500">
                 {data.filter(d => d.stress_score >= 50 && d.stress_score < 70).length}
               </div>
               <div className="text-muted text-sm">High</div>
-            </div>
-            <div className="glass-card p-4 text-center">
+            </DashboardCard>
+            <DashboardCard className="p-4 text-center">
               <div className="text-2xl font-bold text-green-400">
                 {data.filter(d => d.stress_score < 30).length}
               </div>
               <div className="text-muted text-sm">Low</div>
-            </div>
+            </DashboardCard>
           </div>
         </>
       )}

@@ -8,6 +8,7 @@ import LeaderboardCard from '@/components/cards/LeaderboardCard';
 import { CountryService, EnergyService } from '@/lib/services';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors, getStressColor } from '@/lib/theme/chartColors';
+import { DashboardCard } from '@/components/design-system';
 
 const countries = CountryService.getStressPageCountries().map((c) => {
   const ss = EnergyService.getStressScore(c.code);
@@ -20,15 +21,15 @@ const countries = CountryService.getStressPageCountries().map((c) => {
 });
 
 function levelColor(level: string, isDark: boolean): string {
-  if (level === 'CRITICAL') return isDark ? '#ef4444' : '#DC2626';
-  if (level === 'ELEVATED') return isDark ? '#f59e0b' : '#D97706';
+  if (level === 'CRITICAL') return isDark ? '#ef4444' : '#dc2626';
+  if (level === 'ELEVATED') return isDark ? '#f59e0b' : '#d97706';
   return isDark ? '#10b981' : '#059669';
 }
 
 function levelGlow(level: string, isDark: boolean): string {
-  if (level === 'CRITICAL') return `0 0 30px ${isDark ? 'rgba(239,68,68,0.25)' : 'rgba(220,38,38,0.15)'}`;
-  if (level === 'ELEVATED') return `0 0 25px ${isDark ? 'rgba(245,158,11,0.2)' : 'rgba(215,118,6,0.12)'}`;
-  return `0 0 20px ${isDark ? 'rgba(16,185,129,0.15)' : 'rgba(5,150,105,0.1)'}`;
+  if (level === 'CRITICAL') return isDark ? '0 0 30px rgba(239,68,68,0.25)' : '0 0 30px rgba(220,38,38,0.12)';
+  if (level === 'ELEVATED') return isDark ? '0 0 25px rgba(245,158,11,0.2)' : '0 0 25px rgba(217,119,6,0.12)';
+  return isDark ? '0 0 20px rgba(16,185,129,0.15)' : '0 0 20px rgba(5,150,105,0.10)';
 }
 
 function getDescription(level: string): string {
@@ -88,7 +89,6 @@ function levelBadge(level: string, isDark: boolean) {
         color,
         borderColor: `${color}40`,
         background: `${color}12`,
-        boxShadow: `0 0 12px ${color}15`,
       }}
     >
       {level}
@@ -140,7 +140,7 @@ export default function StressPage() {
               style={{
                 background: isDark
                   ? 'linear-gradient(180deg, rgba(10,14,26,0.3) 0%, rgba(10,14,26,0.75) 50%, rgba(10,14,26,0.92) 100%)'
-                  : 'linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 100%)',
+                  : 'linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.92) 50%, rgba(255,255,255,0.97) 100%)',
                 backdropFilter: 'blur(2px)',
               }}
             />
@@ -179,9 +179,7 @@ export default function StressPage() {
         ))}
       </div>
 
-      <div className="glass-card">
-        <h2 className="section-title">Country Comparison</h2>
-        <p className="text-caption text-xs mb-4">Compare energy stress metrics between two countries</p>
+      <DashboardCard title="Country Comparison" subtitle="Compare energy stress metrics between two countries">
 
         <div className="flex flex-wrap items-center gap-4 mb-6">
           <div className="flex items-center gap-3">
@@ -250,12 +248,9 @@ export default function StressPage() {
             }
           />
         </div>
-      </div>
+      </DashboardCard>
 
-      <div className="glass-card">
-        <h2 className="section-title">Top Risk Countries</h2>
-        <p className="text-caption text-xs mb-4">Animated leaderboard of energy stress rankings</p>
-
+      <DashboardCard title="Top Risk Countries" subtitle="Animated leaderboard of energy stress rankings">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <LeaderboardCard
             title="Highest Stress"
@@ -329,7 +324,7 @@ export default function StressPage() {
             }
           />
         </div>
-      </div>
+      </DashboardCard>
     </div>
   );
 }

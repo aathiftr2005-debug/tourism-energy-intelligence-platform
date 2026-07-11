@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { COUNTRY_FLAGS, COUNTRY_NAMES } from '@/lib/types';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors } from '@/lib/theme/chartColors';
+import { DashboardCard } from '@/components/design-system';
 
 interface ComparisonCardProps {
   country: string;
@@ -16,17 +17,17 @@ interface ComparisonCardProps {
 }
 
 function getScoreColor(score: number): string {
-  if (score >= 70) return '#ef4444';
-  if (score >= 50) return '#f59e0b';
-  if (score >= 30) return '#eab308';
-  return '#10b981';
+  if (score >= 70) return 'var(--color-critical)';
+  if (score >= 50) return 'var(--color-elevated)';
+  if (score >= 30) return 'var(--color-elevated)';
+  return 'var(--color-normal)';
 }
 
 function getTrendIcon(trend: string): { icon: string; color: string } {
   switch (trend) {
-    case 'up': return { icon: '\u2191', color: '#ef4444' };
-    case 'down': return { icon: '\u2193', color: '#10b981' };
-    default: return { icon: '\u2192', color: '#f59e0b' };
+    case 'up': return { icon: '↑', color: 'var(--color-critical)' };
+    case 'down': return { icon: '↓', color: 'var(--color-normal)' };
+    default: return { icon: '→', color: 'var(--color-elevated)' };
   }
 }
 
@@ -41,9 +42,9 @@ function getRiskFactorLabel(key: string): string {
 }
 
 function getRiskFactorColor(value: number): string {
-  if (value >= 0.7) return '#ef4444';
-  if (value >= 0.5) return '#f59e0b';
-  return '#10b981';
+  if (value >= 0.7) return 'var(--color-critical)';
+  if (value >= 0.5) return 'var(--color-elevated)';
+  return 'var(--color-normal)';
 }
 
 export default function ComparisonCard({
@@ -61,17 +62,7 @@ export default function ComparisonCard({
   const trackBg = 'var(--color-border)';
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5 }}
-      className="relative overflow-hidden rounded-2xl p-6"
-      style={{
-        background: cardBg,
-        backdropFilter: 'blur(16px)',
-        border: `1px solid ${cardBorder}`,
-      }}
-    >
+    <DashboardCard className="relative overflow-hidden p-6">
       <div className="flex items-center gap-3 mb-5">
         <span className="text-2xl">{COUNTRY_FLAGS[country] || ''}</span>
         <div>
@@ -100,7 +91,7 @@ export default function ComparisonCard({
         </div>
         <div className="rounded-xl p-3 text-center" style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
           <p className="text-caption text-[10px] uppercase tracking-wider mb-1">Confidence</p>
-          <p className="text-xl font-bold" style={{ color: confidence >= 90 ? '#10b981' : confidence >= 75 ? '#f59e0b' : '#ef4444' }}>{confidence.toFixed(0)}%</p>
+          <p className="text-xl font-bold" style={{ color: confidence >= 90 ? 'var(--color-normal)' : confidence >= 75 ? 'var(--color-elevated)' : 'var(--color-critical)' }}>{confidence.toFixed(0)}%</p>
         </div>
       </div>
 
@@ -135,6 +126,6 @@ export default function ComparisonCard({
         <p className="text-caption text-[10px] uppercase tracking-wider mb-1">AI Recommendation</p>
         <p className="text-body text-xs leading-relaxed">{recommendation}</p>
       </div>
-    </motion.div>
+    </DashboardCard>
   );
 }

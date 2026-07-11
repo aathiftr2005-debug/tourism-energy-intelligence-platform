@@ -48,8 +48,8 @@ export default function AlertFeed({ data }: Props) {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <span className="text-lg">{getFlag(code)}</span>
-                <span className="font-semibold text-sm">{getName(code)}</span>
-                <span className={`ml-auto text-sm font-bold ${isCritical ? 'text-red-400' : 'text-orange-400'}`}>
+                <span className="font-semibold text-sm text-heading">{getName(code)}</span>
+                <span className={`ml-auto text-sm font-bold ${isCritical ? 'text-critical' : 'text-elevated'}`}>
                   {Math.round(score)}
                 </span>
               </div>

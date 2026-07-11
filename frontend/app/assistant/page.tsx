@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { sendChatMessage } from '@/lib/api';
+import { GlassCard, PremiumInput, PremiumButton } from '@/components/design-system';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -46,7 +47,7 @@ export default function AssistantPage() {
         <p className="page-subtitle">AI-powered assistant for energy insights</p>
       </div>
 
-      <div className="flex-1 overflow-y-auto space-y-4 rounded-2xl border p-4" style={{ background: 'var(--color-card)', borderColor: 'var(--color-border)', backdropFilter: 'blur(12px)' }}>
+      <GlassCard className="flex-1 overflow-y-auto space-y-4 p-4" hover={false}>
         {messages.map((m, i) => (
           <motion.div
             key={i}
@@ -88,38 +89,32 @@ export default function AssistantPage() {
           </div>
         )}
         <div ref={endRef} />
-      </div>
+      </GlassCard>
 
       <div className="flex flex-wrap gap-2">
         {suggestions.map((s, i) => (
-          <button
+          <PremiumButton
             key={i}
+            variant="accent"
+            size="sm"
             onClick={() => handleSend(s)}
-            className="px-3 py-1.5 rounded-full text-xs border transition-all"
-            style={{
-              background: 'var(--color-card)',
-              borderColor: 'var(--color-border)',
-              color: 'var(--color-text-muted)',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-accent-8)'; e.currentTarget.style.borderColor = 'var(--color-accent-20)'; e.currentTarget.style.color = 'var(--color-accent)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-card)'; e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.color = 'var(--color-text-muted)'; }}
           >
             {s}
-          </button>
+          </PremiumButton>
         ))}
       </div>
 
       <div className="flex gap-3">
-        <input
+        <PremiumInput
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           placeholder="Ask about energy forecasts, stress scores..."
-          className="glass-input flex-1 min-w-0"
+          className="flex-1 min-w-0"
         />
-        <button onClick={() => handleSend()} disabled={loading} className="btn-primary flex-shrink-0">
+        <PremiumButton variant="primary" onClick={() => handleSend()} disabled={loading} className="flex-shrink-0">
           Send
-        </button>
+        </PremiumButton>
       </div>
     </div>
   );

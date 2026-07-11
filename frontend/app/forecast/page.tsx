@@ -9,6 +9,7 @@ import SeasonalCard from '@/components/cards/SeasonalCard';
 import { CountryService, ForecastService } from '@/lib/services';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors } from '@/lib/theme/chartColors';
+import { DashboardCard, PremiumTable, PremiumButton } from '@/components/design-system';
 
 const countries = CountryService.getForecastCountries();
 const historicalData = ForecastService.getMonthlyEnergy();
@@ -16,9 +17,9 @@ const forecastData = ForecastService.getMonthlyForecast();
 const modelMetrics = ForecastService.getModelMetrics();
 
 function r2Color(r2: number): string {
-  if (r2 >= 0.85) return '#10b981';
-  if (r2 >= 0.70) return '#f59e0b';
-  return '#ef4444';
+  if (r2 >= 0.85) return 'var(--color-normal)';
+  if (r2 >= 0.70) return 'var(--color-elevated)';
+  return 'var(--color-critical)';
 }
 
 export default function ForecastPage() {
@@ -41,6 +42,14 @@ export default function ForecastPage() {
       </div>
     );
   }, [colors]);
+
+  const metricColumns = [
+    { key: 'model', header: 'Model', render: (m: any) => <span className="font-semibold text-heading">{m.model}</span> },
+    { key: 'mae', header: 'MAE', render: (m: any) => <span className="text-muted">{m.mae}</span> },
+    { key: 'rmse', header: 'RMSE', render: (m: any) => <span className="text-muted">{m.rmse}</span> },
+    { key: 'mape', header: 'MAPE (%)', render: (m: any) => <span className="text-muted">{m.mape}</span> },
+    { key: 'r2', header: 'R²', render: (m: any) => <span className="font-bold" style={{ color: r2Color(m.r2) }}>{m.r2.toFixed(2)}</span> },
+  ];
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
@@ -83,11 +92,10 @@ export default function ForecastPage() {
             className="w-full sm:w-32" />
         </div>
 
-        <button className="btn-primary text-sm">Generate Forecast</button>
+        <PremiumButton variant="primary" className="text-sm">Generate Forecast</PremiumButton>
       </div>
 
-      <div className="glass-card">
-        <h2 className="section-title">Forecast &mdash; {COUNTRY_FLAGS[country]} {COUNTRY_NAMES[country]}</h2>
+      <DashboardCard title={`Forecast — ${COUNTRY_FLAGS[country]} ${COUNTRY_NAMES[country]}`}>
         <ResponsiveContainer width="100%" height={350}>
           <ComposedChart data={[...historicalData.slice(-6), ...forecastData]}>
             <CartesianGrid stroke={colors.grid} strokeDasharray="3 3" />
@@ -103,51 +111,25 @@ export default function ForecastPage() {
             <Line type="monotone" dataKey="ensemble" stroke={colors.tooltip.text} strokeWidth={2.5} dot={false} name="Ensemble" />
           </ComposedChart>
         </ResponsiveContainer>
-      </div>
+      </DashboardCard>
 
-      <div className="glass-card">
-        <h3 className="section-title">Model Performance Metrics</h3>
-        <div className="overflow-x-auto">
-          <table className="data-table">
-            <thead>
-              <tr>
-                {['Model', 'MAE', 'RMSE', 'MAPE (%)', 'R\u00b2'].map((h) => (
-                  <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-caption" style={{ letterSpacing: '0.05em' }}>
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {modelMetrics.map((m, i) => (
-                <tr key={m.model} className="transition-colors">
-                  <td className="px-4 py-3 font-semibold text-heading">{m.model}</td>
-                  <td className="px-4 py-3 text-muted">{m.mae}</td>
-                  <td className="px-4 py-3 text-muted">{m.rmse}</td>
-                  <td className="px-4 py-3 text-muted">{m.mape}</td>
-                  <td className="px-4 py-3 font-bold" style={{ color: r2Color(m.r2) }}>{m.r2.toFixed(2)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <DashboardCard title="Model Performance Metrics">
+        <PremiumTable columns={metricColumns} data={modelMetrics as any} />
+      </DashboardCard>
 
-      <div className="glass-card">
-        <h2 className="section-title">Historical Trends &mdash; {COUNTRY_FLAGS[country]} {COUNTRY_NAMES[country]}</h2>
+      <DashboardCard title={`Historical Trends — ${COUNTRY_FLAGS[country]} ${COUNTRY_NAMES[country]}`}>
         <p className="text-caption text-xs mb-4">Stress score trajectory from 2022 through 2026 forecast</p>
         <HistoricalTrendsChart country={country} />
-      </div>
+      </DashboardCard>
 
-      <div className="glass-card">
-        <h2 className="section-title">Seasonal Analysis &mdash; {COUNTRY_FLAGS[country]} {COUNTRY_NAMES[country]}</h2>
+      <DashboardCard title={`Seasonal Analysis — ${COUNTRY_FLAGS[country]} ${COUNTRY_NAMES[country]}`}>
         <p className="text-caption text-xs mb-4">Average energy stress by season</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {ForecastService.getSeasonalStress().map((s) => (
             <SeasonalCard key={s.season} season={s.season} stress={s.stress} />
           ))}
         </div>
-      </div>
+      </DashboardCard>
     </motion.div>
   );
 }

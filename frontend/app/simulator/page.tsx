@@ -7,6 +7,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { CountryService, ForecastService } from '@/lib/services';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors } from '@/lib/theme/chartColors';
+import { DashboardCard, PremiumButton } from '@/components/design-system';
 
 const COUNTRIES = Object.entries(COUNTRY_NAMES);
 const sampleMonths = ForecastService.getMonthlyEnergy().map((m: { month: string }) => m.month);
@@ -38,8 +39,7 @@ export default function SimulatorPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="glass-card space-y-5">
-          <h2 className="section-title">Adjust Scenario Parameters</h2>
+        <DashboardCard title="Adjust Scenario Parameters" className="space-y-5">
 
           <select value={country} onChange={(e) => setCountry(e.target.value)} className="glass-select w-full">
             {COUNTRIES.map(([k, v]) => (
@@ -64,17 +64,15 @@ export default function SimulatorPage() {
             </div>
           ))}
 
-          <button onClick={() => setSimulated(true)} className="btn-primary w-full text-sm">
+          <PremiumButton variant="primary" onClick={() => setSimulated(true)} className="w-full text-sm">
             Run Simulation
-          </button>
-          <button onClick={() => { setSimulated(false); setTouristChange(0); setTempDeviation(0); setFlightMultiplier(1); setEventBoost(0); }}
-            className="btn-ghost w-full text-center text-xs">
+          </PremiumButton>
+          <PremiumButton variant="ghost" onClick={() => { setSimulated(false); setTouristChange(0); setTempDeviation(0); setFlightMultiplier(1); setEventBoost(0); }} className="w-full text-center text-xs">
             Reset to Baseline
-          </button>
-        </div>
+          </PremiumButton>
+        </DashboardCard>
 
-        <div className="glass-card space-y-5">
-          <h2 className="section-title">Simulation Results</h2>
+        <DashboardCard title="Simulation Results" className="space-y-5">
 
           {simulated ? (
             <>
@@ -86,7 +84,7 @@ export default function SimulatorPage() {
                 <div className="text-2xl text-muted">&rarr;</div>
                 <div className="text-center">
                   <p className="text-xs mb-1 text-muted">Simulated</p>
-                  <p className="text-3xl font-bold" style={{ color: '#ef4444', textShadow: '0 0 20px rgba(239,68,68,0.3)' }}>81.7</p>
+                  <p className="text-3xl font-bold" style={{ color: 'var(--color-critical)', textShadow: '0 0 20px var(--color-critical-30)' }}>81.7</p>
                   <span className="badge-critical text-xs">CRITICAL</span>
                 </div>
               </div>
@@ -97,12 +95,12 @@ export default function SimulatorPage() {
                   <XAxis dataKey="month" stroke={colors.axis.tick} fontSize={11} />
                   <YAxis stroke={colors.axis.tick} fontSize={11} />
                   <Tooltip contentStyle={{ background: colors.tooltip.background, border: `1px solid ${colors.tooltip.border}`, borderRadius: 12, color: colors.tooltip.text }} />
-                  <Bar dataKey="baseline" fill={isDark ? 'rgba(255,255,255,0.2)' : '#9CA3AF'} radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="simulated" fill="#ef4444" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="baseline" fill="var(--color-text-disabled)" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="simulated" fill="var(--color-critical)" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
 
-              <div className="rounded-xl p-4 text-xs leading-relaxed" style={{ background: 'rgba(0,212,255,0.04)', border: '1px solid rgba(0,212,255,0.08)' }}>
+              <div className="rounded-xl p-4 text-xs leading-relaxed" style={{ background: 'var(--color-accent-5)', border: '1px solid var(--color-accent-8)' }}>
                 <p className="font-semibold mb-1 text-accent">What Changed</p>
                 <ul className="list-disc list-inside space-y-1 text-body">
                   <li>Tourist arrivals +{touristChange}% increases accommodation energy demand</li>
@@ -117,7 +115,7 @@ export default function SimulatorPage() {
               Adjust parameters and run a simulation
             </div>
           )}
-        </div>
+        </DashboardCard>
       </div>
     </motion.div>
   );

@@ -5,6 +5,7 @@ import type { ExecutiveSummaryData } from '@/lib/types';
 import data from '@/data/executive.json';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors } from '@/lib/theme/chartColors';
+import ExecutiveCard from '@/components/design-system/ExecutiveCard';
 
 const summaryData = data.summary as ExecutiveSummaryData;
 const currentStatus = data.summary.currentStatus || 'moderate';
@@ -21,11 +22,14 @@ export default function ExecutiveSummary() {
   const colors = getChartColors(isDark);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="glass-card-accent overflow-hidden"
+    <ExecutiveCard
+      title="Executive Summary"
+      subtitle="AI-generated operational overview"
+      icon={
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 20V10" /><path d="M18 20V4" /><path d="M6 20v-4" />
+        </svg>
+      }
     >
       <div className="absolute top-0 right-0 w-72 h-72 rounded-full opacity-[0.03] pointer-events-none"
         style={{
@@ -99,6 +103,6 @@ export default function ExecutiveSummary() {
         </div>
         <p className="text-body">{summaryData.summary}</p>
       </div>
-    </motion.div>
+    </ExecutiveCard>
   );
 }

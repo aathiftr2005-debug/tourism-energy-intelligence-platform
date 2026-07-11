@@ -79,8 +79,8 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
         >
           <path
             d={europePath}
-            fill="rgba(0,212,255,0.02)"
-            stroke="rgba(0,212,255,0.08)"
+            fill="var(--color-accent-5)"
+            stroke="var(--color-accent-8)"
             strokeWidth="0.5"
           />
 
@@ -106,13 +106,13 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
               >
                 {isHovered && (
                   <>
-                    <circle cx={pos.x} cy={pos.y} r={size + 8} fill="rgba(0,212,255,0.06)" className="animate-ping" style={{ animationDuration: '2s' }} />
-                    <circle cx={pos.x} cy={pos.y} r={size + 5} fill="rgba(0,212,255,0.1)" />
+                    <circle cx={pos.x} cy={pos.y} r={size + 8} fill="var(--color-accent-5)" className="animate-ping" style={{ animationDuration: '2s' }} />
+                    <circle cx={pos.x} cy={pos.y} r={size + 5} fill="var(--color-accent-8)" />
                   </>
                 )}
 
                 {isZoomed && (
-                  <circle cx={pos.x} cy={pos.y} r={size + 10} fill="rgba(0,212,255,0.08)" className="animate-pulse" style={{ animationDuration: '1.5s' }} />
+                  <circle cx={pos.x} cy={pos.y} r={size + 10} fill="var(--color-accent-8)" className="animate-pulse" style={{ animationDuration: '1.5s' }} />
                 )}
 
                 <motion.circle
@@ -141,11 +141,11 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
                         width={36}
                         height={18}
                         rx={4}
-                        fill={isDark ? 'rgba(10,14,26,0.95)' : 'var(--color-card)'}
+                        fill="var(--color-card)"
                         stroke="var(--color-accent-20)"
                         strokeWidth="0.5"
                       />
-                      <text x={pos.x} y={pos.y - 10} textAnchor="middle" fill={isDark ? 'white' : '#111827'} fontSize="3.5" fontWeight="bold">
+                      <text x={pos.x} y={pos.y - 10} textAnchor="middle" fill="var(--color-text-heading)" fontSize="3.5" fontWeight="bold">
                         {pos.label}
                       </text>
                     </motion.g>
@@ -167,7 +167,7 @@ export default function EuropeMap({ data, onCountryClick, timelineIndex = 0 }: E
               style={{
                 background: tooltipBg,
                 backdropFilter: 'blur(16px)',
-                border: `1px solid ${isDark ? 'rgba(0,212,255,0.12)' : 'rgba(0,212,255,0.2)'}`,
+                border: '1px solid var(--color-accent-20)',
               }}
             >
               <div className="flex items-center gap-2 mb-1">

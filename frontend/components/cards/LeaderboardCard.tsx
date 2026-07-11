@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { CountryService } from '@/lib/services';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors } from '@/lib/theme/chartColors';
+import { DashboardCard } from '@/components/design-system';
 
 interface LeaderboardEntry {
   rank: number;
@@ -26,10 +27,10 @@ const flagImages = CountryService.getAll().flags;
 
 function getValueColor(value: number, accentColor: string): string {
   if (accentColor === '#10b981') {
-    if (value >= 70) return '#ef4444';
-    if (value >= 50) return '#f59e0b';
-    if (value >= 30) return '#eab308';
-    return '#10b981';
+    if (value >= 70) return 'var(--color-critical)';
+    if (value >= 50) return 'var(--color-elevated)';
+    if (value >= 30) return 'var(--color-elevated)';
+    return 'var(--color-normal)';
   }
   return accentColor;
 }
@@ -43,9 +44,9 @@ function getChangeIcon(change: number | undefined): string {
 
 function getChangeColor(change: number | undefined): string {
   if (change === undefined) return 'var(--color-text-muted)';
-  if (change > 0) return '#ef4444';
-  if (change < 0) return '#10b981';
-  return '#f59e0b';
+  if (change > 0) return 'var(--color-critical)';
+  if (change < 0) return 'var(--color-normal)';
+  return 'var(--color-elevated)';
 }
 
 export default function LeaderboardCard({ title, subtitle, entries, valueLabel, accentColor }: LeaderboardCardProps) {
@@ -58,17 +59,7 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
   const entryBorder = 'var(--color-border)';
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="relative overflow-hidden rounded-2xl p-5"
-      style={{
-        background: cardBg,
-        backdropFilter: 'blur(16px)',
-        border: `1px solid ${cardBorder}`,
-      }}
-    >
+    <DashboardCard className="relative overflow-hidden p-5">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-body text-sm font-semibold">{title}</h3>
@@ -129,6 +120,6 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
           {valueLabel}
         </span>
       </div>
-    </motion.div>
+    </DashboardCard>
   );
 }

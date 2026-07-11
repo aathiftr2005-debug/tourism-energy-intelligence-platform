@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors } from '@/lib/theme/chartColors';
+import { PremiumCard } from '@/components/design-system';
 
 interface SeasonalCardProps {
   season: string;
@@ -10,10 +11,10 @@ interface SeasonalCardProps {
 }
 
 function getStressColor(score: number): string {
-  if (score >= 70) return '#ef4444';
-  if (score >= 50) return '#f59e0b';
-  if (score >= 30) return '#eab308';
-  return '#10b981';
+  if (score >= 70) return 'var(--color-critical)';
+  if (score >= 50) return 'var(--color-elevated)';
+  if (score >= 30) return 'var(--color-elevated)';
+  return 'var(--color-normal)';
 }
 
 function getStressGlow(score: number): string {
@@ -44,17 +45,7 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
   const trackBg = 'var(--color-border)';
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="relative overflow-hidden rounded-2xl p-5"
-      style={{
-        background: cardBg,
-        backdropFilter: 'blur(16px)',
-        border: `1px solid ${cardBorder}`,
-      }}
-    >
+    <PremiumCard className="relative overflow-hidden p-5" hover={false}>
       <div className="flex items-center justify-between mb-3">
         <span className="text-xl">{getSeasonIcon(season)}</span>
         <div className="h-8 w-16 rounded-lg flex items-center justify-center" style={{ background: `${color}15`, border: `1px solid ${color}30` }}>
@@ -85,6 +76,6 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
         </span>
         <div className="flex-1 h-px" style={{ background: 'var(--color-border)' }} />
       </div>
-    </motion.div>
+    </PremiumCard>
   );
 }
