@@ -67,7 +67,7 @@ export default function GovernmentReadiness() {
                   animate={{ width: `${item.score}%` }}
                   transition={{ duration: 1, delay: 0.3 + i * 0.1, ease: 'easeOut' }}
                   className="h-full rounded-full"
-                  style={{ background: `linear-gradient(90deg, ${color}60, ${color})`, boxShadow: `0 0 6px ${color}30` }}
+                  style={{ background: `linear-gradient(90deg, color-mix(in srgb, ${color} 60%, transparent), ${color})`, boxShadow: `0 0 6px color-mix(in srgb, ${color} 30%, transparent)` }}
                 />
               </div>
             </motion.div>

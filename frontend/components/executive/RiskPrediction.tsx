@@ -57,7 +57,7 @@ export default function RiskPrediction() {
                 <span className="text-xs font-semibold text-heading">{risk.title}</span>
                 <div className="flex items-center gap-2">
                   <TrendArrow trend={risk.trend} />
-                  <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full" style={{ background: `${lvl.color}15`, border: `1px solid ${lvl.color}30`, color: lvl.color }}>
+                  <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full" style={{ background: `color-mix(in srgb, ${lvl.color} 15%, transparent)`, border: `1px solid color-mix(in srgb, ${lvl.color} 30%, transparent)`, color: lvl.color }}>
                     {lvl.label}
                   </span>
                 </div>
@@ -70,7 +70,7 @@ export default function RiskPrediction() {
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   className="text-lg font-bold"
-                  style={{ color: lvl.color, textShadow: `0 0 15px ${lvl.color}30` }}
+                  style={{ color: lvl.color, textShadow: `0 0 15px color-mix(in srgb, ${lvl.color} 30%, transparent)` }}
                 >
                   {risk.probability}%
                 </motion.span>
@@ -81,8 +81,8 @@ export default function RiskPrediction() {
                   className="h-full rounded-full"
                   style={{
                     width: `${risk.probability}%`,
-                    background: `linear-gradient(90deg, ${lvl.color}60, ${lvl.color})`,
-                    boxShadow: `0 0 8px ${lvl.color}40`,
+                    background: `linear-gradient(90deg, color-mix(in srgb, ${lvl.color} 60%, transparent), ${lvl.color})`,
+                    boxShadow: `0 0 8px color-mix(in srgb, ${lvl.color} 40%, transparent)`,
                     transition: 'width 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s',
                   }}
                 />

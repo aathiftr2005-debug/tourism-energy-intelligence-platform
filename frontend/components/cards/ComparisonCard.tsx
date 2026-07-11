@@ -73,7 +73,7 @@ export default function ComparisonCard({
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="rounded-xl p-3 text-center" style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
           <p className="text-caption text-[10px] uppercase tracking-wider mb-1">Current Stress</p>
-          <p className="text-2xl font-bold" style={{ color: scoreColor, textShadow: `0 0 15px ${scoreColor}30` }}>{stressScore.toFixed(1)}</p>
+          <p className="text-2xl font-bold" style={{ color: scoreColor, textShadow: `0 0 15px color-mix(in srgb, ${scoreColor} 30%, transparent)` }}>{stressScore.toFixed(1)}</p>
         </div>
         <div className="rounded-xl p-3 text-center" style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
           <p className="text-caption text-[10px] uppercase tracking-wider mb-1">Forecast</p>
@@ -111,7 +111,7 @@ export default function ComparisonCard({
                     className="h-full rounded-full"
                     style={{
                       width: `${pct}%`,
-                      background: `linear-gradient(90deg, ${color}60, ${color})`,
+                      background: `linear-gradient(90deg, color-mix(in srgb, ${color} 60%, transparent), ${color})`,
                       transition: 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s',
                     }}
                   />

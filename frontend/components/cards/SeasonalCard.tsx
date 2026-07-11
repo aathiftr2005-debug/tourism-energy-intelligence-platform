@@ -48,7 +48,7 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
     <PremiumCard className="relative overflow-hidden p-5" hover={false}>
       <div className="flex items-center justify-between mb-3">
         <span className="text-xl">{getSeasonIcon(season)}</span>
-        <div className="h-8 w-16 rounded-lg flex items-center justify-center" style={{ background: `${color}15`, border: `1px solid ${color}30` }}>
+        <div className="h-8 w-16 rounded-lg flex items-center justify-center" style={{ background: `color-mix(in srgb, ${color} 15%, transparent)`, border: `1px solid color-mix(in srgb, ${color} 30%, transparent)` }}>
           <span className="text-xs font-semibold" style={{ color }}>{stress.toFixed(0)}</span>
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function SeasonalCard({ season, stress }: SeasonalCardProps) {
           transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
           className="h-full rounded-full"
           style={{
-            background: `linear-gradient(90deg, ${color}60, ${color})`,
+            background: `linear-gradient(90deg, color-mix(in srgb, ${color} 60%, transparent), ${color})`,
             boxShadow: getStressGlow(stress),
           }}
         />
