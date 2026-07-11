@@ -72,7 +72,7 @@ export default function Dashboard() {
           fill
           className="object-cover opacity-[0.05]"
         />
-        <div className="absolute inset-0" style={{ background: 'rgba(240,242,245,0.15)' }} />
+        <div className="absolute inset-0" style={{ background: 'var(--color-overlay)' }} />
       </div>
 
       <DashboardCard className="mb-4 md:mb-6 w-full max-w-full">
