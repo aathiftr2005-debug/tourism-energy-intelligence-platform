@@ -288,12 +288,14 @@ export default function MapPage() {
                           <span className="text-xs font-mono" style={{ color }}>{pct}%</span>
                         </div>
                         <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--color-border)' }}>
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: `${pct}%` }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
+                          <div
                             className="h-full rounded-full"
-                            style={{ background: `linear-gradient(90deg, ${color}60, ${color})`, boxShadow: `0 0 8px ${color}40` }}
+                            style={{
+                              width: `${pct}%`,
+                              background: `linear-gradient(90deg, ${color}60, ${color})`,
+                              boxShadow: `0 0 8px ${color}40`,
+                              transition: 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
+                            }}
                           />
                         </div>
                       </div>

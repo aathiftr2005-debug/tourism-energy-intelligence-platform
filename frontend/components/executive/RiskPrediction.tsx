@@ -77,12 +77,14 @@ export default function RiskPrediction() {
               </div>
 
               <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: colors.grid }}>
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${risk.probability}%` }}
-                  transition={{ duration: 1, delay: 0.4 + i * 0.1, ease: 'easeOut' }}
+                <div
                   className="h-full rounded-full"
-                  style={{ background: `linear-gradient(90deg, ${lvl.color}60, ${lvl.color})`, boxShadow: `0 0 8px ${lvl.color}40` }}
+                  style={{
+                    width: `${risk.probability}%`,
+                    background: `linear-gradient(90deg, ${lvl.color}60, ${lvl.color})`,
+                    boxShadow: `0 0 8px ${lvl.color}40`,
+                    transition: 'width 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s',
+                  }}
                 />
               </div>
             </motion.div>

@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { COUNTRY_FLAGS, COUNTRY_NAMES } from '@/lib/types';
 import { useTheme } from '@/lib/theme/ThemeContext';
 import { getChartColors } from '@/lib/theme/chartColors';
@@ -108,12 +107,13 @@ export default function ComparisonCard({
                   <span className="text-xs font-mono" style={{ color }}>{pct.toFixed(0)}%</span>
                 </div>
                 <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: trackBg }}>
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${pct}%` }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
+                  <div
                     className="h-full rounded-full"
-                    style={{ background: `linear-gradient(90deg, ${color}60, ${color})` }}
+                    style={{
+                      width: `${pct}%`,
+                      background: `linear-gradient(90deg, ${color}60, ${color})`,
+                      transition: 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s',
+                    }}
                   />
                 </div>
               </div>
