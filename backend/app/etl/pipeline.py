@@ -25,6 +25,7 @@ from app.etl.flights import (
 from app.etl.utils import (
     COUNTRY_COORDS,
     TARGET_COUNTRIES,
+    _find_project_root,
     log_dataframe_info,
     retry_with_backoff_async,
 )
@@ -32,7 +33,7 @@ from app.etl.weather import aggregate_to_monthly, fetch_weather_data
 
 logger = logging.getLogger(__name__)
 
-PROCESSED_DIR = Path(__file__).resolve().parents[4] / "ml" / "data" / "processed"
+PROCESSED_DIR = _find_project_root() / "ml" / "data" / "processed"
 
 
 def _assign_season(month: int) -> str:
