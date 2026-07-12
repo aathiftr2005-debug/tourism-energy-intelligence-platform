@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     request_timeout: int = 120
 
     # ── CORS ─────────────────────────────────────────────────────
-    cors_origins: str = "http://localhost:3000"
+    cors_origins: str = "http://localhost:3000,https://tourism-energy-intelligence-platfor.vercel.app"
 
     # ── Supabase ─────────────────────────────────────────────────
     supabase_url: str

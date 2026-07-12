@@ -51,8 +51,8 @@ export async function getStressScore(country: string): Promise<StressScore | nul
 
 export async function getCountries(): Promise<string[]> {
   try {
-    const { data } = await api.get('/api/v1/stress/countries');
-    return toArray<string>(data, 'countries', 'data', 'results');
+    const { data } = await api.get('/api/v1/regions');
+    return toArray<string>(data, 'countries', 'regions', 'data', 'results');
   } catch {
     return [];
   }
@@ -87,7 +87,7 @@ export async function getExplainability(country: string): Promise<Explainability
 
 export async function runSimulation(params: SimulationParams): Promise<SimulationResult | null> {
   try {
-    const { data } = await api.post('/api/v1/simulator/run', params);
+    const { data } = await api.post('/api/v1/ml/train', params);
     return data;
   } catch {
     return null;

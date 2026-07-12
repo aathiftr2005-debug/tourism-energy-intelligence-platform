@@ -101,13 +101,19 @@ export default function MapPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/stress/all');
-        const result = await response.json();
-        if (result && Array.isArray(result) && result.length > 0) {
-          setData(result);
+        const { getStressScores } = await import('@/lib/api');
+        const result = await getStressScores();
+        if (result && result.length > 0) {
+          const mapped = result.map((s) => ({
+            country: CountryService.getName(s.country_code),
+            country_code: s.country_code,
+            stress_score: s.stress_score,
+            status: s.stress_level,
+          }));
+          setData(mapped);
         }
       } catch {
-        console.log('Using mock data');
+        // Fallback to mock data
       }
     }
     fetchData();

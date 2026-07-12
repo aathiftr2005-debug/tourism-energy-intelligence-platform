@@ -9,3 +9,4 @@ export { default as PremiumInput } from './PremiumInput';
 export { default as PremiumTable } from './PremiumTable';
 export { default as PremiumChart } from './PremiumChart';
 export { default as PremiumBadge } from './PremiumBadge';
+export { ThemeSwitcher } from './ThemeSwitcher';
