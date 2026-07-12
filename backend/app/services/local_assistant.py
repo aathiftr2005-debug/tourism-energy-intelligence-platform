@@ -906,13 +906,26 @@ def generate_local_response(message: str) -> str:
 
     Classifies the user's intent, fetches the relevant data from Supabase
     and local ML services, and composes a structured reply.
+
+    Returns an empty string for pure conversational queries (greetings,
+    identity, capabilities, etc.) so the caller can use the conversational
+    fallback instead.
     """
     try:
+        # Check for conversational intents first — return empty so the
+        # caller routes to the conversational fallback.
+        convo_intent = _detect_conversational_intent(message)
+        if convo_intent:
+            return ""
+
         country = _detect_country(message)
         intent = _detect_intent(message)
         is_overview = _is_overview_query(message)
 
-        logger.info("Local assistant: intent=%s, country=%s, overview=%s", intent, country, is_overview)
+        logger.info(
+            "Local assistant: intent=%s, country=%s, overview=%s",
+            intent, country, is_overview,
+        )
 
         # Overview/ranking queries without a specific country always get the
         # full European stress table — never a single-country response.
@@ -932,11 +945,121 @@ def generate_local_response(message: str) -> str:
         if intent == "explanation":
             return _get_explanation_summary(country)
 
-        return _get_stress_summary()
+        return ""
 
     except Exception as e:
         logger.error("Local assistant failed: %s", e, exc_info=True)
+        return ""
+
+
+# ---------------------------------------------------------------------------
+# Conversational helpers (greetings, identity, capabilities, etc.)
+# ---------------------------------------------------------------------------
+
+_GREETING_KEYWORDS = [
+    "hi", "hello", "hey", "good morning", "good afternoon",
+    "good evening", "howdy", "greetings", "sup", "yo",
+]
+
+_THANK_KEYWORDS = [
+    "thank", "thanks", "thx", "cheers", "appreciate",
+]
+
+_IDENTITY_KEYWORDS = [
+    "who are you", "what are you", "your name", "introduce yourself",
+    "tell me about yourself",
+]
+
+_CAPABILITY_KEYWORDS = [
+    "what can you do", "what do you do", "capabilities",
+    "features", "help me", "how can you help", "what do you know",
+]
+
+_CAPABILITY_KEYWORDS_EXTENDED = [
+    "how does this work", "how does it work", "how to use",
+    "getting started", "getting started",
+]
+
+
+def _detect_conversational_intent(message: str) -> str | None:
+    """Detect non-TEI conversational intents (greetings, identity, etc.)."""
+    msg = message.lower().strip()
+
+    # Use word-boundary matching for short keywords to avoid false positives
+    # (e.g., "yo" matching inside "you", "hi" matching inside "this").
+    _SHORT_GREETINGS = {"hi", "hey", "yo", "sup"}
+    _LONG_GREETINGS = {"hello", "good morning", "good afternoon", "good evening", "howdy", "greetings"}
+
+    words = set(re.findall(r"\b\w+\b", msg))
+    if words & _SHORT_GREETINGS or any(kw in msg for kw in _LONG_GREETINGS):
+        return "greeting"
+    if any(kw in msg for kw in _IDENTITY_KEYWORDS):
+        return "identity"
+    if any(kw in msg for kw in _CAPABILITY_KEYWORDS) or any(
+        kw in msg for kw in _CAPABILITY_KEYWORDS_EXTENDED
+    ):
+        return "capabilities"
+    if any(kw in msg for kw in _THANK_KEYWORDS):
+        return "thanks"
+    return None
+
+
+def generate_conversational_response(
+    message: str,
+    history: list | None = None,
+) -> str:
+    """Generate a local conversational reply without calling Gemini.
+
+    Handles greetings, identity questions, capability questions, and
+    thank-you messages.  Always returns a non-empty string.
+    """
+    intent = _detect_conversational_intent(message)
+    history = history or []
+
+    if intent == "greeting":
         return (
-            "I am sorry, but I am unable to retrieve the latest information "
-            "at this time. Please try again shortly."
+            "Hello! Welcome to the TEI Intelligence assistant. "
+            "I can help you with energy stress scores, forecasts, "
+            "tourism data, and country comparisons across Europe. "
+            "What would you like to know?"
         )
+
+    if intent == "identity":
+        return (
+            "I'm the TEI Intelligence Assistant — an AI-powered assistant "
+            "built for the Tourism Energy Intelligence platform. I help "
+            "governments and energy providers understand seasonal energy "
+            "demand in European tourism regions. You can ask me about "
+            "stress scores, forecasts, tourism patterns, or request "
+            "country comparisons."
+        )
+
+    if intent == "capabilities":
+        return (
+            "Here's what I can help with:\n\n"
+            "- **Stress Scores** — Check current energy stress for any "
+            "European country (e.g., \"What's the stress score for Spain?\")\n"
+            "- **Forecasts** — Get energy demand projections (e.g., "
+            "\"Show me the forecast for Germany\")\n"
+            "- **Country Comparisons** — Compare metrics between countries "
+            "(e.g., \"Compare France and Italy\")\n"
+            "- **Tourism Data** — View tourism activity and intensity "
+            "(e.g., \"How's tourism in Greece?\")\n"
+            "- **Explanations** — Understand how the stress score works "
+            "(e.g., \"How is the stress score calculated?\")\n\n"
+            "Just type your question and I'll do my best to help!"
+        )
+
+    if intent == "thanks":
+        return (
+            "You're welcome! Feel free to ask if you have any more "
+            "questions about energy, tourism, or stress scores."
+        )
+
+    # Fallback for unrecognized conversational queries
+    return (
+        "I'm not sure I understand that question. I'm best at helping "
+        "with energy stress scores, forecasts, tourism data, and country "
+        "comparisons across Europe. Could you try rephrasing, or ask "
+        "something like \"What's the stress score for Spain?\""
+    )
