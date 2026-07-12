@@ -12,7 +12,24 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-RAW_CACHE_ROOT = Path(__file__).resolve().parents[4] / "ml" / "data" / "raw"
+
+def _find_project_root() -> Path:
+    """Walk upward from this file until a directory containing
+    ``requirements.txt`` is found — that is the project root.
+
+    Works regardless of directory depth:
+    - Locally: ``backend/app/etl/utils.py`` → ``backend/``
+    - Docker  (WORKDIR /app, COPY . .): ``/app/app/etl/utils.py`` → ``/app/``
+    """
+    current = Path(__file__).resolve().parent
+    for candidate in [current, *current.parents]:
+        if (candidate / "requirements.txt").exists():
+            return candidate
+    # Last-resort fallback (should never be reached in practice)
+    return Path(__file__).resolve().parents[2]
+
+
+RAW_CACHE_ROOT = _find_project_root() / "ml" / "data" / "raw"
 
 TARGET_COUNTRIES = ["DE", "FR", "ES", "IT", "AT", "GR", "PT", "NL", "BE", "CZ"]
 
