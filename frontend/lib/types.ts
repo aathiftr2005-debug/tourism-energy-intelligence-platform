@@ -77,6 +77,11 @@ export interface Region {
   coordinates: { lat: number; lng: number };
 }
 
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
 export interface ChatResponse {
   reply: string;
 }

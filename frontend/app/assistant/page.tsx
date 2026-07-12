@@ -1,14 +1,10 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { sendChatMessage } from '@/lib/api';
+import type { ChatMessage } from '@/lib/types';
 import { GlassCard, PremiumInput, PremiumButton } from '@/components/design-system';
-
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
 
 const suggestions = [
   'What is the current energy stress in Spain?',
@@ -18,36 +14,67 @@ const suggestions = [
 ];
 
 export default function AssistantPage() {
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Hello! I\'m the TEI Intelligence assistant. Ask me about energy forecasts, stress scores, or tourism patterns across Europe.' },
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      role: 'assistant',
+      content:
+        "Hello! I'm the TEI Intelligence assistant. Ask me about energy forecasts, stress scores, or tourism patterns across Europe.",
+    },
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    const container = scrollRef.current;
+    const target = endRef.current;
+    if (!container || !target) return;
 
-  const handleSend = async (text?: string) => {
-    const msg = (text || input).trim();
-    if (!msg || loading) return;
-    setInput('');
-    setMessages((prev) => [...prev, { role: 'user', content: msg }]);
-    setLoading(true);
-    const res = await sendChatMessage(msg);
-    setMessages((prev) => [...prev, { role: 'assistant', content: res?.reply || 'No response available.' }]);
-    setLoading(false);
-  };
+    // Scroll the chat container to the bottom (not the page)
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [messages, loading]);
+
+  const handleSend = useCallback(
+    async (text?: string) => {
+      const msg = (text || input).trim();
+      if (!msg || loading) return;
+      setInput('');
+      setMessages((prev) => [...prev, { role: 'user', content: msg }]);
+      setLoading(true);
+
+      const history = messages.slice(1).map((m) => ({
+        role: m.role,
+        content: m.content,
+      }));
+
+      const res = await sendChatMessage(msg, history);
+
+      const reply =
+        res?.reply ||
+        "I'm sorry, I couldn't process that request. Please try again.";
+
+      setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
+      setLoading(false);
+    },
+    [input, loading, messages],
+  );
 
   return (
     <div className="flex flex-col h-full min-h-0 space-y-4">
-      <div className="page-header">
+      <div className="page-header flex-shrink-0">
         <h1 className="page-title">TEI Intelligence</h1>
         <p className="page-subtitle">AI-powered assistant for energy insights</p>
       </div>
 
-      <GlassCard className="flex-1 overflow-y-auto space-y-4 p-4" hover={false}>
+      <GlassCard
+        ref={scrollRef}
+        className="glass-panel--scrollable flex-1 space-y-4 p-4"
+        hover={false}
+      >
         {messages.map((m, i) => (
           <motion.div
             key={i}
@@ -58,21 +85,29 @@ export default function AssistantPage() {
           >
             <div className="flex gap-3 max-w-[80%]">
               {m.role === 'assistant' && (
-                <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ background: 'var(--color-accent-8)', boxShadow: '0 0 10px var(--color-accent-5)' }}>
+                <div
+                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                  style={{
+                    background: 'var(--color-accent-8)',
+                    boxShadow: '0 0 10px var(--color-accent-5)',
+                  }}
+                >
                   ⚡
                 </div>
               )}
               <div
-                className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                  m.role === 'user'
-                    ? 'rounded-tr-sm'
-                    : 'rounded-tl-sm'
+                className={`rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
+                  m.role === 'user' ? 'rounded-tr-sm' : 'rounded-tl-sm'
                 }`}
                 style={{
-                  background: m.role === 'user'
-                    ? 'var(--color-accent-8)'
-                    : 'var(--color-card-hover)',
-                  border: m.role === 'assistant' ? '1px solid var(--color-border)' : 'none',
+                  background:
+                    m.role === 'user'
+                      ? 'var(--color-accent-8)'
+                      : 'var(--color-card-hover)',
+                  border:
+                    m.role === 'assistant'
+                      ? '1px solid var(--color-border)'
+                      : 'none',
                   color: 'var(--color-text-body)',
                 }}
               >
@@ -83,15 +118,36 @@ export default function AssistantPage() {
         ))}
         {loading && (
           <div className="flex items-center gap-2 px-4">
-            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--color-accent)', boxShadow: '0 0 6px var(--color-accent)', animationDelay: '0ms' }} />
-            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--color-accent)', boxShadow: '0 0 6px var(--color-accent)', animationDelay: '150ms' }} />
-            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--color-accent)', boxShadow: '0 0 6px var(--color-accent)', animationDelay: '300ms' }} />
+            <span
+              className="w-2 h-2 rounded-full animate-bounce"
+              style={{
+                background: 'var(--color-accent)',
+                boxShadow: '0 0 6px var(--color-accent)',
+                animationDelay: '0ms',
+              }}
+            />
+            <span
+              className="w-2 h-2 rounded-full animate-bounce"
+              style={{
+                background: 'var(--color-accent)',
+                boxShadow: '0 0 6px var(--color-accent)',
+                animationDelay: '150ms',
+              }}
+            />
+            <span
+              className="w-2 h-2 rounded-full animate-bounce"
+              style={{
+                background: 'var(--color-accent)',
+                boxShadow: '0 0 6px var(--color-accent)',
+                animationDelay: '300ms',
+              }}
+            />
           </div>
         )}
         <div ref={endRef} />
       </GlassCard>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 flex-shrink-0">
         {suggestions.map((s, i) => (
           <PremiumButton
             key={i}
@@ -104,7 +160,7 @@ export default function AssistantPage() {
         ))}
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 flex-shrink-0">
         <PremiumInput
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -112,7 +168,12 @@ export default function AssistantPage() {
           placeholder="Ask about energy forecasts, stress scores..."
           className="flex-1 min-w-0"
         />
-        <PremiumButton variant="primary" onClick={() => handleSend()} disabled={loading} className="flex-shrink-0">
+        <PremiumButton
+          variant="primary"
+          onClick={() => handleSend()}
+          disabled={loading}
+          className="flex-shrink-0"
+        >
           Send
         </PremiumButton>
       </div>

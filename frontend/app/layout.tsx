@@ -8,6 +8,9 @@ import { ThemeProvider } from '@/lib/theme/ThemeContext';
 export const metadata = {
   title: 'Tourism Energy Intelligence',
   description: 'AI-powered seasonal energy demand forecasting for European tourism regions',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export const viewport: Viewport = {

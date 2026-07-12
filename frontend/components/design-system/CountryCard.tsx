@@ -49,13 +49,14 @@ export default function CountryCard({ country, code, flagSrc, stressScore, class
           src={flagSrc}
           alt=""
           fill
+          sizes="(max-width: 768px) 100vw, 400px"
           className="object-cover scale-110 blur-sm opacity-25 group-hover:opacity-35 group-hover:scale-125 transition-all duration-700"
         />
       </div>
       <div className="country-card__overlay" />
       <div className="country-card__content">
         <div className="country-card__flag-badge">
-          <Image src={flagSrc} alt={`${country} flag`} fill className="object-cover" />
+          <Image src={flagSrc} alt={`${country} flag`} fill sizes="32px" className="object-cover" />
         </div>
         <h3 className="country-card__name">{country}</h3>
         <div

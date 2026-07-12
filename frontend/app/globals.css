@@ -1623,6 +1623,30 @@ input[type='range']::-webkit-slider-thumb {
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.glass-panel--scrollable {
+  overflow: hidden;
+  overflow-y: auto;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.glass-panel--scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.glass-panel--scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.glass-panel--scrollable::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+.glass-panel--scrollable::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
 .glass-panel::before {
   content: '';
   position: absolute;

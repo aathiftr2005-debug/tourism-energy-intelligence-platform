@@ -112,11 +112,15 @@ export async function getETLStatus(): Promise<ETLStatus | null> {
   }
 }
 
-export async function sendChatMessage(message: string): Promise<ChatResponse | null> {
+export async function sendChatMessage(
+  message: string,
+  history: { role: 'user' | 'assistant'; content: string }[] = [],
+): Promise<ChatResponse | null> {
   try {
-    const { data } = await api.post('/api/v1/assistant/chat', { message });
+    const { data } = await api.post('/api/v1/assistant/chat', { message, history });
     return data;
-  } catch {
+  } catch (err) {
+    console.error('sendChatMessage failed:', err);
     return null;
   }
 }

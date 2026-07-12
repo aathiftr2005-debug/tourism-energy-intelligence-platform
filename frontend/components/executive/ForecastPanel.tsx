@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { ForecastItem } from '@/lib/types';
 import data from '@/data/executive.json';
@@ -23,7 +23,12 @@ function TrendIcon({ direction }: { direction: 'up' | 'down' | 'stable' }) {
 
 export default function ForecastPanel() {
   const [tab, setTab] = useState<'24h' | '7d'>('24h');
+  const [time, setTime] = useState('');
   const forecastData = tab === '24h' ? forecast24h : forecast7d;
+
+  useEffect(() => {
+    setTime(new Date().toLocaleTimeString());
+  }, []);
 
   return (
     <ExecutiveCard
@@ -83,7 +88,7 @@ export default function ForecastPanel() {
       <div className="mt-4 rounded-xl p-3 flex items-center justify-between"
         style={{ background: 'var(--color-accent-5)', border: '1px solid var(--color-accent-8)' }}>
         <span className="text-[10px] text-accent/60">AI Confidence: {confidence}%</span>
-        <span className="text-[10px] text-muted">Updated {new Date().toLocaleTimeString()}</span>
+        <span className="text-[10px] text-muted">Updated {time}</span>
       </div>
     </ExecutiveCard>
   );

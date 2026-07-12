@@ -131,6 +131,7 @@ export default function StressPage() {
                 src={CountryService.getFlagPath(c.code)}
                 alt=""
                 fill
+                sizes="(max-width: 768px) 100vw, 400px"
                 className="object-cover scale-110 group-hover:scale-125 transition-transform duration-700 opacity-20 group-hover:opacity-30 blur-sm"
               />
             </div>
@@ -152,6 +153,7 @@ export default function StressPage() {
                     src={CountryService.getFlagPath(c.code)}
                     alt={c.name}
                     fill
+                    sizes="32px"
                     className="object-cover"
                   />
                 </div>

@@ -124,7 +124,7 @@ export default function MapPage() {
   return (
     <div className="min-h-screen relative">
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <Image src="/images/map-bg.jpg" alt="" aria-hidden="true" fill className="object-cover opacity-[0.05]" />
+        <Image src="/images/map-bg.jpg" alt="" aria-hidden="true" fill sizes="100vw" className="object-cover opacity-[0.05]" />
         <div className="absolute inset-0" style={{ background: 'var(--color-overlay)' }} />
       </div>
 

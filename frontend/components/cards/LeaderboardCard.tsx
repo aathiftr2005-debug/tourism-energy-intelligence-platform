@@ -93,7 +93,7 @@ export default function LeaderboardCard({ title, subtitle, entries, valueLabel, 
 
               <div className="w-7 h-5 rounded overflow-hidden flex-shrink-0 border bg-white/5 relative" style={{ borderColor: 'var(--color-border)' }}>
                 {flagImages[entry.countryCode] && (
-                  <Image src={flagImages[entry.countryCode]} alt={entry.country} fill className="object-cover" />
+                  <Image src={flagImages[entry.countryCode]} alt={entry.country} fill sizes="28px" className="object-cover" />
                 )}
               </div>
 
