@@ -15,7 +15,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
-from app.api.routes import assistant, etl, forecast, public, regions, stress_score
+from app.api.routes import assistant, energy, etl, forecast, public, regions, stress_score
 from app.core.auth import limiter
 from app.core.config import settings
 
@@ -118,6 +118,7 @@ async def security_headers_middleware(request: Request, call_next):
     return response
 
 
+app.include_router(energy.router, prefix="/api")
 app.include_router(forecast.router, prefix="/api/v1")
 app.include_router(etl.router, prefix="/api/v1")
 app.include_router(regions.router, prefix="/api/v1")
