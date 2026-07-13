@@ -28,14 +28,14 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push frontend
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: ./frontend
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
 
       - name: Build and push backend
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: ./backend
           push: true
