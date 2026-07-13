@@ -58,17 +58,17 @@ export default function ApiAccessPage() {
           <div className="rounded-xl p-4" style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)' }}>
             <p className="mb-2 text-xs" style={{ color: 'var(--color-text-caption)' }}>Get forecast for Germany</p>
             <pre className="text-sm font-mono" style={{ color: 'var(--color-accent)' }}>GET /api/public/forecast/DE</pre>
-            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "YOUR_API_KEY" }`}</pre>
           </div>
           <div className="rounded-xl p-4" style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)' }}>
             <p className="mb-2 text-xs" style={{ color: 'var(--color-text-caption)' }}>Get stress score for Spain</p>
             <pre className="text-sm font-mono" style={{ color: 'var(--color-accent)' }}>GET /api/public/stress-score/ES</pre>
-            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "YOUR_API_KEY" }`}</pre>
           </div>
           <div className="rounded-xl p-4" style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)' }}>
             <p className="mb-2 text-xs" style={{ color: 'var(--color-text-caption)' }}>Get all stress scores</p>
             <pre className="text-sm font-mono" style={{ color: 'var(--color-accent)' }}>GET /api/public/stress-score/all</pre>
-            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "TEI-your-key-here" }`}</pre>
+            <pre className="text-xs mt-1" style={{ color: 'var(--color-text-caption)' }}>Headers: {`{ "X-API-Key": "YOUR_API_KEY" }`}</pre>
           </div>
         </div>
 
