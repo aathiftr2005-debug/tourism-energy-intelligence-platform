@@ -1,7 +1,7 @@
 fastapi==0.115.0
 uvicorn[standard]==0.30.0
 gunicorn==22.0.0
-python-dotenv==1.0.1
+python-dotenv==1.2.2
 supabase==2.6.0
 pandas==2.2.0
 numpy==1.26.0
@@ -13,11 +13,11 @@ pydantic==2.9.0
 pydantic-settings==2.5.0
 httpx==0.27.2
 joblib==1.4.0
-python-multipart==0.0.12
+python-multipart==0.0.31
 tenacity==9.0.0
-aiohttp==3.10.0
+aiohttp==3.14.1
 google-generativeai==0.8.0
 sendgrid==6.11.0
 apscheduler==3.10.4
 slowapi==0.1.9
-pytest==8.3.3
+pytest==9.0.3
