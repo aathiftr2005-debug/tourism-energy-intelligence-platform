@@ -4,7 +4,7 @@
 class TestHealthEndpoint:
     """Tests for the /health endpoint."""
 
-    def test_health_endpoint_returns_ok(self, client):
+    def test_health_endpoint_returns_ok(self, client, mock_supabase):
         response = client.get("/health")
         assert response.status_code == 200
         data = response.json()
@@ -12,7 +12,7 @@ class TestHealthEndpoint:
         assert "app" in data
         assert "version" in data
 
-    def test_health_has_correct_fields(self, client):
+    def test_health_has_correct_fields(self, client, mock_supabase):
         response = client.get("/health")
         data = response.json()
         assert data["app"] == "Tourism Energy Intelligence"

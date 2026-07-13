@@ -146,7 +146,7 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
 
     # Ensure X contains only numeric columns
     feature_cols = [c for c in result.columns if c != "target"]
-    X = result[feature_cols].select_dtypes(include=["number"])
+    X = result[feature_cols].select_dtypes(include=["number", "bool"])
     y = result["target"]
 
     logger.info(
